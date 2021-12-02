@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/m400cSplashFragment">
+
+    <fragment
+        android:id="@+id/m400cSplashFragment"
+        android:name="com.vuzix.android.m400c.M400cSplashFragment"
+        android:label="M400cSplashFragment">
+        <action
+            android:id="@+id/action_m400cSplashFragment_to_m400cFragment"
+            app:destination="@id/m400cFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/m400cFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/m400cFragment"
+        android:name="com.vuzix.android.m400c.M400cFragment"
+        android:label="M400cFragment">
+        <action
+            android:id="@+id/action_m400cFragment_to_hidFragment"
+            app:destination="@id/hidFragment" />
+        <action
+            android:id="@+id/action_m400cFragment_to_videoFragment"
+            app:destination="@id/videoFragment" />
+        <action
+            android:id="@+id/action_m400cFragment_to_audioFragment"
+            app:destination="@id/audioFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/hidFragment"
+        android:name="com.vuzix.android.m400c.hid.presentation.HidFragment"
+        android:label="HidFragment" />
+    <fragment
+        android:id="@+id/videoFragment"
+        android:name="com.vuzix.android.m400c.video.presentation.VideoFragment"
+        android:label="VideoFragment" />
+    <fragment
+        android:id="@+id/audioFragment"
+        android:name="com.vuzix.android.m400c.audio.presentation.AudioFragment"
+        android:label="AudioFragment" >
+        <action
+            android:id="@+id/action_audioFragment_to_playSavedAudioFragment"
+            app:destination="@id/playSavedAudioFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playSavedAudioFragment"
+        android:name="com.vuzix.android.m400c.audio.presentation.PlaySavedAudioFragment"
+        android:label="PlaySavedAudioFragment" />
+
+</navigation>

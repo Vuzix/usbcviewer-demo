@@ -5,18 +5,47 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/main_background"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
-        <TextView
-            android:id="@+id/tv_hid_message"
+        <ImageView
+            android:id="@+id/iv_sensor_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_vuzix"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Device Information Here" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_sensor_header"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/demo_sensor_header"
+            android:textColor="@color/white"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_sensor_main" />
+
+        <TextView
+            android:id="@+id/tv_sensor_message"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/demo_sensor_message"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_sensor_header" />
 
         <TextView
             android:id="@+id/tv_gyro_title"
@@ -25,8 +54,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:text="@string/gyrometer_values"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_hid_message" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_sensor_message" />
 
         <TextView
             android:id="@+id/tv_hid_gyro_x"
@@ -34,6 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_gyro_title"
             tools:text="X: 0.002 rad/s" />
@@ -44,6 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_hid_gyro_x"
             tools:text="Y: 0.002 rad/s" />
@@ -54,6 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_hid_gyro_y"
             tools:text="z: 0.002 rad/s" />
@@ -65,8 +98,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:text="@string/accelerometer_values"
-            app:layout_constraintStart_toStartOf="@+id/gl_hid_vert_33"
-            app:layout_constraintTop_toBottomOf="@+id/tv_hid_message" />
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_33"
+            app:layout_constraintTop_toBottomOf="@+id/tv_sensor_message" />
 
         <TextView
             android:id="@+id/tv_hid_accel_x"
@@ -74,7 +108,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
-            app:layout_constraintStart_toStartOf="@+id/gl_hid_vert_33"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_33"
             app:layout_constraintTop_toBottomOf="@+id/tv_accel_title"
             tools:text="X: 0.002 rad/s" />
 
@@ -84,7 +119,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
-            app:layout_constraintStart_toStartOf="@+id/gl_hid_vert_33"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_33"
             app:layout_constraintTop_toBottomOf="@+id/tv_hid_accel_x"
             tools:text="Y: 0.002 rad/s" />
 
@@ -94,7 +130,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
-            app:layout_constraintStart_toStartOf="@+id/gl_hid_vert_33"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_33"
             app:layout_constraintTop_toBottomOf="@+id/tv_hid_accel_y"
             tools:text="z: 0.002 rad/s" />
 
@@ -105,8 +142,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:text="@string/magnometer_values"
-            app:layout_constraintStart_toStartOf="@+id/gl_hid_vert_66"
-            app:layout_constraintTop_toBottomOf="@+id/tv_hid_message" />
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintTop_toBottomOf="@+id/tv_sensor_message" />
 
         <TextView
             android:id="@+id/tv_hid_mag_x"
@@ -114,7 +152,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
-            app:layout_constraintStart_toStartOf="@+id/gl_hid_vert_66"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_66"
             app:layout_constraintTop_toBottomOf="@+id/tv_mag_title"
             tools:text="X: 0.002 rad/s" />
 
@@ -124,7 +163,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
-            app:layout_constraintStart_toStartOf="@+id/gl_hid_vert_66"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_66"
             app:layout_constraintTop_toBottomOf="@+id/tv_hid_mag_x"
             tools:text="Y: 0.002 rad/s" />
 
@@ -134,66 +174,43 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
-            app:layout_constraintStart_toStartOf="@+id/gl_hid_vert_66"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_66"
             app:layout_constraintTop_toBottomOf="@+id/tv_hid_mag_y"
             tools:text="z: 0.002 rad/s" />
 
-        <TextView
-            android:id="@+id/tv_keyboard_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            style="@style/TextAppearance.MaterialComponents.Headline4"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="10dp"
-            android:gravity="center_horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/gl_hid_vert_33"
-            app:layout_constraintEnd_toEndOf="@+id/gl_hid_vert_66"
-            tools:text="keypress"/>
-
-        <Button
-            android:id="@+id/btn_keyboard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="@string/button_hid_keyboard_off"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
         <Button
             android:id="@+id/btn_hid_sensor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/button_hid_sensor_off"
-            app:layout_constraintStart_toStartOf="parent"
+            android:backgroundTint="@color/vuzix_red"
+            android:text="@string/start"
+            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_33"
+            app:layout_constraintEnd_toEndOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintTop_toBottomOf="@+id/gl_sensor_horz_80"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <Button
-            android:id="@+id/btn_viewer_control"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="10dp"
-            android:visibility="invisible"
-            android:text="@string/button_hid_control_off"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/btn_hid_sensor"/>
-
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gl_hid_vert_33"
+            android:id="@+id/gl_sensor_vert_33"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent=".33" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gl_hid_vert_66"
+            android:id="@+id/gl_sensor_vert_66"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent=".66" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_sensor_horz_80"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".80" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

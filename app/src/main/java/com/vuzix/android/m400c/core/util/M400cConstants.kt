@@ -59,7 +59,7 @@ object M400cConstants {
     const val AUDIO_STREAM_ONE_ENDPOINT_TWO = 1
 
     // Keyboard IDs
-    const val KEY_ONE = "0000280000000000"
+    const val KEY_ONE = "Key One"
     const val KEY_ONE_LONG = "0000290000000000"
     const val KEY_TWO = "0000500000000000"
     const val KEY_TWO_LONG = "0000510000000000"

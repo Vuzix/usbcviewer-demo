@@ -1,8 +1,9 @@
 package com.vuzix.android.m400c.audio.presentation.adapter
 
 import androidx.recyclerview.widget.DiffUtil
+import com.vuzix.android.m400c.audio.domain.AudioFileInfo
 
-class AudioFileListDiffCallback(private val oldList: List<String>, private val newList: List<String>): DiffUtil.Callback() {
+class AudioFileListDiffCallback(private val oldList: List<AudioFileInfo>, private val newList: List<AudioFileInfo>): DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldList.size
 
     override fun getNewListSize(): Int = newList.size

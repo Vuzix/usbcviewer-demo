@@ -1,32 +1,27 @@
 package com.vuzix.android.m400c.video.presentation
 
 import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
-import android.hardware.camera2.CameraManager
 import android.hardware.usb.UsbDevice
-import android.hardware.usb.UsbInterface
 import android.hardware.usb.UsbManager
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.vuzix.android.camerasdk.UVCCameraProxy
 import com.vuzix.android.camerasdk.callbacks.ConnectCallback
 import com.vuzix.android.camerasdk.enums.PicturePath.APPCACHE
 import com.vuzix.android.m400c.R
 import com.vuzix.android.m400c.common.domain.entity.VuzixVideoDevice
-import com.vuzix.android.m400c.common.presentation.DeviceAdapter
 import com.vuzix.android.m400c.core.base.BaseFragment
 import com.vuzix.android.m400c.core.util.M400cConstants
-import com.vuzix.android.m400c.databinding.FragmentVideoBinding
+import com.vuzix.android.m400c.databinding.FragmentCameraDemoBinding
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class VideoFragment :
-    BaseFragment<VideoUiState, VideoViewModel, FragmentVideoBinding>(R.layout.fragment_video) {
+class CameraFragment :
+    BaseFragment<VideoUiState, VideoViewModel, FragmentCameraDemoBinding>(R.layout.fragment_camera_demo) {
     override val viewModel: VideoViewModel by viewModels()
 
     @Inject
@@ -40,14 +35,6 @@ class VideoFragment :
         videoDevice.usbDevice?.let { device ->
             Timber.d("$device")
             binding.tvVideoMessage.text = getString(R.string.video_device_available)
-            binding.rvVideoDeviceInfo.apply {
-                layoutManager = LinearLayoutManager(requireContext())
-                val interfaceList = mutableListOf<UsbInterface>()
-                for (i in 0 until device.interfaceCount) {
-                    interfaceList.add(device.getInterface(i))
-                }
-                adapter = DeviceAdapter(interfaceList)
-            }
             usbManager.hasPermission(device).let {
                 if (it) {
                     binding.tvVideoMessage.text =
@@ -65,42 +52,6 @@ class VideoFragment :
                     usbManager.requestPermission(device, usbPermissionIntent)
                 }
             }
-        }
-
-        binding.btnVideoStreamOne.apply {
-            setOnClickListener {
-                if (usbManager.hasPermission(videoDevice.usbDevice)) {
-                    if (this.text == getString(R.string.button_video_one_off)) {
-                        this.text = getString(R.string.button_video_one_on)
-                        viewModel.startVideoOneStream()
-                    } else {
-                        this.text = getString(R.string.button_video_one_off)
-                        viewModel.stopVideoOneStream()
-                    }
-                }
-            }
-        }
-
-        binding.btnVideoStreamTwo.apply {
-            setOnClickListener {
-                if (usbManager.hasPermission(videoDevice.usbDevice)) {
-                    if (this.text == getString(R.string.button_video_two_off)) {
-                        this.text = getString(R.string.button_video_two_on)
-                        viewModel.startVideoTwoStream()
-                    } else {
-                        this.text = getString(R.string.button_video_two_off)
-                        viewModel.stopVideoTwoStream()
-                    }
-                }
-            }
-        }
-
-        val cm = requireContext().getSystemService(Context.CAMERA_SERVICE) as CameraManager
-        binding.btnCheckCamera.setOnClickListener {
-            cm.cameraIdList.forEach {
-                Timber.d(it)
-            }
-            //initCamera()
         }
     }
 

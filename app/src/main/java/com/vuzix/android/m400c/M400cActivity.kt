@@ -8,13 +8,35 @@ import android.hardware.usb.UsbDevice
 import android.hardware.usb.UsbManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.Window
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.vuzix.android.m400c.core.util.M400cConstants
+import com.vuzix.android.m400c.hid.presentation.buttons.ButtonDemoFragment
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import java.lang.Exception
 
 @AndroidEntryPoint
 class M400cActivity : AppCompatActivity() {
+
+    override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
+        Timber.d("$event")
+        val currentFragment = NavHostFragment.findNavController(supportFragmentManager.primaryNavigationFragment!!).currentDestination
+        if (currentFragment?.id == R.id.buttonDemoFragment) {
+            supportFragmentManager.fragments[0].let { fragment ->
+                fragment.childFragmentManager.fragments[0].let { it as ButtonDemoFragment
+                    event?.let { keyEvent ->
+                        it.onKey(it.view, keyEvent.keyCode, keyEvent)
+                        return true
+                    }
+                }
+            }
+        }
+        return super.dispatchKeyEvent(event)
+    }
 
     private val usbReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {

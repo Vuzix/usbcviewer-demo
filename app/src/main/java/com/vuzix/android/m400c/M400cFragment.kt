@@ -23,6 +23,7 @@ import com.vuzix.android.m400c.common.domain.entity.VuzixAudioDevice
 import com.vuzix.android.m400c.common.domain.entity.VuzixHidDevice
 import com.vuzix.android.m400c.common.domain.entity.VuzixVideoDevice
 import com.vuzix.android.m400c.core.util.M400cConstants
+import com.vuzix.android.m400c.databinding.FragmentMainAltBinding
 import com.vuzix.android.m400c.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -43,14 +44,14 @@ class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallb
     @Inject
     lateinit var videoDevice: VuzixVideoDevice
 
-    lateinit var binding: FragmentMainBinding
+    lateinit var binding: FragmentMainAltBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_alt, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
@@ -59,40 +60,42 @@ class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallb
         super.onViewCreated(view, savedInstanceState)
         Timber.d(usbManager.deviceList.toString())
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            binding.btnVideoDevice.isEnabled = false
+            binding.btnDemoCamera.isEnabled = false
             ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), 0)
         }
         hidDevice.usbDevice?.let {
-            binding.tvHid.text = getString(R.string.hid_device_connected, hidDevice.usbDevice?.deviceName)
-            binding.btnHidDevice.setOnClickListener {
-                view.findNavController().navigate(R.id.action_m400cFragment_to_hidFragment)
+            binding.btnDemoSensors.setOnClickListener {
+                view.findNavController().navigate(R.id.action_m400cFragment_to_sensorFragment)
             }
-            checkPermission(it, binding.tvHid)
+            binding.btnDemoButtons.setOnClickListener {
+                view.findNavController().navigate(R.id.action_m400cFragment_to_buttonDemoFragment)
+            }
+            checkPermission(it)
         } ?: run {
-            binding.tvHid.text = getString(R.string.hid_device_not_connected, hidDevice.usbDevice?.deviceName)
-            binding.btnHidDevice.isEnabled = false
+            binding.btnDemoSensors.isEnabled = false
+            binding.btnDemoButtons.isEnabled = false
         }
 
         audioDevice.usbDevice?.let {
-            binding.tvAudio.text = getString(R.string.audio_device_connected, audioDevice.usbDevice?.deviceName)
-            binding.btnAudioDevice.setOnClickListener {
-                view.findNavController().navigate(R.id.action_m400cFragment_to_audioFragment)
+            binding.btnDemoMic.setOnClickListener {
+                view.findNavController().navigate(R.id.action_m400cFragment_to_microphoneFragment)
             }
-            checkPermission(it, binding.tvAudio)
+            binding.btnDemoSpeakers.setOnClickListener {
+                view.findNavController().navigate(R.id.action_m400cFragment_to_speakerFragment)
+            }
+            checkPermission(it)
         } ?: run {
-            binding.tvAudio.text = getString(R.string.audio_device_not_connected, audioDevice.usbDevice?.deviceName)
-            binding.btnAudioDevice.isEnabled = false
+            binding.btnDemoMic.isEnabled = false
+            binding.btnDemoSpeakers.isEnabled = false
         }
 
         videoDevice.usbDevice?.let {
-            binding.tvVideo.text = getString(R.string.video_device_connected, videoDevice.usbDevice?.deviceName)
-            binding.btnVideoDevice.setOnClickListener {
-                view.findNavController().navigate(R.id.action_m400cFragment_to_videoFragment)
+            binding.btnDemoCamera.setOnClickListener {
+                view.findNavController().navigate(R.id.action_m400cFragment_to_cameraFragment)
             }
-            checkPermission(it, binding.tvVideo)
+            checkPermission(it)
         } ?: run {
-            binding.tvVideo.text = getString(R.string.video_device_not_connected, videoDevice.usbDevice?.deviceName)
-            binding.btnVideoDevice.isEnabled = false
+            binding.btnDemoCamera.isEnabled = false
         }
 
     }
@@ -104,15 +107,14 @@ class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallb
     ) {
         if (requestCode == 0) {
             if (grantResults.size == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                binding.btnVideoDevice.isEnabled = true
+                binding.btnDemoCamera.isEnabled = true
             }
         }
     }
 
-    private fun checkPermission(usbDevice: UsbDevice, textView: TextView) {
+    private fun checkPermission(usbDevice: UsbDevice) {
         usbManager.hasPermission(usbDevice).let {
             if (!it) {
-                textView.text = getString(R.string.device_no_permission_granted, textView.text)
                 val usbPermissionIntent = PendingIntent.getBroadcast(
                     requireContext(),
                     0,

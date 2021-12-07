@@ -20,34 +20,40 @@
         android:name="com.vuzix.android.m400c.M400cFragment"
         android:label="M400cFragment">
         <action
-            android:id="@+id/action_m400cFragment_to_hidFragment"
-            app:destination="@id/hidFragment" />
+            android:id="@+id/action_m400cFragment_to_buttonDemoFragment"
+            app:destination="@id/buttonDemoFragment" />
         <action
-            android:id="@+id/action_m400cFragment_to_videoFragment"
-            app:destination="@id/videoFragment" />
+            android:id="@+id/action_m400cFragment_to_microphoneFragment"
+            app:destination="@id/microphoneFragment" />
         <action
-            android:id="@+id/action_m400cFragment_to_audioFragment"
-            app:destination="@id/audioFragment" />
+            android:id="@+id/action_m400cFragment_to_speakerFragment"
+            app:destination="@id/speakerFragment" />
+        <action
+            android:id="@+id/action_m400cFragment_to_sensorFragment"
+            app:destination="@id/sensorFragment" />
+        <action
+            android:id="@+id/action_m400cFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
     </fragment>
     <fragment
-        android:id="@+id/hidFragment"
-        android:name="com.vuzix.android.m400c.hid.presentation.HidFragment"
-        android:label="HidFragment" />
+        android:id="@+id/buttonDemoFragment"
+        android:name="com.vuzix.android.m400c.hid.presentation.buttons.ButtonDemoFragment"
+        android:label="ButtonDemoFragment" />
     <fragment
-        android:id="@+id/videoFragment"
-        android:name="com.vuzix.android.m400c.video.presentation.VideoFragment"
-        android:label="VideoFragment" />
+        android:id="@+id/microphoneFragment"
+        android:name="com.vuzix.android.m400c.audio.presentation.mic.MicrophoneFragment"
+        android:label="MicrophoneFragment" />
     <fragment
-        android:id="@+id/audioFragment"
-        android:name="com.vuzix.android.m400c.audio.presentation.AudioFragment"
-        android:label="AudioFragment" >
-        <action
-            android:id="@+id/action_audioFragment_to_playSavedAudioFragment"
-            app:destination="@id/playSavedAudioFragment" />
-    </fragment>
+        android:id="@+id/speakerFragment"
+        android:name="com.vuzix.android.m400c.audio.presentation.speakers.SpeakerFragment"
+        android:label="SpeakerFragment" />
     <fragment
-        android:id="@+id/playSavedAudioFragment"
-        android:name="com.vuzix.android.m400c.audio.presentation.PlaySavedAudioFragment"
-        android:label="PlaySavedAudioFragment" />
+        android:id="@+id/sensorFragment"
+        android:name="com.vuzix.android.m400c.hid.presentation.sensors.SensorFragment"
+        android:label="SensorFragment" />
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.vuzix.android.m400c.video.presentation.CameraFragment"
+        android:label="CameraFragment" />
 
 </navigation>

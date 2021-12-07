@@ -6,6 +6,14 @@
     <string name="button_find_device">Find Device</string>
     <string name="button_find_audio_device">Find Audio Device</string>
 
+    <!-- Main Screen Strings   -->
+    <string name="main_pick_a_demo">Pick a demo</string>
+    <string name="button_main_sensors">Sensors</string>
+    <string name="button_main_mic">Microphone</string>
+    <string name="button_main_speakers">Speakers</string>
+    <string name="button_main_camera">Camera</string>
+    <string name="button_main_buttons">Buttons</string>
+
     <!-- HID Button Strings   -->
     <string name="button_hid_keyboard_off">Keyboard - OFF</string>
     <string name="button_hid_keyboard_on">Keyboard - ON</string>
@@ -24,11 +32,23 @@
     <string name="hid_accel_y">Y: %1$d</string>
     <string name="hid_accel_z">Z: %1$d</string>
 
+    <!-- HID Text Strings   -->
+    <string name="demo_sensor_header">Sensor Demo</string>
+    <string name="demo_buttons">M400-C Button Demo</string>
+    <string name="demo_buttons_message">The M400-C has four buttons which allows for four short press commands and three long-press commands (the fourth long-press is system reserved).\n\nPress a button to see which one it is and what it does.</string>
+    <string name="demo_sensor_message">The M400-C has onboard sensors available for use.\nPress Start to see this in action.</string>
+
     <!--  Audio Button Strings   -->
     <string name="button_audio_sound_on">Audio Sound - ON</string>
     <string name="button_audio_sound_off">Audio Sound - OFF</string>
     <string name="button_audio_record_on">Record Audio - ON</string>
     <string name="button_audio_record_off">Record Audio - OFF</string>
+
+    <!-- Audio Text Strings   -->
+    <string name="audio_demo_message">The M400-C is capable of acting as an external speaker.\n\nPress the Play button for a demonstration.</string>
+    <string name="audio_mic_demo_message">The M400-C is capable of acting as an external microphone.\n\nPress Record and begin speaking to try this out. Press Stop when you are finished and a new audio file will appear in the list.\n\nSelect your audio from the list and press the Play button to play back your recorded message.</string>
+    <string name="audio_speaker_demo">Speaker Demo</string>
+    <string name="audio_microphone_demo">Microphone Demo</string>
 
     <!-- Video Button Strings   -->
     <string name="button_video_one_on">Video One - ON</string>
@@ -37,11 +57,16 @@
     <string name="button_video_two_off">Video Two - OFF</string>
     <string name="button_check_camera">Check Camera</string>
 
+    <!-- Video Text Strings   -->
+    <string name="video_camera_demo">Camera Demo</string>
+    <string name="camera_message">This section is a work in progress</string>
+
     <!-- Debug user messages   -->
     <string name="hid_device_available">HID Device Available</string>
     <string name="audio_device_available">Audio Device Available</string>
     <string name="video_device_available">Video Device Available</string>
 
+    <!-- General Strings   -->
     <string name="device_permission_granted">%1$s - Permissions Granted</string>
     <string name="device_no_permission_granted">%1$s - No Permissions Granted</string>
     <string name="hid_device_connected">HID Device %1$s: Connected</string>
@@ -55,4 +80,10 @@
     <string name="accelerometer_values">Accelerometer Values</string>
     <string name="magnometer_values">Magnometer Values</string>
     <string name="button_audio_clear_cache">Clear Cache</string>
+
+    <string name="play">Play</string>
+    <string name="stop">Stop</string>
+    <string name="record">Record</string>
+    <string name="available_files">Available Files</string>
+    <string name="start">Start</string>
 </resources>

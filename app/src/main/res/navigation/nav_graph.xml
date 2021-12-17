@@ -53,7 +53,7 @@
         android:label="SensorFragment" />
     <fragment
         android:id="@+id/cameraFragment"
-        android:name="com.vuzix.android.m400c.video.presentation.CameraFragment"
+        android:name="com.vuzix.android.m400c.video.presentation.VuzixCameraFragment"
         android:label="CameraFragment" />
 
 </navigation>

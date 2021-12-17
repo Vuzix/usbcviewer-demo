@@ -119,7 +119,7 @@ class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallb
                     requireContext(),
                     0,
                     Intent(M400cConstants.ACTION_USB_PERMISSION),
-                    0
+                    PendingIntent.FLAG_IMMUTABLE
                 )
                 usbManager.requestPermission(usbDevice, usbPermissionIntent)
             }

@@ -11,4 +11,17 @@
     <color name="vuzix_red">#d31145</color>
     <color name="vuzix_medium_red">#a11034</color>
     <color name="vuzix_dark_red">#551515</color>
+
+    <color name="dark_moderate_violet">#662d91</color>
+    <color name="dark_pink">#9e1f63</color>
+    <color name="vivid_pink">#da1c5c</color>
+    <color name="strong_red">#be1e2d</color>
+    <color name="bright_red">#f15a29</color>
+    <color name="vivid_orange">#f7941d</color>
+    <color name="yellow">#fff200</color>
+    <color name="moderate_green">#8dc63f</color>
+    <color name="dark_lime_green">#00ae50</color>
+    <color name="dark_green">#009444</color>
+    <color name="dark_cyan">#00979d</color>
+    <color name="strong_blue">#1c75bc</color>
 </resources>

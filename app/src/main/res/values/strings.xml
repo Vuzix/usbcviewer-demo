@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">M400C Controller App</string>
+    <string name="app_name">M400-C</string>
     <string name="button_hid_device">HID Device</string>
     <string name="button_audio_device">Audio Device</string>
     <string name="button_video_device">Video Device</string>
@@ -86,4 +86,5 @@
     <string name="record">Record</string>
     <string name="available_files">Available Files</string>
     <string name="start">Start</string>
+    <string name="btn_flashlight">Flashlight</string>
 </resources>

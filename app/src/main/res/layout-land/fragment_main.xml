@@ -1,126 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
-        tools:context=".M400cFragment">
+        android:background="@drawable/bg_menu">
 
-        <TextView
-            android:id="@+id/tv_message"
+        <com.google.android.material.button.MaterialButton
+            style="@style/VuzixButton"
+            android:id="@+id/btn_demo_sensors"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/gl_vert_50"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="5dp"
+            android:text="@string/button_main_sensors"
+            android:textSize="20sp"
+            app:icon="@drawable/icon_sensor_white"
+            app:layout_constraintBottom_toTopOf="@+id/gl_main_horz_80"
+            app:layout_constraintEnd_toStartOf="@+id/gl_main_vert_33"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Debug Messages here" />
+            app:layout_constraintTop_toBottomOf="@+id/gl_main_horz_60" />
 
-        <TextView
-            android:id="@+id/tv_hid"
+        <com.google.android.material.button.MaterialButton
+            style="@style/VuzixButton"
+            android:id="@+id/btn_demo_mic"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/gl_vert_50"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="5dp"
+            android:text="@string/button_main_mic"
+            app:icon="@drawable/icon_microphone_white"
+            app:layout_constraintBottom_toTopOf="@+id/gl_main_horz_80"
+            app:layout_constraintEnd_toStartOf="@+id/gl_main_vert_66"
+            app:layout_constraintStart_toEndOf="@+id/gl_main_vert_33"
+            app:layout_constraintTop_toBottomOf="@+id/gl_main_horz_60" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/VuzixButton"
+            android:id="@+id/btn_demo_speakers"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="5dp"
+            android:text="@string/button_main_speakers"
+            app:icon="@drawable/icon_speaker_white"
+            app:layout_constraintBottom_toTopOf="@+id/gl_main_horz_80"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gl_main_vert_66"
+            app:layout_constraintTop_toBottomOf="@+id/gl_main_horz_60" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/VuzixButton"
+            android:id="@+id/btn_demo_camera"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="5dp"
+            android:text="@string/button_main_camera"
+            app:icon="@drawable/icon_camera_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/gl_main_vert_33"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_message"
-            tools:text="HID Device: READY" />
+            app:layout_constraintTop_toBottomOf="@+id/gl_main_horz_80" />
 
-        <TextView
-            android:id="@+id/tv_video"
+        <com.google.android.material.button.MaterialButton
+            style="@style/VuzixButton"
+            android:id="@+id/btn_demo_flashlight"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/gl_vert_50"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_hid"
-            tools:text="Video Device: READY" />
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="5dp"
+            android:text="@string/btn_flashlight"
+            app:icon="@drawable/icon_flashlight_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/gl_main_vert_66"
+            app:layout_constraintStart_toEndOf="@+id/gl_main_vert_33"
+            app:layout_constraintTop_toBottomOf="@+id/gl_main_horz_80" />
 
-        <TextView
-            android:id="@+id/tv_audio"
+        <com.google.android.material.button.MaterialButton
+            style="@style/VuzixButton"
+            android:id="@+id/btn_demo_buttons"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/gl_vert_50"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_video"
-            tools:text="Audio Device: READY" />
-
-        <TextView
-            android:id="@+id/tv_status"
-            style="@style/TextAppearance.MaterialComponents.Headline2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/gl_vert_50"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_audio"
-            tools:text="CONNECTED" />
-
-        <TextView
-            android:id="@+id/tv_keypress"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/gl_vert_50"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_status"
-            tools:text="CONNECTED" />
-
-        <Button
-            android:id="@+id/btn_hid_device"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:text="@string/button_hid_device"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/vuzix_red"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="5dp"
+            android:text="@string/button_main_buttons"
+            app:icon="@drawable/icon_button_white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/gl_vert_50" />
-
-        <Button
-            android:id="@+id/btn_audio_device"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:text="@string/button_audio_device"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/vuzix_red"
-            app:layout_constraintBottom_toTopOf="@id/btn_hid_device"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/gl_vert_50" />
-
-        <Button
-            android:id="@+id/btn_video_device"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:text="@string/button_video_device"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/vuzix_red"
-            app:layout_constraintBottom_toTopOf="@id/btn_audio_device"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/gl_vert_50" />
+            app:layout_constraintStart_toEndOf="@+id/gl_main_vert_66"
+            app:layout_constraintTop_toBottomOf="@+id/gl_main_horz_80" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gl_vert_50"
+            android:id="@+id/gl_main_vert_33"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent=".5" />
+            app:layout_constraintGuide_percent=".33" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_main_vert_66"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".66" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_main_horz_60"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".60" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_main_horz_80"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".80" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

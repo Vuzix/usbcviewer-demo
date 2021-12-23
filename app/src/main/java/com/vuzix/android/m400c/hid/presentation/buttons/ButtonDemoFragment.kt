@@ -8,11 +8,8 @@ import android.view.View.OnKeyListener
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import com.vuzix.android.m400c.R
-import com.vuzix.android.m400c.core.util.M400cConstants
 import com.vuzix.android.m400c.databinding.FragmentButtonDemoBinding
-import timber.log.Timber
 
 class ButtonDemoFragment : Fragment(), OnKeyListener {
 
@@ -52,8 +49,7 @@ class ButtonDemoFragment : Fragment(), OnKeyListener {
     }
 
     private fun setButtonPressedText(which: String, command: String) {
-        binding.tvButtonsWhich?.text = which
-        binding.tvButtonsCommand?.text = command
+        // TODO Implement Image switching.
     }
 
 

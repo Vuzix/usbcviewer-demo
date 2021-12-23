@@ -2,17 +2,9 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Disabled -->
-    <item android:state_enabled="false">
+    <item android:state_focused="true">
         <shape>
             <solid android:color="@color/vuzix_dark_red" />
-            <corners android:radius="5dp" />
-        </shape>
-    </item>
-
-    <!-- Pressed -->
-    <item android:state_pressed="true">
-        <shape>
-            <solid android:color="@color/vuzix_medium_red" />
             <corners android:radius="5dp" />
         </shape>
     </item>
@@ -20,8 +12,8 @@
     <!-- Default color -->
     <item>
         <shape>
-            <solid android:color="@color/vuzix_red" />
-            <corners android:radius="5dp" />
+            <corners android:radius="7dp" />
+            <stroke android:color="@color/white"/>
         </shape>
     </item>
 

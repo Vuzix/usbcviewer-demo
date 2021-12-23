@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_m400cFragment_to_cameraFragment"
             app:destination="@id/cameraFragment" />
+        <action
+            android:id="@+id/action_m400cFragment_to_flashlightFragment"
+            app:destination="@id/flashlightFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonDemoFragment"
@@ -41,11 +44,11 @@
         android:label="ButtonDemoFragment" />
     <fragment
         android:id="@+id/microphoneFragment"
-        android:name="com.vuzix.android.m400c.audio.presentation.mic.MicrophoneFragment"
+        android:name="com.vuzix.android.m400c.audio.mic.MicrophoneFragment"
         android:label="MicrophoneFragment" />
     <fragment
         android:id="@+id/speakerFragment"
-        android:name="com.vuzix.android.m400c.audio.presentation.speakers.SpeakerFragment"
+        android:name="com.vuzix.android.m400c.audio.speakers.SpeakerFragment"
         android:label="SpeakerFragment" />
     <fragment
         android:id="@+id/sensorFragment"
@@ -53,7 +56,11 @@
         android:label="SensorFragment" />
     <fragment
         android:id="@+id/cameraFragment"
-        android:name="com.vuzix.android.m400c.video.presentation.VuzixCameraFragment"
+        android:name="com.vuzix.android.m400c.video.VuzixCameraFragment"
         android:label="CameraFragment" />
+    <fragment
+        android:id="@+id/flashlightFragment"
+        android:name="com.vuzix.android.m400c.video.FlashlightFragment"
+        android:label="FlashlightFragment" />
 
 </navigation>

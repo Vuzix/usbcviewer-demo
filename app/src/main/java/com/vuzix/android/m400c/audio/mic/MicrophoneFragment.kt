@@ -34,9 +34,6 @@ class MicrophoneFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.ivNeedle?.apply {
-
-        }
         recorder = MediaRecorder().apply {
             setAudioSource(MediaRecorder.AudioSource.MIC)
             setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
@@ -52,7 +49,7 @@ class MicrophoneFragment : Fragment() {
         val handler = Handler(Looper.myLooper()!!)
         val runner = Thread {
             while (recorder != null) {
-                Thread.sleep(500)
+                Thread.sleep(250)
                 handler.post(updater)
             }
         }
@@ -83,13 +80,13 @@ class MicrophoneFragment : Fragment() {
     private fun moveNeedle() {
         binding.ivNeedle?.apply {
             val dB = getDecibels()
-            Timber.d("$dB")
-
             val convertedScale = (dB * .9).toFloat()
             val rotationAmount = convertedScale - currentLocation
             currentLocation = convertedScale
             pivotY = 475F
-            rotation = rotationAmount
+            if (!dB.isInfinite()) {
+                rotation = rotationAmount
+            }
         }
     }
 }

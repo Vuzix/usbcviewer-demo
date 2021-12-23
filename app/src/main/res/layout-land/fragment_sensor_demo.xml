@@ -141,19 +141,6 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_hid_mag_y"
             tools:text="z: 0.002 rad/s" />
 
-        <Button
-            android:id="@+id/btn_hid_sensor"
-            style="@style/VuzixButton"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="@string/start"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/gl_sensor_vert_66"
-            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_33"
-            app:layout_constraintTop_toBottomOf="@+id/gl_sensor_horz_80" />
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_sensor_vert_33"
             android:layout_width="wrap_content"

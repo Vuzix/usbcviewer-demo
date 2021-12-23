@@ -1,39 +1,24 @@
 package com.vuzix.android.m400c.hid.data.source
 
 import android.hardware.usb.UsbDeviceConnection
-import android.hardware.usb.UsbEndpoint
-import android.hardware.usb.UsbInterface
 import android.hardware.usb.UsbManager
 import com.vuzix.android.m400c.common.data.InboundDataSource
-import com.vuzix.android.m400c.common.data.InboundDataSourceFailure
 import com.vuzix.android.m400c.common.domain.entity.VuzixHidDevice
-import com.vuzix.android.m400c.core.util.Either
-import com.vuzix.android.m400c.core.util.Either.Failure
-import com.vuzix.android.m400c.core.util.Either.Success
-import com.vuzix.android.m400c.core.util.M400cConstants
 import com.vuzix.android.m400c.core.util.SensorUtil
-import com.vuzix.android.m400c.core.util.UsbHidDevice
 import com.vuzix.android.m400c.core.util.strPrint
 import com.vuzix.android.m400c.hid.data.model.HidSensorInterface
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import javax.inject.Inject
 
-class HidSensorDataSource @Inject constructor(
+class HidSensorDataSource constructor(
     val externalScope: CoroutineScope,
     val usbManager: UsbManager,
     val hidDevice: VuzixHidDevice,
     private val hidSensorInterface: HidSensorInterface
 ) : InboundDataSource(
-    externalScope,
-    usbManager,
-    hidDevice.usbDevice!!,
     hidSensorInterface
 ) {
     lateinit var connection: UsbDeviceConnection

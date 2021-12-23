@@ -6,20 +6,15 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.hardware.usb.UsbDevice
 import android.hardware.usb.UsbManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.Window
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.vuzix.android.m400c.core.util.M400cConstants
 import com.vuzix.android.m400c.hid.presentation.buttons.ButtonDemoFragment
-import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-import java.lang.Exception
 
-@AndroidEntryPoint
 class M400cActivity : AppCompatActivity() {
 
     override fun dispatchKeyEvent(event: KeyEvent?): Boolean {

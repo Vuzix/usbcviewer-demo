@@ -2,6 +2,7 @@ package com.vuzix.android.m400c
 
 import android.Manifest
 import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.hardware.usb.UsbDevice
@@ -18,24 +19,18 @@ import androidx.navigation.findNavController
 import com.vuzix.android.m400c.common.domain.entity.VuzixAudioDevice
 import com.vuzix.android.m400c.common.domain.entity.VuzixHidDevice
 import com.vuzix.android.m400c.common.domain.entity.VuzixVideoDevice
+import com.vuzix.android.m400c.core.util.DeviceUtil
 import com.vuzix.android.m400c.core.util.M400cConstants
 import com.vuzix.android.m400c.databinding.FragmentMainBinding
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
-@AndroidEntryPoint
 class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallback {
 
-    @Inject
     lateinit var usbManager: UsbManager
 
-    @Inject
     lateinit var hidDevice: VuzixHidDevice
 
-    @Inject
     lateinit var audioDevice: VuzixAudioDevice
 
-    @Inject
     lateinit var videoDevice: VuzixVideoDevice
 
     lateinit var binding: FragmentMainBinding
@@ -53,10 +48,24 @@ class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallb
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        Timber.d(usbManager.deviceList.toString())
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.RECORD_AUDIO
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             binding.btnDemoCamera.isEnabled = false
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), 0)
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO),
+                0
+            )
         }
+        usbManager = requireContext().getSystemService(Context.USB_SERVICE) as UsbManager
+        hidDevice = DeviceUtil.getHidDevice(usbManager)
         hidDevice.usbDevice?.let {
             binding.btnDemoSensors.setOnClickListener {
                 view.findNavController().navigate(R.id.action_m400cFragment_to_sensorFragment)
@@ -70,6 +79,7 @@ class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallb
             binding.btnDemoButtons.isEnabled = false
         }
 
+        audioDevice = DeviceUtil.getAudioDevice(usbManager)
         audioDevice.usbDevice?.let {
             binding.btnDemoMic.setOnClickListener {
                 view.findNavController().navigate(R.id.action_m400cFragment_to_microphoneFragment)
@@ -83,6 +93,7 @@ class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallb
             binding.btnDemoSpeakers.isEnabled = false
         }
 
+        videoDevice = DeviceUtil.getVideoDevice(usbManager)
         videoDevice.usbDevice?.let {
             binding.btnDemoCamera.setOnClickListener {
                 view.findNavController().navigate(R.id.action_m400cFragment_to_cameraFragment)

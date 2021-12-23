@@ -2,29 +2,18 @@ package com.vuzix.android.m400c.common.data
 
 import android.hardware.usb.UsbDevice
 import android.hardware.usb.UsbDeviceConnection
-import android.hardware.usb.UsbEndpoint
-import android.hardware.usb.UsbInterface
 import android.hardware.usb.UsbManager
 import com.vuzix.android.m400c.common.domain.entity.VuzixInboundInterface
 import com.vuzix.android.m400c.core.util.Either
-import com.vuzix.android.m400c.core.util.Either.Failure
 import com.vuzix.android.m400c.core.util.Either.Success
-import com.vuzix.android.m400c.core.util.M400cConstants
-import com.vuzix.android.m400c.core.util.UsbHidDevice
-import com.vuzix.android.m400c.core.util.strPrint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.nio.ByteBuffer
 import com.vuzix.android.m400c.core.util.Failure as Fail
 
 abstract class InboundDataSource(
-    externalScope: CoroutineScope,
-    usbManager: UsbManager,
-    usbDevice: UsbDevice,
     val inboundInterface: VuzixInboundInterface
 ) {
     private val _dataFlow = MutableSharedFlow<Either<InboundDataSourceFailure, ByteArray>>(replay = 0)

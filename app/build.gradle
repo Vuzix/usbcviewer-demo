@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.application'
-    id 'dagger.hilt.android.plugin'
     id 'kotlin-android'
     id 'kotlin-kapt'
 }
@@ -49,16 +48,9 @@ dependencies {
     implementation "com.jakewharton.timber:timber:${versions.timber}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
 
-    // Hilt
-    implementation "com.google.dagger:hilt-android:${versions.hilt}"
-    kapt "com.google.dagger:hilt-compiler:${versions.hilt}"
-
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:${versions.navigation}"
     implementation "androidx.navigation:navigation-ui-ktx:${versions.navigation}"
-
-    // POC
-    //implementation "com.github.Liuguihong:AndroidUVCCamera:1.0.0"
 
     testImplementation 'junit:junit:4.13.2'
 

@@ -1,5 +1,6 @@
 package com.vuzix.android.m400c
 
+import android.content.Context
 import android.hardware.usb.UsbManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,19 +11,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.vuzix.android.m400c.databinding.FragmentSplashBinding
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@AndroidEntryPoint
 class M400cSplashFragment : Fragment() {
 
-    @Inject
     lateinit var usbManager: UsbManager
-
     lateinit var binding: FragmentSplashBinding
 
     override fun onCreateView(
@@ -37,6 +33,7 @@ class M400cSplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        usbManager = requireContext().getSystemService(Context.USB_SERVICE) as UsbManager
         if (usbManager.deviceList.isEmpty()) {
             AlertDialog.Builder(requireContext())
                 .setTitle("No device found")

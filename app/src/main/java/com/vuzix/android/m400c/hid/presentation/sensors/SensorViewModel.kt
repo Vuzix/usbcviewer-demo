@@ -11,17 +11,12 @@ import com.vuzix.android.m400c.hid.presentation.sensors.SensorAction.AccelUpdate
 import com.vuzix.android.m400c.hid.presentation.sensors.SensorAction.Error
 import com.vuzix.android.m400c.hid.presentation.sensors.SensorAction.GyroUpdate
 import com.vuzix.android.m400c.hid.presentation.sensors.SensorAction.MagUpdate
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class SensorViewModel @Inject constructor(
-//    private val kbDataSource: ViewerKeyboardDataSource,
+class SensorViewModel constructor(
     private val hidDataSource: HidSensorDataSource,
-//    private val vcDataSource: ViewerControlDataSource
 ) : BaseViewModel<SensorUiState>(SensorUiState()) {
     override fun <F : Failure> onError(failure: F) {
         when (failure) {

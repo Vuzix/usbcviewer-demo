@@ -1,5 +1,6 @@
 package com.vuzix.android.m400c.hid.presentation.sensors
 
+import android.content.Context
 import android.hardware.usb.UsbManager
 import android.os.Bundle
 import android.view.View
@@ -7,39 +8,52 @@ import androidx.fragment.app.viewModels
 import com.vuzix.android.m400c.R
 import com.vuzix.android.m400c.common.domain.entity.VuzixHidDevice
 import com.vuzix.android.m400c.core.base.BaseFragment
+import com.vuzix.android.m400c.core.util.DeviceUtil
+import com.vuzix.android.m400c.core.util.M400cConstants
 import com.vuzix.android.m400c.databinding.FragmentSensorDemoBinding
+import com.vuzix.android.m400c.hid.data.model.HidSensorInterface
+import com.vuzix.android.m400c.hid.data.source.HidSensorDataSource
 import com.vuzix.android.m400c.hid.presentation.sensors.SensorAction.AccelUpdate
 import com.vuzix.android.m400c.hid.presentation.sensors.SensorAction.Default
 import com.vuzix.android.m400c.hid.presentation.sensors.SensorAction.Error
 import com.vuzix.android.m400c.hid.presentation.sensors.SensorAction.GyroUpdate
 import com.vuzix.android.m400c.hid.presentation.sensors.SensorAction.Loading
 import com.vuzix.android.m400c.hid.presentation.sensors.SensorAction.MagUpdate
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 
-@AndroidEntryPoint
 class SensorFragment :
     BaseFragment<SensorUiState, SensorViewModel, FragmentSensorDemoBinding>(R.layout.fragment_sensor_demo) {
-    override val viewModel: SensorViewModel by viewModels()
+    override val viewModel: SensorViewModel by viewModels() {
+        SensorViewModelFactory(hidSensorDataSource)
+    }
 
-    @Inject
     lateinit var usbManager: UsbManager
-    @Inject
     lateinit var hidDevice: VuzixHidDevice
+    lateinit var hidSensorDataSource: HidSensorDataSource
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        usbManager = requireContext().getSystemService(Context.USB_SERVICE) as UsbManager
+        hidDevice = DeviceUtil.getHidDevice(usbManager)
+        val hidSensorInterface = hidDevice.usbDevice.let {
+            val intf = it!!.getInterface(M400cConstants.HID_SENSOR)
+            val inboundEndpoint = intf.getEndpoint(M400cConstants.HID_SENSOR_INBOUND)
+            HidSensorInterface(intf, inboundEndpoint)
+        }
+        val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+        hidSensorDataSource = HidSensorDataSource(scope, usbManager, hidDevice, hidSensorInterface)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnHidSensor.apply {
-            setOnClickListener {
-                if (this.text == getString(R.string.start)) {
-                    this.text = getString(R.string.stop)
-                    viewModel.startSensorStream()
-                } else {
-                    this.text = getString(R.string.start)
-                    viewModel.stopSensorStream()
-                }
-            }
-        }
+        viewModel.startSensorStream()
+    }
+
+    override fun onStop() {
+        viewModel.stopSensorStream()
+        super.onStop()
     }
 
     override fun onUiStateUpdated(uiState: SensorUiState) {

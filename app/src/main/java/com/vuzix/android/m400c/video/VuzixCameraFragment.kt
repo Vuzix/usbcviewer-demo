@@ -1,28 +1,27 @@
 package com.vuzix.android.m400c.video
 
+import android.content.Context
 import android.hardware.usb.UsbDevice
+import android.hardware.usb.UsbManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Surface
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.vuzix.android.camerasdk.camera.UVCCameraHandler
 import com.vuzix.android.camerasdk.ui.CameraDialog
 import com.vuzix.android.camerasdk.ui.CameraFragment
+import com.vuzix.android.camerasdk.ui.CameraViewInterface
 import com.vuzix.android.camerasdk.usb.USBMonitor
 import com.vuzix.android.camerasdk.usb.USBMonitor.OnDeviceConnectListener
 import com.vuzix.android.camerasdk.usb.USBMonitor.UsbControlBlock
-import com.vuzix.android.camerasdk.ui.CameraViewInterface
 import com.vuzix.android.m400c.R
 import com.vuzix.android.m400c.common.domain.entity.VuzixVideoDevice
+import com.vuzix.android.m400c.core.util.DeviceUtil
 import com.vuzix.android.m400c.databinding.FragmentCameraDemoBinding
-import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-import javax.inject.Inject
 
-@AndroidEntryPoint
 class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent {
     private val PREVIEW_WIDTH = 1920
     private val PREVIEW_HEIGHT = 1080
@@ -32,9 +31,7 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent {
     lateinit var cameraHandler: UVCCameraHandler
     lateinit var uvcCameraView: CameraViewInterface
     lateinit var onDeviceConnectListener: OnDeviceConnectListener
-
-    @Inject lateinit var vuzixVideoDevice: VuzixVideoDevice
-
+    lateinit var vuzixVideoDevice: VuzixVideoDevice
     lateinit var binding: FragmentCameraDemoBinding
 
     override fun onCreateView(
@@ -48,11 +45,11 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent {
         uvcCameraView.setAspectRatio(PREVIEW_WIDTH, PREVIEW_HEIGHT)
         onDeviceConnectListener = object : OnDeviceConnectListener {
             override fun onAttach(device: UsbDevice?) {
-                Toast.makeText(requireContext(), "Usb Device Attached", Toast.LENGTH_SHORT).show()
+                Timber.d("Usb Device Attached")
             }
 
             override fun onDetach(device: UsbDevice?) {
-                Toast.makeText(requireContext(), "Usb Device Detached", Toast.LENGTH_SHORT).show()
+                Timber.d("Usb Device Detached")
             }
 
             override fun onConnect(
@@ -82,6 +79,8 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent {
             PREVIEW_HEIGHT,
             PREVIEW_MODE
         )
+        val usbManager = requireContext().getSystemService(Context.USB_SERVICE) as UsbManager
+        vuzixVideoDevice = DeviceUtil.getVideoDevice(usbManager)
         return binding.root
     }
 

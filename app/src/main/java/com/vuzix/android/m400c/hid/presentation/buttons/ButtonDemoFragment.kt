@@ -6,10 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnKeyListener
 import android.view.ViewGroup
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.vuzix.android.m400c.R
+import com.vuzix.android.m400c.core.util.M400cConstants
 import com.vuzix.android.m400c.databinding.FragmentButtonDemoBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class ButtonDemoFragment : Fragment(), OnKeyListener {
 
@@ -33,28 +41,29 @@ class ButtonDemoFragment : Fragment(), OnKeyListener {
     override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
         if (event?.keyCode == KeyEvent.KEYCODE_BACK) {
             requireActivity().onBackPressed()
+        } else if (event?.action == KeyEvent.ACTION_UP) {
+            GlobalScope.launch {
+                delay(2500)
+                launch(Dispatchers.Main) {
+                    binding.ivButtons?.visibility = View.INVISIBLE
+                }
+            }
         } else {
             when (event?.scanCode) {
-                28 -> setButtonPressedText("Key One", "Enter")
-                105 -> setButtonPressedText("Key Two", "Move Left")
-                106 -> setButtonPressedText("Key Three", "Move Right")
-                186 -> setButtonPressedText("Key Four", "Unknown")
-                111 -> setButtonPressedText("Key One Long Press", "Escape")
-                108 -> setButtonPressedText("Key Two Long Press", "Move Down")
-                103 -> setButtonPressedText("Key Three Long Press", "Move Up")
+                M400cConstants.KEY_TWO -> setButtonPressedImage(R.drawable.buttons_3)
+                M400cConstants.KEY_THREE -> setButtonPressedImage(R.drawable.buttons_2)
+                M400cConstants.KEY_FOUR -> setButtonPressedImage(R.drawable.buttons_1)
+                M400cConstants.KEY_ONE_LONG, M400cConstants.KEY_TWO_LONG, M400cConstants.KEY_THREE_LONG -> requireActivity().onBackPressed()
             }
             return true
         }
         return false
     }
 
-    private fun setButtonPressedText(which: String, command: String) {
-        // TODO Implement Image switching.
+    private fun setButtonPressedImage(@DrawableRes id: Int) {
+        binding.ivButtons?.visibility = View.VISIBLE
+        binding.ivButtons?.setImageDrawable(ContextCompat.getDrawable(requireContext(), id))
     }
-
-
-
-
 
 
 }

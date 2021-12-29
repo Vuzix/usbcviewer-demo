@@ -4,9 +4,11 @@ import android.content.Context
 import android.hardware.usb.UsbDevice
 import android.hardware.usb.UsbManager
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.Surface
 import android.view.View
+import android.view.View.OnKeyListener
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.vuzix.android.camerasdk.camera.UVCCameraHandler
@@ -19,10 +21,11 @@ import com.vuzix.android.camerasdk.usb.USBMonitor.UsbControlBlock
 import com.vuzix.android.m400c.R
 import com.vuzix.android.m400c.common.domain.entity.VuzixVideoDevice
 import com.vuzix.android.m400c.core.util.DeviceUtil
+import com.vuzix.android.m400c.core.util.M400cConstants
 import com.vuzix.android.m400c.databinding.FragmentCameraDemoBinding
 import timber.log.Timber
 
-class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent {
+class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, OnKeyListener {
     private val PREVIEW_WIDTH = 1920
     private val PREVIEW_HEIGHT = 1080
     private val PREVIEW_MODE = 1
@@ -120,5 +123,20 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent {
         }
     }
 
-
+    override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+        if (event?.keyCode == KeyEvent.KEYCODE_BACK) {
+            requireActivity().onBackPressed()
+        } else {
+            when (event?.scanCode) {
+                M400cConstants.KEY_ONE_LONG,
+                M400cConstants.KEY_TWO_LONG,
+                M400cConstants.KEY_THREE_LONG ->
+                    if (event.action != KeyEvent.ACTION_UP) {
+                        requireActivity().onBackPressed()
+                    }
+            }
+            return true
+        }
+        return false
+    }
 }

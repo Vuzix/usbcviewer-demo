@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="@string/magnometer_values"
+            android:text="@string/compass_values"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_66"
             app:layout_constraintTop_toBottomOf="@+id/gl_sensor_horz_20" />

@@ -35,10 +35,6 @@ abstract class InboundDataSource(
         }
     }
 
-     suspend fun emit(data: Either<InboundDataSourceFailure, ByteArray>) {
-        _dataFlow.emit(data)
-    }
-
     fun getSubCount(): Int = _dataFlow.subscriptionCount.value
 
     open fun startStream() {

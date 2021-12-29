@@ -13,6 +13,7 @@
     <string name="button_main_speakers">Speakers</string>
     <string name="button_main_camera">Camera</string>
     <string name="button_main_buttons">Buttons</string>
+    <string name="button_main_flashlight">Flashlight</string>
 
     <!-- HID Button Strings   -->
     <string name="button_hid_keyboard_off">Keyboard - OFF</string>
@@ -78,7 +79,7 @@
     <string name="m400_c">M400-C</string>
     <string name="gyrometer_values">Gyrometer Values</string>
     <string name="accelerometer_values">Accelerometer Values</string>
-    <string name="magnometer_values">Magnometer Values</string>
+    <string name="compass_values">Compass Values</string>
     <string name="button_audio_clear_cache">Clear Cache</string>
 
     <string name="play">Play</string>
@@ -86,5 +87,4 @@
     <string name="record">Record</string>
     <string name="available_files">Available Files</string>
     <string name="start">Start</string>
-    <string name="btn_flashlight">Flashlight</string>
 </resources>

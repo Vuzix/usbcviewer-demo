@@ -36,7 +36,7 @@ object SensorUtil {
     fun createAccelData(bytes: ByteArray): AccelData {
         return AccelData(
             TimeUnit.MILLISECONDS.toNanos(System.currentTimeMillis()),
-            ((bytes[4].toInt() shl 4) or bytes[3].toInt()),
+            ((bytes[4].toInt() shl 8) or bytes[3].toInt()),
             ((bytes[6].toInt() shl 8) or bytes[5].toInt()),
             ((bytes[8].toInt() shl 8) or bytes[7].toInt())
         )
@@ -46,7 +46,7 @@ object SensorUtil {
     fun createMagData(bytes: ByteArray): MagData {
         return MagData(
             TimeUnit.MILLISECONDS.toNanos(System.currentTimeMillis()),
-            ((bytes[4].toInt() shl 4) or bytes[3].toInt()).toFloat(),
+            ((bytes[4].toInt() shl 8) or bytes[3].toInt()).toFloat(),
             ((bytes[6].toInt() shl 8) or bytes[5].toInt()).toFloat(),
             ((bytes[8].toInt() shl 8) or bytes[7].toInt()).toFloat()
         )

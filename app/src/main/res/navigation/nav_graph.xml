@@ -2,19 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@+id/m400cSplashFragment">
+    app:startDestination="@+id/m400cFragment">
 
-    <fragment
-        android:id="@+id/m400cSplashFragment"
-        android:name="com.vuzix.android.m400c.M400cSplashFragment"
-        android:label="M400cSplashFragment">
-        <action
-            android:id="@+id/action_m400cSplashFragment_to_m400cFragment"
-            app:destination="@id/m400cFragment"
-            app:launchSingleTop="false"
-            app:popUpTo="@id/m400cFragment"
-            app:popUpToInclusive="false" />
-    </fragment>
     <fragment
         android:id="@+id/m400cFragment"
         android:name="com.vuzix.android.m400c.M400cFragment"

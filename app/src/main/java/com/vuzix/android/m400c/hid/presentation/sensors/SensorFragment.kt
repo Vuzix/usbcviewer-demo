@@ -3,7 +3,9 @@ package com.vuzix.android.m400c.hid.presentation.sensors
 import android.content.Context
 import android.hardware.usb.UsbManager
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
+import android.view.View.OnKeyListener
 import androidx.fragment.app.viewModels
 import com.vuzix.android.m400c.R
 import com.vuzix.android.m400c.common.domain.entity.VuzixHidDevice
@@ -24,7 +26,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 
 class SensorFragment :
-    BaseFragment<SensorUiState, SensorViewModel, FragmentSensorDemoBinding>(R.layout.fragment_sensor_demo) {
+    BaseFragment<SensorUiState, SensorViewModel, FragmentSensorDemoBinding>(R.layout.fragment_sensor_demo),
+    OnKeyListener {
     override val viewModel: SensorViewModel by viewModels() {
         SensorViewModelFactory(hidSensorDataSource)
     }
@@ -88,4 +91,23 @@ class SensorFragment :
             }
         }
     }
+
+    override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+        if (event?.keyCode == KeyEvent.KEYCODE_BACK) {
+            requireActivity().onBackPressed()
+        } else {
+            when (event?.scanCode) {
+                M400cConstants.KEY_ONE_LONG,
+                M400cConstants.KEY_TWO_LONG,
+                M400cConstants.KEY_THREE_LONG ->
+                    if (event.action != KeyEvent.ACTION_UP) {
+                        requireActivity().onBackPressed()
+                    }
+            }
+            return true
+        }
+        return false
+    }
+
+
 }

@@ -11,8 +11,14 @@ import android.view.KeyEvent
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
+import com.vuzix.android.camerasdk.ui.CameraFragment
+import com.vuzix.android.m400c.audio.mic.MicrophoneFragment
+import com.vuzix.android.m400c.audio.speakers.SpeakerFragment
 import com.vuzix.android.m400c.core.util.M400cConstants
 import com.vuzix.android.m400c.hid.presentation.buttons.ButtonDemoFragment
+import com.vuzix.android.m400c.hid.presentation.sensors.SensorFragment
+import com.vuzix.android.m400c.video.FlashlightFragment
+import com.vuzix.android.m400c.video.VuzixCameraFragment
 import timber.log.Timber
 
 class M400cActivity : AppCompatActivity() {
@@ -20,15 +26,69 @@ class M400cActivity : AppCompatActivity() {
     override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
         Timber.d("$event")
         val currentFragment = NavHostFragment.findNavController(supportFragmentManager.primaryNavigationFragment!!).currentDestination
-        if (currentFragment?.id == R.id.buttonDemoFragment) {
-            supportFragmentManager.fragments[0].let { fragment ->
-                fragment.childFragmentManager.fragments[0].let { it as ButtonDemoFragment
-                    event?.let { keyEvent ->
-                        it.onKey(it.view, keyEvent.keyCode, keyEvent)
-                        return true
+        when (currentFragment?.id) {
+            R.id.sensorFragment -> {
+                supportFragmentManager.fragments[0].let { fragment ->
+                    fragment.childFragmentManager.fragments[0].let { it as SensorFragment
+                        event?.let { keyEvent ->
+                            it.onKey(it.view, keyEvent.keyCode, keyEvent)
+                            return true
+                        }
                     }
                 }
             }
+            R.id.microphoneFragment -> {
+                supportFragmentManager.fragments[0].let { fragment ->
+                    fragment.childFragmentManager.fragments[0].let { it as MicrophoneFragment
+                        event?.let { keyEvent ->
+                            it.onKey(it.view, keyEvent.keyCode, keyEvent)
+                            return true
+                        }
+                    }
+                }
+            }
+            R.id.speakerFragment -> {
+                supportFragmentManager.fragments[0].let { fragment ->
+                    fragment.childFragmentManager.fragments[0].let { it as SpeakerFragment
+                        event?.let { keyEvent ->
+                            it.onKey(it.view, keyEvent.keyCode, keyEvent)
+                            return true
+                        }
+                    }
+                }
+            }
+            R.id.cameraFragment -> {
+                supportFragmentManager.fragments[0].let { fragment ->
+                    fragment.childFragmentManager.fragments[0].let { it as VuzixCameraFragment
+                        event?.let { keyEvent ->
+                            it.onKey(it.view, keyEvent.keyCode, keyEvent)
+                            return true
+                        }
+                    }
+                }
+            }
+            R.id.flashlightFragment -> {
+                supportFragmentManager.fragments[0].let { fragment ->
+                    fragment.childFragmentManager.fragments[0].let { it as FlashlightFragment
+                        event?.let { keyEvent ->
+                            it.onKey(it.view, keyEvent.keyCode, keyEvent)
+                            return true
+                        }
+                    }
+                }
+            }
+            R.id.buttonDemoFragment -> {
+                supportFragmentManager.fragments[0].let { fragment ->
+                    fragment.childFragmentManager.fragments[0].let { it as ButtonDemoFragment
+                        event?.let { keyEvent ->
+                            it.onKey(it.view, keyEvent.keyCode, keyEvent)
+                            return true
+                        }
+                    }
+                }
+            }
+
+
         }
         return super.dispatchKeyEvent(event)
     }

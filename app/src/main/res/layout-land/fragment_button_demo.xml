@@ -9,6 +9,14 @@
         android:layout_height="match_parent"
         android:background="@drawable/bg_buttons_device">
 
+        <ImageView
+            android:id="@+id/iv_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:src="@drawable/buttons_1"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

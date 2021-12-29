@@ -4,17 +4,20 @@ import android.media.MediaRecorder
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnKeyListener
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.vuzix.android.m400c.R
+import com.vuzix.android.m400c.core.util.M400cConstants
 import com.vuzix.android.m400c.databinding.FragmentMicrophoneDemoBinding
 import timber.log.Timber
 import kotlin.math.log10
 
-class MicrophoneFragment : Fragment() {
+class MicrophoneFragment : Fragment(), OnKeyListener {
 
     lateinit var binding: FragmentMicrophoneDemoBinding
     var recorder: MediaRecorder? = null
@@ -88,6 +91,23 @@ class MicrophoneFragment : Fragment() {
                 rotation = rotationAmount
             }
         }
+    }
+
+    override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+        if (event?.keyCode == KeyEvent.KEYCODE_BACK) {
+            requireActivity().onBackPressed()
+        } else {
+            when (event?.scanCode) {
+                M400cConstants.KEY_ONE_LONG,
+                M400cConstants.KEY_TWO_LONG,
+                M400cConstants.KEY_THREE_LONG ->
+                    if (event.action != KeyEvent.ACTION_UP) {
+                        requireActivity().onBackPressed()
+                    }
+            }
+            return true
+        }
+        return false
     }
 }
 

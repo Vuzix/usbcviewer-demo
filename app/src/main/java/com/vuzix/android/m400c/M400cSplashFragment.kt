@@ -40,13 +40,6 @@ class M400cSplashFragment : Fragment() {
                 .setMessage("An M400-C device was not found. You will need to exit the app and connect the device before you can continue.")
                 .setNeutralButton("Okay") { _, _ -> requireActivity().finish() }
                 .show()
-        } else {
-            GlobalScope.launch {
-                delay(2000)
-                launch(Dispatchers.Main) {
-                    view.findNavController().navigate(R.id.action_m400cSplashFragment_to_m400cFragment)
-                }
-            }
         }
     }
 }

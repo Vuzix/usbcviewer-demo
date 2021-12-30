@@ -90,20 +90,23 @@ public class Orientation implements SensorEventListener, VuzixSensorEventListene
 //    }
     //mSensorManager.registerListener(this, mRotationSensor, SENSOR_DELAY_MICROS);
     vuzixSensorManager.registerListener(this);
-    vuzixSensorManager.start(new Continuation<Unit>() {
-      @Override
-      public CoroutineContext getContext() {
-        return EmptyCoroutineContext.INSTANCE;
-      }
-
-      @Override
-      public void resumeWith(Object obj) {
-      }
-    });
+//    vuzixSensorManager.start(new Continuation<Unit>() {
+//      @Override
+//      public CoroutineContext getContext() {
+//        return EmptyCoroutineContext.INSTANCE;
+//      }
+//
+//      @Override
+//      public void resumeWith(Object obj) {
+//      }
+//    });
   }
 
   public void stopListening() {
     //mSensorManager.unregisterListener(this);
+    if (vuzixSensorManager != null) {
+      vuzixSensorManager.stopSensorStream();
+    }
     mListener = null;
   }
 
@@ -213,7 +216,9 @@ public class Orientation implements SensorEventListener, VuzixSensorEventListene
     float pitch = orientation[1] * 57;
     float roll = orientation[2] * -57;
 
-    mListener.onOrientationChanged(azimuth, pitch, roll);
+    if (mListener != null) {
+      mListener.onOrientationChanged(azimuth, pitch, roll);
+    }
   }
 
   public static float[] normalize(float[] data) {
@@ -270,9 +275,9 @@ public class Orientation implements SensorEventListener, VuzixSensorEventListene
     m[0] /= magSize;
     m[1] /= magSize;
     m[2] /= magSize;
-    acc_avg[0] = a[0];
-    acc_avg[1] = a[1];
-    acc_avg[2] = a[2];
+    acc_avg[0] = -a[0];
+    acc_avg[1] = -a[1];
+    acc_avg[2] = -a[2];
     mag_avg[0] = m[0];
     mag_avg[1] = m[1];
     mag_avg[2] = m[2];

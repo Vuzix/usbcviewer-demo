@@ -29,7 +29,7 @@ abstract class InboundDataSource(
             if (getData) {
                 val bytes = ByteArray(inboundInterface.inboundEndpoint.maxPacketSize)
                 val read = connection.bulkTransfer(inboundInterface.inboundEndpoint, bytes, inboundInterface.inboundEndpoint.maxPacketSize, 1000)
-                Timber.d("$read")
+//                Timber.d("$read")
                 if (read <= inboundInterface.inboundEndpoint.maxPacketSize && read != -1) {
                     _dataFlow.emit(Success(bytes.take(read).toByteArray()))
                 }

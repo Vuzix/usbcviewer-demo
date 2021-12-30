@@ -24,6 +24,7 @@ import com.vuzix.android.m400c.common.domain.entity.VuzixVideoDevice
 import com.vuzix.android.m400c.core.util.DeviceUtil
 import com.vuzix.android.m400c.core.util.M400cConstants
 import com.vuzix.android.m400c.databinding.FragmentMainBinding
+import com.vuzix.android.m400c.databinding.FragmentMainNoFlashlightBinding
 import timber.log.Timber
 
 class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallback {
@@ -36,14 +37,14 @@ class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallb
 
     lateinit var videoDevice: VuzixVideoDevice
 
-    lateinit var binding: FragmentMainBinding
+    lateinit var binding: FragmentMainNoFlashlightBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_no_flashlight, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_menu">
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/VuzixButton"
+            android:id="@+id/btn_demo_sensors"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="5dp"
+            android:text="@string/button_main_sensors"
+            android:textSize="20sp"
+            android:nextFocusLeft="@+id/btn_demo_buttons"
+            app:icon="@drawable/icon_sensor_white"
+            app:layout_constraintBottom_toTopOf="@+id/gl_main_horz_80"
+            app:layout_constraintEnd_toStartOf="@+id/gl_main_vert_33"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gl_main_horz_60" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/VuzixButton"
+            android:id="@+id/btn_demo_mic"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="5dp"
+            android:text="@string/button_main_mic"
+            app:icon="@drawable/icon_microphone_white"
+            app:layout_constraintBottom_toTopOf="@+id/gl_main_horz_80"
+            app:layout_constraintEnd_toStartOf="@+id/gl_main_vert_66"
+            app:layout_constraintStart_toEndOf="@+id/gl_main_vert_33"
+            app:layout_constraintTop_toBottomOf="@+id/gl_main_horz_60" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/VuzixButton"
+            android:id="@+id/btn_demo_speakers"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="5dp"
+            android:text="@string/button_main_speakers"
+            android:nextFocusRight="@+id/btn_demo_camera"
+            app:icon="@drawable/icon_speaker_white"
+            app:layout_constraintBottom_toTopOf="@+id/gl_main_horz_80"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gl_main_vert_66"
+            app:layout_constraintTop_toBottomOf="@+id/gl_main_horz_60" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/VuzixButton"
+            android:id="@+id/btn_demo_camera"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="5dp"
+            android:text="@string/button_main_camera"
+            android:nextFocusLeft="@+id/btn_demo_speakers"
+            app:icon="@drawable/icon_camera_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/gl_main_vert_50"
+            app:layout_constraintStart_toEndOf="@+id/gl_main_vert_17"
+            app:layout_constraintTop_toBottomOf="@+id/gl_main_horz_80" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/VuzixButton"
+            android:id="@+id/btn_demo_flashlight"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="5dp"
+            android:text="@string/button_main_flashlight"
+            android:visibility="gone"
+            app:icon="@drawable/icon_flashlight_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/gl_main_vert_66"
+            app:layout_constraintStart_toEndOf="@+id/gl_main_vert_33"
+            app:layout_constraintTop_toBottomOf="@+id/gl_main_horz_80" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/VuzixButton"
+            android:id="@+id/btn_demo_buttons"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="5dp"
+            android:text="@string/button_main_buttons"
+            android:nextFocusRight="@+id/btn_demo_sensors"
+            app:icon="@drawable/icon_button_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/gl_main_vert_83"
+            app:layout_constraintStart_toEndOf="@+id/gl_main_vert_50"
+            app:layout_constraintTop_toBottomOf="@+id/gl_main_horz_80" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_main_vert_33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".33" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_main_vert_17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".17" />
+
+        <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_main_vert_50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".50" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_main_vert_66"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".66" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_main_vert_83"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".83" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_main_horz_60"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".60" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_main_horz_80"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".80" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

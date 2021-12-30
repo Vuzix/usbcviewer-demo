@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import android.view.View.OnKeyListener
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.vuzix.android.m400c.R
 import com.vuzix.android.m400c.core.base.BaseFragment
@@ -18,14 +19,11 @@ import com.vuzix.m400cconnectivitysdk.core.VuzixSensorEvent
 import timber.log.Timber
 
 class ArtificialHorizonFragment :
-    BaseFragment<SensorUiState, HorizonViewModel, FragmentHorizonSensorDemoBinding>(R.layout.fragment_horizon_sensor_demo),
+    Fragment(R.layout.fragment_horizon_sensor_demo),
     OnKeyListener, Orientation.Listener {
-    override val viewModel: HorizonViewModel by viewModels() {
-        HorizonViewModelFactory()
-    }
 
     lateinit var usbManager: UsbManager
-    private lateinit var mAttitudeIndicator: AttitudeIndicator
+    private lateinit var mAltitudeIndicator: AltitudeIndicator
     lateinit var mOrientation: Orientation
 
     private var azZero = 0.0f
@@ -43,49 +41,35 @@ class ArtificialHorizonFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        viewModel.startSensorStream()
-        mAttitudeIndicator = view.findViewById(R.id.attitude_indicator)
-        if (mOrientation != null) {
-            mOrientation.startListening(this)
-        }
+        mAltitudeIndicator = view.findViewById(R.id.attitude_indicator)
+        mOrientation.startListening(this)
     }
 
     override fun onStop() {
 //        viewModel.stopSensorStream()
-        if (mOrientation != null) {
-            mOrientation.stopListening()
-        }
+        mOrientation.stopListening()
         super.onStop()
     }
 
-    override fun onUiStateUpdated(uiState: SensorUiState) {
-        var event = VuzixSensorEvent(VuzixSensor())
-        var array = FloatArray(4)
-        when (uiState.action) {
-            is Default -> {
-                // Do nothing
-            }
-            //is Error -> binding.tvHidMessage?.text = uiState.action.errorMessage
-            is Loading -> {
-                // Do nothing for now (may not need this)
-            }
-        }
-    }
-
     override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
-        if (event?.keyCode == KeyEvent.KEYCODE_BACK) {
-            requireActivity().onBackPressed()
-        } else if (event?.keyCode == KeyEvent.KEYCODE_ENTER) {
-            setZero()
-        } else {
-            when (event?.scanCode) {
-                M400cConstants.KEY_BACK_LONG,
-                M400cConstants.KEY_FRONT_LONG,
-                M400cConstants.KEY_MIDDLE_LONG ->
-                    if (event.action != KeyEvent.ACTION_UP) {
-                        requireActivity().onBackPressed()
-                    }
+        when (event?.keyCode) {
+            KeyEvent.KEYCODE_BACK -> {
+                requireActivity().onBackPressed()
             }
-            return true
+            KeyEvent.KEYCODE_ENTER -> {
+                setZero()
+            }
+            else -> {
+                when (event?.scanCode) {
+                    M400cConstants.KEY_BACK_LONG,
+                    M400cConstants.KEY_FRONT_LONG,
+                    M400cConstants.KEY_MIDDLE_LONG ->
+                        if (event.action != KeyEvent.ACTION_UP) {
+                            requireActivity().onBackPressed()
+                        }
+                }
+                return true
+            }
         }
         return false
     }
@@ -97,14 +81,10 @@ class ArtificialHorizonFragment :
     }
 
     override fun onOrientationChanged(azimuth: Float, pitch: Float, roll: Float) {
-        var pitch = pitch
-        var roll = roll
         Timber.i("Orientation changed: az = $azimuth, pitch = $pitch, roll = $roll")
-        if (java.lang.Float.isNaN(pitch)) pitch = 0f
-        if (java.lang.Float.isNaN(roll)) roll = 0f
         currAngle[0] = azimuth
-        currAngle[1] = pitch
-        currAngle[2] = roll
-        mAttitudeIndicator.setAttitude(pitch - pitchZero, roll - rollZero)
+        currAngle[1] = if (pitch.isNaN()) 0f else pitch
+        currAngle[2] = if (roll.isNaN()) 0f else roll
+        mAltitudeIndicator.setAttitude(pitch - pitchZero, roll - rollZero)
     }
 }

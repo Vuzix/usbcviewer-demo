@@ -1,23 +1,17 @@
 package com.vuzix.android.m400c.hid.presentation.sensors
 
 import android.content.Context
-import android.hardware.Sensor
-import android.hardware.Sensor.*
-import android.hardware.SensorEvent
 import android.hardware.usb.UsbManager
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.View.OnKeyListener
-import android.widget.ImageView
 import androidx.fragment.app.viewModels
 import com.vuzix.android.m400c.R
 import com.vuzix.android.m400c.core.base.BaseFragment
 import com.vuzix.android.m400c.core.util.M400cConstants
 import com.vuzix.android.m400c.databinding.FragmentHorizonSensorDemoBinding
 import com.vuzix.android.m400c.hid.presentation.sensors.SensorAction.Default
-import com.vuzix.android.m400c.hid.presentation.sensors.SensorAction.Error
 import com.vuzix.android.m400c.hid.presentation.sensors.SensorAction.Loading
 import com.vuzix.m400cconnectivitysdk.core.VuzixSensor
 import com.vuzix.m400cconnectivitysdk.core.VuzixSensorEvent
@@ -84,9 +78,9 @@ class ArtificialHorizonFragment :
             setZero()
         } else {
             when (event?.scanCode) {
-                M400cConstants.KEY_ONE_LONG,
-                M400cConstants.KEY_TWO_LONG,
-                M400cConstants.KEY_THREE_LONG ->
+                M400cConstants.KEY_BACK_LONG,
+                M400cConstants.KEY_FRONT_LONG,
+                M400cConstants.KEY_MIDDLE_LONG ->
                     if (event.action != KeyEvent.ACTION_UP) {
                         requireActivity().onBackPressed()
                     }

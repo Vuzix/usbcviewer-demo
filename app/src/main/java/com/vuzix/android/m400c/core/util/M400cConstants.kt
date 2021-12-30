@@ -33,13 +33,15 @@ object M400cConstants {
     // IDs for the Video Interfaces
     const val VIDEO_CONTROL = 0
     const val VIDEO_STREAM = 1
+    const val VIDEO_HID = 2
 
     // IDs for Video Endpoints
     const val VIDEO_CONTROL_ENDPOINT_ONE = 0
     const val VIDEO_STREAM_ENDPOINT_ONE = 0
+    const val VIDEO_HID_ENDPOINT_ONE = 0
 
     // IDs for Flashlight Commands
-    const val FLASHLIGHT_ON = 11
+    const val FLASHLIGHT_ON = 9
     const val FLASHLIGHT_OFF = 10
 
     // IDs for the Outgoing Audio Interfaces
@@ -62,11 +64,11 @@ object M400cConstants {
     const val AUDIO_STREAM_ONE_ENDPOINT_TWO = 1
 
     // Keyboard IDs / Command
-    const val KEY_ONE = 28 // Enter
-    const val KEY_ONE_LONG = 111 // Escape
-    const val KEY_TWO = 105 // Move Left
-    const val KEY_TWO_LONG = 108 // Move Down
-    const val KEY_THREE = 106 // Move Right
-    const val KEY_THREE_LONG = 103 // Move Up
-    const val KEY_FOUR = 186 // Unknown
+    const val KEY_BACK = 28 // Enter
+    const val KEY_BACK_LONG = 111 // Escape
+    const val KEY_FRONT = 105 // Move Left
+    const val KEY_FRONT_LONG = 108 // Move Down
+    const val KEY_MIDDLE = 106 // Move Right
+    const val KEY_MIDDLE_LONG = 103 // Move Up
+    const val KEY_SIDE = 57 // Unknown
 }

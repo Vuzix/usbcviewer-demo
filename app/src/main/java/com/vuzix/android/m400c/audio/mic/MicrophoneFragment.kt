@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment
 import com.vuzix.android.m400c.R
 import com.vuzix.android.m400c.core.util.M400cConstants
 import com.vuzix.android.m400c.databinding.FragmentMicrophoneDemoBinding
-import timber.log.Timber
 import kotlin.math.log10
 
 class MicrophoneFragment : Fragment(), OnKeyListener {
@@ -98,9 +97,9 @@ class MicrophoneFragment : Fragment(), OnKeyListener {
             requireActivity().onBackPressed()
         } else {
             when (event?.scanCode) {
-                M400cConstants.KEY_ONE_LONG,
-                M400cConstants.KEY_TWO_LONG,
-                M400cConstants.KEY_THREE_LONG ->
+                M400cConstants.KEY_BACK_LONG,
+                M400cConstants.KEY_FRONT_LONG,
+                M400cConstants.KEY_MIDDLE_LONG ->
                     if (event.action != KeyEvent.ACTION_UP) {
                         requireActivity().onBackPressed()
                     }

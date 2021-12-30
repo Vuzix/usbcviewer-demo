@@ -34,13 +34,13 @@ class FlashlightFragment : Fragment(), OnKeyListener {
         usbManager = requireContext().getSystemService(Context.USB_SERVICE) as UsbManager
         videoDevice = DeviceUtil.getVideoDevice(usbManager)
         flashlightInterface = videoDevice.usbDevice.let {
-            val intf = it!!.getInterface(M400cConstants.VIDEO_CONTROL)
-            Timber.d("${intf.getEndpoint(0).direction}")
-            val endpoint = intf.getEndpoint(M400cConstants.VIDEO_CONTROL_ENDPOINT_ONE)
+            val intf = it!!.getInterface(M400cConstants.VIDEO_HID)
+            val endpoint = intf.getEndpoint(M400cConstants.VIDEO_HID_ENDPOINT_ONE)
             FlashlightInterface(intf, endpoint)
         }
         connection = usbManager.openDevice(videoDevice.usbDevice)
         connection.claimInterface(flashlightInterface.intf, true)
+        Timber.d(connection.rawDescriptors.strPrint())
     }
 
     override fun onCreateView(
@@ -59,43 +59,15 @@ class FlashlightFragment : Fragment(), OnKeyListener {
         binding.clFlashlightView.setBackgroundResource(R.drawable.bg_flashlight_on)
         state = FlashlightState.On
         val bytes = getFlashlightPacket(true)
-        val first = connection.controlTransfer(
+        connection.controlTransfer(
             0x21,
             0x09,
-            0x0300,
+            0x0200,
             flashlightInterface.intf.id,
             bytes,
             bytes.size,
             1000
         )
-//        val first = connection.bulkTransfer(
-//            flashlightInterface.inboundEndpoint,
-//            bytes,
-//            bytes.size,
-//            1000
-//        )
-        Timber.d("$first")
-        Thread.sleep(50)
-        val incomingBytes = ByteArray(64)
-        val read = connection.controlTransfer(
-            0xA1,
-            0x01,
-            0x0300,
-            flashlightInterface.intf.id,
-            incomingBytes,
-            incomingBytes.size,
-            1000
-        )
-//        val read = connection.bulkTransfer(
-//            flashlightInterface.inboundEndpoint,
-//            incomingBytes,
-//            incomingBytes.size,
-//            1000
-//        )
-        Timber.d("$read")
-        if (read > 0) {
-            Timber.d("Received 0x${incomingBytes.strPrint()}")
-        }
     }
 
     fun turnFlashlightOff() {
@@ -105,25 +77,18 @@ class FlashlightFragment : Fragment(), OnKeyListener {
         val bytes = getFlashlightPacket(false)
         connection.controlTransfer(
             0x21,
-            0x09,
-            0x0300 or M400cConstants.FLASHLIGHT_OFF,
+            0x0A,
+            0x0200,
             flashlightInterface.intf.id,
             bytes,
             bytes.size,
             1000
         )
-//        connection.bulkTransfer(
-//            flashlightInterface.inboundEndpoint,
-//            bytes,
-//            bytes.size,
-//            1000
-//        )
     }
 
     fun getFlashlightPacket(turnOn: Boolean): ByteArray {
         return if (turnOn) {
-//            byteArrayOf(M400cConstants.FLASHLIGHT_ON.toByte(), 0x01)
-            byteArrayOf(0xFE.toByte(), 20.toByte())
+            byteArrayOf(M400cConstants.FLASHLIGHT_ON.toByte(), 0x01)
         } else {
             byteArrayOf(M400cConstants.FLASHLIGHT_OFF.toByte(), 0x01)
         }
@@ -135,10 +100,10 @@ class FlashlightFragment : Fragment(), OnKeyListener {
             requireActivity().onBackPressed()
         } else {
             when (event?.scanCode) {
-                M400cConstants.KEY_ONE,
-                M400cConstants.KEY_TWO,
-                M400cConstants.KEY_THREE,
-                M400cConstants.KEY_FOUR -> {
+                M400cConstants.KEY_BACK,
+                M400cConstants.KEY_FRONT,
+                M400cConstants.KEY_MIDDLE,
+                M400cConstants.KEY_SIDE -> {
                     if (event.action != KeyEvent.ACTION_UP) {
                         when (state) {
                             FlashlightState.On -> turnFlashlightOff()

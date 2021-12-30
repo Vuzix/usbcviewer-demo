@@ -56,9 +56,9 @@ class SpeakerFragment : Fragment(), OnKeyListener {
             requireActivity().onBackPressed()
         } else {
             when (event?.scanCode) {
-                M400cConstants.KEY_ONE_LONG,
-                M400cConstants.KEY_TWO_LONG,
-                M400cConstants.KEY_THREE_LONG ->
+                M400cConstants.KEY_BACK_LONG,
+                M400cConstants.KEY_FRONT_LONG,
+                M400cConstants.KEY_MIDDLE_LONG ->
                     if (event.action != KeyEvent.ACTION_UP) {
                         requireActivity().onBackPressed()
                     }

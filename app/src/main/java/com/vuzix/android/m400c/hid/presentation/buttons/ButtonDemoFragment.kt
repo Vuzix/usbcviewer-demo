@@ -10,7 +10,6 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import com.vuzix.android.m400c.R
 import com.vuzix.android.m400c.core.util.M400cConstants
 import com.vuzix.android.m400c.databinding.FragmentButtonDemoBinding
@@ -50,10 +49,10 @@ class ButtonDemoFragment : Fragment(), OnKeyListener {
             }
         } else {
             when (event?.scanCode) {
-                M400cConstants.KEY_TWO -> setButtonPressedImage(R.drawable.buttons_3)
-                M400cConstants.KEY_THREE -> setButtonPressedImage(R.drawable.buttons_2)
-                M400cConstants.KEY_FOUR -> setButtonPressedImage(R.drawable.buttons_1)
-                M400cConstants.KEY_ONE_LONG, M400cConstants.KEY_TWO_LONG, M400cConstants.KEY_THREE_LONG -> requireActivity().onBackPressed()
+                M400cConstants.KEY_FRONT -> setButtonPressedImage(R.drawable.button_front)
+                M400cConstants.KEY_MIDDLE -> setButtonPressedImage(R.drawable.button_middle)
+                M400cConstants.KEY_BACK -> setButtonPressedImage(R.drawable.button_back)
+                M400cConstants.KEY_BACK_LONG, M400cConstants.KEY_FRONT_LONG, M400cConstants.KEY_MIDDLE_LONG -> requireActivity().onBackPressed()
             }
             return true
         }

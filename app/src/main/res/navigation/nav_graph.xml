@@ -41,7 +41,7 @@
         android:label="SpeakerFragment" />
     <fragment
         android:id="@+id/sensorFragment"
-        android:name="com.vuzix.android.m400c.hid.presentation.sensors.SensorFragment"
+        android:name="com.vuzix.android.m400c.hid.presentation.sensors.ArtificialHorizonFragment"
         android:label="SensorFragment" />
     <fragment
         android:id="@+id/cameraFragment"

@@ -33,7 +33,7 @@ class HidSensorDataSource constructor(
     }
 
     fun initSensor(sensor: Int): Flow<Boolean> = flow {
-        val bytes = SensorUtil.getSensorControlPacket(sensor, 120)
+        val bytes = SensorUtil.getSensorControlPacket(sensor, 4)
         connection.controlTransfer(
             0x21,
             0x09,

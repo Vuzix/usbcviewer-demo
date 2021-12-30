@@ -16,6 +16,7 @@ import com.vuzix.android.m400c.audio.mic.MicrophoneFragment
 import com.vuzix.android.m400c.audio.speakers.SpeakerFragment
 import com.vuzix.android.m400c.core.util.M400cConstants
 import com.vuzix.android.m400c.hid.presentation.buttons.ButtonDemoFragment
+import com.vuzix.android.m400c.hid.presentation.sensors.ArtificialHorizonFragment
 import com.vuzix.android.m400c.hid.presentation.sensors.SensorFragment
 import com.vuzix.android.m400c.video.FlashlightFragment
 import com.vuzix.android.m400c.video.VuzixCameraFragment
@@ -29,7 +30,7 @@ class M400cActivity : AppCompatActivity() {
         when (currentFragment?.id) {
             R.id.sensorFragment -> {
                 supportFragmentManager.fragments[0].let { fragment ->
-                    fragment.childFragmentManager.fragments[0].let { it as SensorFragment
+                    fragment.childFragmentManager.fragments[0].let { it as ArtificialHorizonFragment
                         event?.let { keyEvent ->
                             it.onKey(it.view, keyEvent.keyCode, keyEvent)
                             return true

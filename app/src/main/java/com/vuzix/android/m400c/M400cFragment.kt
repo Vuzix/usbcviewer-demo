@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -23,8 +24,13 @@ import com.vuzix.android.m400c.common.domain.entity.VuzixHidDevice
 import com.vuzix.android.m400c.common.domain.entity.VuzixVideoDevice
 import com.vuzix.android.m400c.core.util.DeviceUtil
 import com.vuzix.android.m400c.core.util.M400cConstants
+import com.vuzix.android.m400c.core.util.allData
 import com.vuzix.android.m400c.databinding.FragmentMainBinding
 import com.vuzix.android.m400c.databinding.FragmentMainNoFlashlightBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallback {
@@ -37,14 +43,16 @@ class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallb
 
     lateinit var videoDevice: VuzixVideoDevice
 
-    lateinit var binding: FragmentMainNoFlashlightBinding
+//    lateinit var binding: FragmentMainNoFlashlightBinding
+    lateinit var binding: FragmentMainBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_no_flashlight, container, false)
+        //binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_no_flashlight, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
@@ -69,69 +77,90 @@ class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallb
         }
         usbManager = requireContext().getSystemService(Context.USB_SERVICE) as UsbManager
         Timber.d(usbManager.deviceList.toString())
-        hidDevice = DeviceUtil.getHidDevice(usbManager)
-        hidDevice.usbDevice?.let {
-            binding.btnDemoSensors.apply {
-                setOnClickListener {
-                    view.findNavController().navigate(R.id.action_m400cFragment_to_sensorFragment)
-                }
-                setButtonFocusTheme(this)
+        if (usbManager.deviceList.isEmpty()) {
+            AlertDialog.Builder(requireContext())
+                .setTitle("No device found")
+                .setMessage("An M400-C device was not found. You will need to exit the app and connect the device before you can continue.")
+                .setNeutralButton("Okay") { _, _ -> requireActivity().finish() }
+                .show()
+        } else {
+            hidDevice = try {
+                DeviceUtil.getHidDevice(usbManager)
+            } catch (e: Exception) {
+                Thread.sleep(4000)
+                DeviceUtil.getHidDevice(usbManager)
             }
-            binding.btnDemoButtons.apply {
-                setOnClickListener {
-                    view.findNavController()
-                        .navigate(R.id.action_m400cFragment_to_buttonDemoFragment)
+            hidDevice.usbDevice?.let {
+                binding.btnDemoSensors.apply {
+                    setOnClickListener {
+                        view.findNavController().navigate(R.id.action_m400cFragment_to_sensorFragment)
+                    }
+                    setButtonFocusTheme(this)
                 }
-                setButtonFocusTheme(this)
+                binding.btnDemoButtons.apply {
+                    setOnClickListener {
+                        view.findNavController()
+                            .navigate(R.id.action_m400cFragment_to_buttonDemoFragment)
+                    }
+                    setButtonFocusTheme(this)
+                }
+                checkPermission(it)
+            } ?: run {
+                binding.btnDemoSensors.isEnabled = false
+                binding.btnDemoButtons.isEnabled = false
             }
-            checkPermission(it)
-        } ?: run {
-            binding.btnDemoSensors.isEnabled = false
-            binding.btnDemoButtons.isEnabled = false
+
+            audioDevice = DeviceUtil.getAudioDevice(usbManager)
+            audioDevice.usbDevice?.let {
+                binding.btnDemoMic.apply {
+                    setOnClickListener {
+                        view.findNavController()
+                            .navigate(R.id.action_m400cFragment_to_microphoneFragment)
+                    }
+                    setButtonFocusTheme(this)
+                }
+                binding.btnDemoSpeakers.apply {
+                    setOnClickListener {
+                        view.findNavController().navigate(R.id.action_m400cFragment_to_speakerFragment)
+                    }
+                    setButtonFocusTheme(this)
+                }
+                checkPermission(it)
+            } ?: run {
+                binding.btnDemoMic.isEnabled = false
+                binding.btnDemoSpeakers.isEnabled = false
+            }
+
+            videoDevice = DeviceUtil.getVideoDevice(usbManager)
+            videoDevice.usbDevice?.let {
+                for (i in 0 until it.interfaceCount) {
+                    val intf = it.getInterface(i)
+                    Timber.d("Interface ID #${intf.id}")
+                    for (j in 0 until intf.endpointCount) {
+                        Timber.d(intf.getEndpoint(j).allData())
+                    }
+                }
+                binding.btnDemoCamera.apply {
+                    setOnClickListener {
+                        view.findNavController().navigate(R.id.action_m400cFragment_to_cameraFragment)
+                    }
+                    setButtonFocusTheme(this)
+                }
+                binding.btnDemoFlashlight.apply {
+                    setOnClickListener {
+                        view.findNavController()
+                            .navigate(R.id.action_m400cFragment_to_flashlightFragment)
+                    }
+                    setButtonFocusTheme(this)
+                }
+                checkPermission(it)
+
+            } ?: run {
+                binding.btnDemoCamera.isEnabled = false
+                binding.btnDemoFlashlight.isEnabled = false
+            }
         }
 
-        audioDevice = DeviceUtil.getAudioDevice(usbManager)
-        audioDevice.usbDevice?.let {
-            binding.btnDemoMic.apply {
-                setOnClickListener {
-                    view.findNavController()
-                        .navigate(R.id.action_m400cFragment_to_microphoneFragment)
-                }
-                setButtonFocusTheme(this)
-            }
-            binding.btnDemoSpeakers.apply {
-                setOnClickListener {
-                    view.findNavController().navigate(R.id.action_m400cFragment_to_speakerFragment)
-                }
-                setButtonFocusTheme(this)
-            }
-            checkPermission(it)
-        } ?: run {
-            binding.btnDemoMic.isEnabled = false
-            binding.btnDemoSpeakers.isEnabled = false
-        }
-
-        videoDevice = DeviceUtil.getVideoDevice(usbManager)
-        videoDevice.usbDevice?.let {
-            binding.btnDemoCamera.apply {
-                setOnClickListener {
-                    view.findNavController().navigate(R.id.action_m400cFragment_to_cameraFragment)
-                }
-                setButtonFocusTheme(this)
-            }
-            binding.btnDemoFlashlight.apply {
-                setOnClickListener {
-                    view.findNavController()
-                        .navigate(R.id.action_m400cFragment_to_flashlightFragment)
-                }
-                setButtonFocusTheme(this)
-            }
-            checkPermission(it)
-
-        } ?: run {
-            binding.btnDemoCamera.isEnabled = false
-            binding.btnDemoFlashlight.isEnabled = false
-        }
     }
 
     override fun onRequestPermissionsResult(

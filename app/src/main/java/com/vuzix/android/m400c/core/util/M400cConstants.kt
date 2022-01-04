@@ -66,9 +66,9 @@ object M400cConstants {
     // Keyboard IDs / Command
     const val KEY_BACK = 28 // Enter
     const val KEY_BACK_LONG = 111 // Escape
-    const val KEY_FRONT = 105 // Move Left
-    const val KEY_FRONT_LONG = 108 // Move Down
-    const val KEY_MIDDLE = 106 // Move Right
-    const val KEY_MIDDLE_LONG = 103 // Move Up
+    const val KEY_FRONT = 106 // Move Right
+    const val KEY_FRONT_LONG = 103 // Move Up
+    const val KEY_MIDDLE = 105 // Move Left
+    const val KEY_MIDDLE_LONG = 108 // Move Down
     const val KEY_SIDE = 57 // Unknown
 }

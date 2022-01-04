@@ -3,6 +3,7 @@ package com.vuzix.android.m400c.video
 import android.content.Context
 import android.hardware.usb.UsbDeviceConnection
 import android.hardware.usb.UsbManager
+import android.hardware.usb.UsbRequest
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -15,9 +16,12 @@ import com.vuzix.android.m400c.R
 import com.vuzix.android.m400c.common.domain.entity.VuzixVideoDevice
 import com.vuzix.android.m400c.core.util.DeviceUtil
 import com.vuzix.android.m400c.core.util.M400cConstants
+import com.vuzix.android.m400c.core.util.allData
 import com.vuzix.android.m400c.core.util.strPrint
 import com.vuzix.android.m400c.databinding.FragmentFlashlightDemoBinding
 import timber.log.Timber
+import java.nio.ByteBuffer
+import java.util.concurrent.TimeUnit
 
 class FlashlightFragment : Fragment(), OnKeyListener {
 
@@ -40,7 +44,6 @@ class FlashlightFragment : Fragment(), OnKeyListener {
         }
         connection = usbManager.openDevice(videoDevice.usbDevice)
         connection.claimInterface(flashlightInterface.intf, true)
-        Timber.d(connection.rawDescriptors.strPrint())
     }
 
     override fun onCreateView(
@@ -54,7 +57,7 @@ class FlashlightFragment : Fragment(), OnKeyListener {
         return binding.root
     }
 
-    fun turnFlashlightOn() {
+    private fun turnFlashlightOn() {
         Timber.d("Turn On")
         binding.clFlashlightView.setBackgroundResource(R.drawable.bg_flashlight_on)
         state = FlashlightState.On
@@ -66,18 +69,18 @@ class FlashlightFragment : Fragment(), OnKeyListener {
             flashlightInterface.intf.id,
             bytes,
             bytes.size,
-            1000
+            TimeUnit.SECONDS.toMillis(1).toInt()
         )
     }
 
-    fun turnFlashlightOff() {
+    private fun turnFlashlightOff() {
         Timber.d("Turn Off")
         binding.clFlashlightView.setBackgroundResource(R.drawable.bg_flashlight_off)
         state = FlashlightState.Off
         val bytes = getFlashlightPacket(false)
         connection.controlTransfer(
             0x21,
-            0x0A,
+            0x09,
             0x0200,
             flashlightInterface.intf.id,
             bytes,
@@ -86,11 +89,11 @@ class FlashlightFragment : Fragment(), OnKeyListener {
         )
     }
 
-    fun getFlashlightPacket(turnOn: Boolean): ByteArray {
+    private fun getFlashlightPacket(turnOn: Boolean): ByteArray {
         return if (turnOn) {
-            byteArrayOf(M400cConstants.FLASHLIGHT_ON.toByte(), 0x01)
+            byteArrayOf(2, M400cConstants.FLASHLIGHT_ON.toByte(), 0x01)
         } else {
-            byteArrayOf(M400cConstants.FLASHLIGHT_OFF.toByte(), 0x01)
+            byteArrayOf(2, M400cConstants.FLASHLIGHT_OFF.toByte(), 0x01)
         }
     }
 

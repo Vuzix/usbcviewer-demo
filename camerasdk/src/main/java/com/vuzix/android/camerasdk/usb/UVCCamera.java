@@ -435,6 +435,7 @@ public class UVCCamera {
     	close();
     	if (mNativePtr != 0) {
     		nativeDestroy(mNativePtr);
+    		nativeSetPrivacy(mNativePtr, false);
     		mNativePtr = 0;
     	}
     }

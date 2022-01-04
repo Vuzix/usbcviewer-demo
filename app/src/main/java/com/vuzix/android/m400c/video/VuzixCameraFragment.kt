@@ -36,6 +36,12 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, O
     lateinit var onDeviceConnectListener: OnDeviceConnectListener
     lateinit var vuzixVideoDevice: VuzixVideoDevice
     lateinit var binding: FragmentCameraDemoBinding
+    lateinit var usbManager: UsbManager
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        usbManager = requireContext().getSystemService(Context.USB_SERVICE) as UsbManager
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -99,6 +105,7 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, O
         Timber.d("onStop")
         cameraHandler.close()
         uvcCameraView.onPause()
+        turnOffLed()
         super.onStop()
     }
 
@@ -107,6 +114,13 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, O
         cameraHandler.release()
         usbMonitor.destroy()
         super.onDestroy()
+    }
+
+    private fun turnOffLed() {
+        val bytes = byteArrayOf(4, 0x84.toByte(), 0x04, 0x02, 0)
+        val connection = usbManager.openDevice(vuzixVideoDevice.usbDevice)
+        connection.controlTransfer(0x21, 0x09, 0x0200, vuzixVideoDevice.usbDevice?.getInterface(2)?.id!!, bytes, bytes.size, 1000)
+        connection.close()
     }
 
     fun startPreview() {

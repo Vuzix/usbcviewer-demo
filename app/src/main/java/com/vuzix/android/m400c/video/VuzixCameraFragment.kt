@@ -10,6 +10,7 @@ import android.view.Surface
 import android.view.View
 import android.view.View.OnKeyListener
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.vuzix.android.camerasdk.camera.UVCCameraHandler
 import com.vuzix.android.camerasdk.ui.CameraDialog
@@ -23,6 +24,9 @@ import com.vuzix.android.m400c.common.domain.entity.VuzixVideoDevice
 import com.vuzix.android.m400c.core.util.DeviceUtil
 import com.vuzix.android.m400c.core.util.M400cConstants
 import com.vuzix.android.m400c.databinding.FragmentCameraDemoBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, OnKeyListener {
@@ -30,13 +34,14 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, O
     private val PREVIEW_HEIGHT = 1080
     private val PREVIEW_MODE = 1
 
-    lateinit var usbMonitor: USBMonitor
-    lateinit var cameraHandler: UVCCameraHandler
-    lateinit var uvcCameraView: CameraViewInterface
     lateinit var onDeviceConnectListener: OnDeviceConnectListener
     lateinit var vuzixVideoDevice: VuzixVideoDevice
     lateinit var binding: FragmentCameraDemoBinding
     lateinit var usbManager: UsbManager
+
+    var uvcCameraView: CameraViewInterface? = null
+    var usbMonitor: USBMonitor? = null
+    var cameraHandler: UVCCameraHandler? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,10 +56,10 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, O
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_camera_demo, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         uvcCameraView = binding.uvcCameraView as CameraViewInterface
-        uvcCameraView.setAspectRatio(PREVIEW_WIDTH, PREVIEW_HEIGHT)
+        uvcCameraView?.setAspectRatio(PREVIEW_WIDTH, PREVIEW_HEIGHT)
         onDeviceConnectListener = object : OnDeviceConnectListener {
             override fun onAttach(device: UsbDevice?) {
-                Timber.d("Usb Device Attached")
+                Timber.d("Usb Device Attached: ${device?.deviceId}")
             }
 
             override fun onDetach(device: UsbDevice?) {
@@ -66,12 +71,12 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, O
                 ctrlBlock: UsbControlBlock?,
                 createNew: Boolean
             ) {
-                cameraHandler.open(ctrlBlock)
+                cameraHandler?.open(ctrlBlock)
                 startPreview()
             }
 
             override fun onDisconnect(device: UsbDevice?, ctrlBlock: UsbControlBlock?) {
-                queueEvent({ cameraHandler.close() }, 0)
+                queueEvent({ cameraHandler?.close() }, 0)
             }
 
             override fun onCancel(device: UsbDevice?) {
@@ -96,39 +101,59 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, O
     override fun onStart() {
         super.onStart()
         Timber.d("onStart")
-        usbMonitor.register()
-        usbMonitor.requestPermission(vuzixVideoDevice.usbDevice)
-        uvcCameraView.onResume()
+        usbMonitor?.register()
+        usbMonitor?.requestPermission(vuzixVideoDevice.usbDevice)
+        uvcCameraView?.onResume()
     }
 
     override fun onStop() {
         Timber.d("onStop")
-        cameraHandler.close()
-        uvcCameraView.onPause()
+        cameraHandler?.close()
+        uvcCameraView?.onPause()
+        GlobalScope.launch(Dispatchers.Main) { binding.pbCamera?.isVisible = false }
         turnOffLed()
         super.onStop()
     }
 
     override fun onDestroy() {
         Timber.d("onDestroy")
-        cameraHandler.release()
-        usbMonitor.destroy()
+        cameraHandler?.release()
+        usbMonitor?.destroy()
+        uvcCameraView = null
+        usbMonitor = null
+        cameraHandler = null
         super.onDestroy()
     }
 
     private fun turnOffLed() {
         val bytes = byteArrayOf(4, 0x84.toByte(), 0x04, 0x02, 0)
         val connection = usbManager.openDevice(vuzixVideoDevice.usbDevice)
-        connection.controlTransfer(0x21, 0x09, 0x0200, vuzixVideoDevice.usbDevice?.getInterface(2)?.id!!, bytes, bytes.size, 1000)
-        connection.close()
+        connection.controlTransfer(
+            0x21,
+            0x09,
+            0x0200,
+            vuzixVideoDevice.usbDevice?.getInterface(M400cConstants.VIDEO_HID)?.id!!,
+            bytes,
+            bytes.size,
+            1000
+        )
     }
 
     fun startPreview() {
-        cameraHandler.startPreview(Surface(uvcCameraView.surfaceTexture))
+        GlobalScope.launch(Dispatchers.Main) { binding.pbCamera?.isVisible = true }
+        uvcCameraView?.let {
+            while (true) {
+                if (it.hasSurface()) {
+                    break
+                }
+                Thread.sleep(50)
+            }
+            cameraHandler?.startPreview(Surface(it.surfaceTexture))
+        }
     }
 
     override fun getUSBMonitor(): USBMonitor {
-        return usbMonitor
+        return usbMonitor!!
     }
 
     override fun onDialogResult(canceled: Boolean) {

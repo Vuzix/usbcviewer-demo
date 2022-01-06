@@ -133,13 +133,6 @@ class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallb
 
             videoDevice = DeviceUtil.getVideoDevice(usbManager)
             videoDevice.usbDevice?.let {
-                for (i in 0 until it.interfaceCount) {
-                    val intf = it.getInterface(i)
-                    Timber.d("Interface ID #${intf.id}")
-                    for (j in 0 until intf.endpointCount) {
-                        Timber.d(intf.getEndpoint(j).allData())
-                    }
-                }
                 binding.btnDemoCamera.apply {
                     setOnClickListener {
                         view.findNavController().navigate(R.id.action_m400cFragment_to_cameraFragment)

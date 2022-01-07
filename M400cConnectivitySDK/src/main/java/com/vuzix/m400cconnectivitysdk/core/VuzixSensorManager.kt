@@ -3,14 +3,10 @@ package com.vuzix.m400cconnectivitysdk.core
 import android.hardware.Sensor.*
 import android.hardware.usb.UsbManager
 import android.util.Log
-import com.vuzix.android.m400c.core.util.M400cConstants
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flatMapConcat
-import java.util.*
-import kotlin.math.abs
 import kotlin.math.sqrt
-import kotlin.text.CharCategory.Companion.valueOf
 
 private const val EPSILON = 0.000000001f
 

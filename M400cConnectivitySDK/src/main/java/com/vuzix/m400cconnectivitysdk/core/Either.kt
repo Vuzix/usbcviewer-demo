@@ -1,4 +1,4 @@
-package com.vuzix.android.m400c.core.util
+package com.vuzix.m400cconnectivitysdk.core
 
 sealed class Either<out F, out S> {
     data class Failure<out F>(val failure: F) : Either<F, Nothing>()

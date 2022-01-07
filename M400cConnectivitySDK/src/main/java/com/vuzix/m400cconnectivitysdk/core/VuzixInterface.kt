@@ -1,3 +1,3 @@
-package com.vuzix.android.m400c.common.domain.entity
+package com.vuzix.m400cconnectivitysdk.core
 
 abstract class VuzixInterface

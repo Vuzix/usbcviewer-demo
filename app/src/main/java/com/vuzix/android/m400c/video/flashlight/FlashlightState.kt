@@ -1,4 +1,4 @@
-package com.vuzix.android.m400c.video
+package com.vuzix.android.m400c.video.flashlight
 
 sealed class FlashlightState {
     object On : FlashlightState()

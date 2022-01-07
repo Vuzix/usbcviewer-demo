@@ -1,4 +1,4 @@
-package com.vuzix.android.m400c.core.util
+package com.vuzix.m400cconnectivitysdk.core
 
 object M400cConstants {
     const val ACTION_USB_PERMISSION = "com.android.vuzix.USB_PERMISSION"
@@ -24,25 +24,25 @@ object M400cConstants {
     const val HID_SENSOR_INBOUND = 0
 
     // IDs for HID Sensors
-    /*const val SENSOR_ACCELEROMETER_ID = 1
+    const val SENSOR_ACCELEROMETER_ID = 1
     const val SENSOR_ALS_ID = 2
     const val SENSOR_GYRO_ID = 3
     const val SENSOR_MAGNETOMETER_ID = 4
-    const val SENSOR_ORIENTATION_ID = 5*/
-    const val SENSOR_NONE = 0
-    const val SENSOR_ACCELEROMETER_ID = 1
-    const val SENSOR_GYRO_ID = 2
-    const val SENSOR_MAGNETOMETER_ID = 3
-    const val SENSOR_ORIENTATION_ID = 4
+    const val SENSOR_ORIENTATION_ID = 5
 
     // IDs for the Video Interfaces
     const val VIDEO_CONTROL = 0
     const val VIDEO_STREAM = 1
+    const val VIDEO_HID = 2
 
     // IDs for Video Endpoints
     const val VIDEO_CONTROL_ENDPOINT_ONE = 0
     const val VIDEO_STREAM_ENDPOINT_ONE = 0
+    const val VIDEO_HID_ENDPOINT_ONE = 0
 
+    // IDs for Flashlight Commands
+    const val FLASHLIGHT_ON = 9
+    const val FLASHLIGHT_OFF = 10
 
     // IDs for the Outgoing Audio Interfaces
     const val MIC_CONTROL = 0
@@ -63,13 +63,12 @@ object M400cConstants {
     const val AUDIO_STREAM_ONE_ENDPOINT_ONE = 0
     const val AUDIO_STREAM_ONE_ENDPOINT_TWO = 1
 
-    // Keyboard IDs
-    const val KEY_ONE = "Key One"
-    const val KEY_ONE_LONG = "0000290000000000"
-    const val KEY_TWO = "0000500000000000"
-    const val KEY_TWO_LONG = "0000510000000000"
-    const val KEY_THREE = "00004F0000000000"
-    const val KEY_THREE_LONG = "0000520000000000"
-    const val KEY_FOUR = "00006B0000000000"
-    const val KEY_UP = "0000000000000000"
+    // Keyboard IDs / Command
+    const val KEY_BACK = 28 // Enter
+    const val KEY_BACK_LONG = 111 // Escape
+    const val KEY_FRONT = 106 // Move Right
+    const val KEY_FRONT_LONG = 103 // Move Up
+    const val KEY_MIDDLE = 105 // Move Left
+    const val KEY_MIDDLE_LONG = 108 // Move Down
+    const val KEY_SIDE = 57 // Unknown
 }

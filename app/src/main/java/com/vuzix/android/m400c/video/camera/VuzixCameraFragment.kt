@@ -1,4 +1,4 @@
-package com.vuzix.android.m400c.video
+package com.vuzix.android.m400c.video.camera
 
 import android.content.Context
 import android.hardware.usb.UsbDevice
@@ -20,10 +20,10 @@ import com.vuzix.android.camerasdk.usb.USBMonitor
 import com.vuzix.android.camerasdk.usb.USBMonitor.OnDeviceConnectListener
 import com.vuzix.android.camerasdk.usb.USBMonitor.UsbControlBlock
 import com.vuzix.android.m400c.R
-import com.vuzix.android.m400c.common.domain.entity.VuzixVideoDevice
-import com.vuzix.android.m400c.core.util.DeviceUtil
-import com.vuzix.android.m400c.core.util.M400cConstants
 import com.vuzix.android.m400c.databinding.FragmentCameraDemoBinding
+import com.vuzix.m400cconnectivitysdk.core.DeviceUtil
+import com.vuzix.m400cconnectivitysdk.core.M400cConstants
+import com.vuzix.m400cconnectivitysdk.core.VuzixVideoDevice
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.vuzix.android.m400c.R
-import com.vuzix.android.m400c.core.util.M400cConstants
+import com.vuzix.m400cconnectivitysdk.core.M400cConstants
 import com.vuzix.android.m400c.databinding.FragmentMicrophoneDemoBinding
 import kotlin.math.log10
 

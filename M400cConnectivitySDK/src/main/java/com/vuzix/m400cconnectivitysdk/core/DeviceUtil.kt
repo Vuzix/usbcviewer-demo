@@ -1,10 +1,7 @@
-package com.vuzix.android.m400c.core.util
+package com.vuzix.m400cconnectivitysdk.core
 
 import android.hardware.usb.UsbDevice
 import android.hardware.usb.UsbManager
-import com.vuzix.android.m400c.common.domain.entity.VuzixAudioDevice
-import com.vuzix.android.m400c.common.domain.entity.VuzixHidDevice
-import com.vuzix.android.m400c.common.domain.entity.VuzixVideoDevice
 
 object DeviceUtil {
 

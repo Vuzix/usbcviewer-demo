@@ -19,18 +19,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.android.material.button.MaterialButton
-import com.vuzix.android.m400c.common.domain.entity.VuzixAudioDevice
-import com.vuzix.android.m400c.common.domain.entity.VuzixHidDevice
-import com.vuzix.android.m400c.common.domain.entity.VuzixVideoDevice
-import com.vuzix.android.m400c.core.util.DeviceUtil
-import com.vuzix.android.m400c.core.util.M400cConstants
-import com.vuzix.android.m400c.core.util.allData
 import com.vuzix.android.m400c.databinding.FragmentMainBinding
-import com.vuzix.android.m400c.databinding.FragmentMainNoFlashlightBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.vuzix.m400cconnectivitysdk.core.DeviceUtil
+import com.vuzix.m400cconnectivitysdk.core.M400cConstants
+import com.vuzix.m400cconnectivitysdk.core.VuzixAudioDevice
+import com.vuzix.m400cconnectivitysdk.core.VuzixHidDevice
+import com.vuzix.m400cconnectivitysdk.core.VuzixVideoDevice
 import timber.log.Timber
 
 class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallback {

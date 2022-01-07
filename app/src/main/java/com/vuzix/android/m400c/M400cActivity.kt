@@ -11,15 +11,13 @@ import android.view.KeyEvent
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
-import com.vuzix.android.camerasdk.ui.CameraFragment
 import com.vuzix.android.m400c.audio.mic.MicrophoneFragment
 import com.vuzix.android.m400c.audio.speakers.SpeakerFragment
-import com.vuzix.android.m400c.core.util.M400cConstants
-import com.vuzix.android.m400c.hid.presentation.buttons.ButtonDemoFragment
-import com.vuzix.android.m400c.hid.presentation.sensors.ArtificialHorizonFragment
-import com.vuzix.android.m400c.hid.presentation.sensors.SensorFragment
-import com.vuzix.android.m400c.video.FlashlightFragment
-import com.vuzix.android.m400c.video.VuzixCameraFragment
+import com.vuzix.m400cconnectivitysdk.core.M400cConstants
+import com.vuzix.android.m400c.hid.buttons.ButtonDemoFragment
+import com.vuzix.android.m400c.hid.sensors.ArtificialHorizonFragment
+import com.vuzix.android.m400c.video.flashlight.FlashlightFragment
+import com.vuzix.android.m400c.video.camera.VuzixCameraFragment
 import timber.log.Timber
 
 class M400cActivity : AppCompatActivity() {

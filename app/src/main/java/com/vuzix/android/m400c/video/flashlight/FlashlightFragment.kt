@@ -1,9 +1,8 @@
-package com.vuzix.android.m400c.video
+package com.vuzix.android.m400c.video.flashlight
 
 import android.content.Context
 import android.hardware.usb.UsbDeviceConnection
 import android.hardware.usb.UsbManager
-import android.hardware.usb.UsbRequest
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -13,14 +12,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.vuzix.android.m400c.R
-import com.vuzix.android.m400c.common.domain.entity.VuzixVideoDevice
-import com.vuzix.android.m400c.core.util.DeviceUtil
-import com.vuzix.android.m400c.core.util.M400cConstants
-import com.vuzix.android.m400c.core.util.allData
-import com.vuzix.android.m400c.core.util.strPrint
 import com.vuzix.android.m400c.databinding.FragmentFlashlightDemoBinding
+import com.vuzix.android.m400c.video.flashlight.FlashlightState.Off
+import com.vuzix.android.m400c.video.flashlight.FlashlightState.On
+import com.vuzix.m400cconnectivitysdk.core.DeviceUtil
+import com.vuzix.m400cconnectivitysdk.core.M400cConstants
+import com.vuzix.m400cconnectivitysdk.core.VuzixVideoDevice
 import timber.log.Timber
-import java.nio.ByteBuffer
 import java.util.concurrent.TimeUnit
 
 class FlashlightFragment : Fragment(), OnKeyListener {
@@ -31,7 +29,7 @@ class FlashlightFragment : Fragment(), OnKeyListener {
     lateinit var connection: UsbDeviceConnection
     lateinit var flashlightInterface: FlashlightInterface
 
-    var state: FlashlightState = FlashlightState.Off
+    var state: FlashlightState = Off
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +58,7 @@ class FlashlightFragment : Fragment(), OnKeyListener {
     private fun turnFlashlightOn() {
         Timber.d("Turn On")
         binding.clFlashlightView.setBackgroundResource(R.drawable.bg_flashlight_on)
-        state = FlashlightState.On
+        state = On
         val bytes = getFlashlightPacket(true)
         connection.controlTransfer(
             0x21,
@@ -76,7 +74,7 @@ class FlashlightFragment : Fragment(), OnKeyListener {
     private fun turnFlashlightOff() {
         Timber.d("Turn Off")
         binding.clFlashlightView.setBackgroundResource(R.drawable.bg_flashlight_off)
-        state = FlashlightState.Off
+        state = Off
         val bytes = getFlashlightPacket(false)
         connection.controlTransfer(
             0x21,
@@ -109,8 +107,8 @@ class FlashlightFragment : Fragment(), OnKeyListener {
                 M400cConstants.KEY_SIDE -> {
                     if (event.action != KeyEvent.ACTION_UP) {
                         when (state) {
-                            FlashlightState.On -> turnFlashlightOff()
-                            FlashlightState.Off -> turnFlashlightOn()
+                            On -> turnFlashlightOff()
+                            Off -> turnFlashlightOn()
                         }
                     }
                 }

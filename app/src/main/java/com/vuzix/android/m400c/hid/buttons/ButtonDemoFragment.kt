@@ -1,4 +1,4 @@
-package com.vuzix.android.m400c.hid.presentation.buttons
+package com.vuzix.android.m400c.hid.buttons
 
 import android.os.Bundle
 import android.view.KeyEvent
@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.vuzix.android.m400c.R
-import com.vuzix.android.m400c.core.util.M400cConstants
+import com.vuzix.m400cconnectivitysdk.core.M400cConstants
 import com.vuzix.android.m400c.databinding.FragmentButtonDemoBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -38,23 +38,27 @@ class ButtonDemoFragment : Fragment(), OnKeyListener {
     }
 
     override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
-        if (event?.keyCode == KeyEvent.KEYCODE_BACK) {
-            requireActivity().onBackPressed()
-        } else if (event?.action == KeyEvent.ACTION_UP) {
-            GlobalScope.launch {
-                delay(2500)
-                launch(Dispatchers.Main) {
-                    binding.ivButtons?.visibility = View.INVISIBLE
+        when {
+            event?.keyCode == KeyEvent.KEYCODE_BACK -> {
+                requireActivity().onBackPressed()
+            }
+            event?.action == KeyEvent.ACTION_UP -> {
+                GlobalScope.launch {
+                    delay(2500)
+                    launch(Dispatchers.Main) {
+                        binding.ivButtons?.visibility = View.INVISIBLE
+                    }
                 }
             }
-        } else {
-            when (event?.scanCode) {
-                M400cConstants.KEY_FRONT -> setButtonPressedImage(R.drawable.button_front)
-                M400cConstants.KEY_MIDDLE -> setButtonPressedImage(R.drawable.button_middle)
-                M400cConstants.KEY_BACK -> setButtonPressedImage(R.drawable.button_back)
-                M400cConstants.KEY_BACK_LONG, M400cConstants.KEY_FRONT_LONG, M400cConstants.KEY_MIDDLE_LONG -> requireActivity().onBackPressed()
+            else -> {
+                when (event?.scanCode) {
+                    M400cConstants.KEY_FRONT -> setButtonPressedImage(R.drawable.button_front)
+                    M400cConstants.KEY_MIDDLE -> setButtonPressedImage(R.drawable.button_middle)
+                    M400cConstants.KEY_BACK -> setButtonPressedImage(R.drawable.button_back)
+                    M400cConstants.KEY_BACK_LONG, M400cConstants.KEY_FRONT_LONG, M400cConstants.KEY_MIDDLE_LONG -> requireActivity().onBackPressed()
+                }
+                return true
             }
-            return true
         }
         return false
     }

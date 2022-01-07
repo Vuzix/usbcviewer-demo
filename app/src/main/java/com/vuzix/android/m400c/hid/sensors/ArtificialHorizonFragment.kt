@@ -1,4 +1,4 @@
-package com.vuzix.android.m400c.hid.presentation.sensors
+package com.vuzix.android.m400c.hid.sensors
 
 import android.content.Context
 import android.hardware.usb.UsbManager
@@ -7,15 +7,8 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.View.OnKeyListener
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.vuzix.android.m400c.R
-import com.vuzix.android.m400c.core.base.BaseFragment
-import com.vuzix.android.m400c.core.util.M400cConstants
-import com.vuzix.android.m400c.databinding.FragmentHorizonSensorDemoBinding
-import com.vuzix.android.m400c.hid.presentation.sensors.SensorAction.Default
-import com.vuzix.android.m400c.hid.presentation.sensors.SensorAction.Loading
-import com.vuzix.m400cconnectivitysdk.core.VuzixSensor
-import com.vuzix.m400cconnectivitysdk.core.VuzixSensorEvent
+import com.vuzix.m400cconnectivitysdk.core.M400cConstants
 import timber.log.Timber
 
 class ArtificialHorizonFragment :

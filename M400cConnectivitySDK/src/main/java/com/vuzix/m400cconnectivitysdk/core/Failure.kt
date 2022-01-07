@@ -1,4 +1,4 @@
-package com.vuzix.android.m400c.core.util
+package com.vuzix.m400cconnectivitysdk.core
 
 sealed class Failure {
     // A failure related to the feature itself.

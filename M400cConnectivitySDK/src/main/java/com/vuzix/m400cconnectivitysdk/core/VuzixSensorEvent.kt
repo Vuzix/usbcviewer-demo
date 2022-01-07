@@ -5,7 +5,7 @@ class VuzixSensorEvent(
      * The Vuzix sensor that generated this event.
      */
     var sensor: VuzixSensor
-){
+) {
     var values: FloatArray? = null
 
     /**

@@ -3,15 +3,13 @@ package com.vuzix.m400cconnectivitysdk.core
 import android.hardware.usb.UsbDevice
 import android.hardware.usb.UsbDeviceConnection
 import android.hardware.usb.UsbManager
-import com.vuzix.android.m400c.common.domain.entity.VuzixInboundInterface
-import com.vuzix.android.m400c.core.util.Either
-import com.vuzix.android.m400c.core.util.Either.Success
+import com.vuzix.m400cconnectivitysdk.core.Either.Success
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import timber.log.Timber
-import com.vuzix.android.m400c.core.util.Failure as Fail
+import com.vuzix.m400cconnectivitysdk.core.Failure as Fail
 
 abstract class InboundDataSource(
     externalScope: CoroutineScope,
@@ -36,10 +34,6 @@ abstract class InboundDataSource(
             }
             delay(inboundInterface.inboundEndpoint.interval.toLong())
         }
-    }
-
-     suspend fun emit(data: Either<InboundDataSourceFailure, ByteArray>) {
-        _dataFlow.emit(data)
     }
 
     fun getSubCount(): Int = _dataFlow.subscriptionCount.value

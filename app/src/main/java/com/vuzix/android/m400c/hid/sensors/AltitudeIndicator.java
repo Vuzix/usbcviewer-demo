@@ -1,5 +1,5 @@
 
-package com.vuzix.android.m400c.hid.presentation.sensors;
+package com.vuzix.android.m400c.hid.sensors;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -145,28 +145,6 @@ public class AltitudeIndicator extends View {
     // Return to normal to draw the miniature plane
     canvas.restore();
 
-    /*
-    // Draw the nose dot
-    canvas.drawPoint(centerX, centerY, mMinPlanePaint);
-
-    // Half-circle of miniature plane
-    float minPlaneCircleRadiusX = mWidth / 6;
-    float minPlaneCircleRadiusY = mHeight / 6;
-    RectF wingsCircleBounds = new RectF(centerX - minPlaneCircleRadiusX, centerY
-        - minPlaneCircleRadiusY, centerX + minPlaneCircleRadiusX, centerY + minPlaneCircleRadiusY);
-    canvas.drawArc(wingsCircleBounds, 0, 180, false, mMinPlanePaint);
-
-    // Wings of miniature plane
-    float wingLength = mWidth / 6;
-    canvas.drawLine(centerX - minPlaneCircleRadiusX - wingLength, centerY, centerX
-        - minPlaneCircleRadiusX, centerY, mMinPlanePaint);
-    canvas.drawLine(centerX + minPlaneCircleRadiusX, centerY, centerX + minPlaneCircleRadiusX
-        + wingLength, centerY, mMinPlanePaint);
-
-    // Draw vertical post
-    canvas.drawLine(centerX, centerY + minPlaneCircleRadiusY, centerX, centerY
-        + minPlaneCircleRadiusY + mHeight / 3, mMinPlanePaint);
-   */
     return mSrcBitmap;
   }
 
@@ -220,7 +198,7 @@ public class AltitudeIndicator extends View {
     }
     long elapsed = System.currentTimeMillis() - frameCountStartedAt;
     if (elapsed >= 1000) {
-      Log.i("AttitudeIndicator", "FPS: " + frameCount);
+//      Log.i("AttitudeIndicator", "FPS: " + frameCount);
       frameCount = 0;
       frameCountStartedAt = System.currentTimeMillis();
     }

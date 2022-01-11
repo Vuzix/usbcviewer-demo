@@ -9,11 +9,12 @@ import android.hardware.usb.UsbManager
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.Window
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.vuzix.android.m400c.audio.mic.MicrophoneFragment
 import com.vuzix.android.m400c.audio.speakers.SpeakerFragment
-import com.vuzix.m400cconnectivitysdk.core.M400cConstants
+import com.vuzix.m400cconnectivitysdk.M400cConstants
 import com.vuzix.android.m400c.hid.buttons.ButtonDemoFragment
 import com.vuzix.android.m400c.hid.sensors.ArtificialHorizonFragment
 import com.vuzix.android.m400c.video.flashlight.FlashlightFragment
@@ -114,6 +115,7 @@ class M400cActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         setContentView(R.layout.activity_main)
 
         val filter = IntentFilter(M400cConstants.ACTION_USB_PERMISSION)

@@ -20,11 +20,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.android.material.button.MaterialButton
 import com.vuzix.android.m400c.databinding.FragmentMainBinding
-import com.vuzix.m400cconnectivitysdk.core.DeviceUtil
-import com.vuzix.m400cconnectivitysdk.core.M400cConstants
-import com.vuzix.m400cconnectivitysdk.core.VuzixAudioDevice
-import com.vuzix.m400cconnectivitysdk.core.VuzixHidDevice
-import com.vuzix.m400cconnectivitysdk.core.VuzixVideoDevice
+import com.vuzix.m400cconnectivitysdk.util.DeviceUtil
+import com.vuzix.m400cconnectivitysdk.M400cConstants
+import com.vuzix.m400cconnectivitysdk.audio.VuzixAudioDevice
+import com.vuzix.m400cconnectivitysdk.sensor.VuzixHidDevice
+import com.vuzix.m400cconnectivitysdk.video.VuzixVideoDevice
 import timber.log.Timber
 
 class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallback {

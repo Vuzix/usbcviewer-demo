@@ -8,7 +8,7 @@ import android.view.View
 import android.view.View.OnKeyListener
 import androidx.fragment.app.Fragment
 import com.vuzix.android.m400c.R
-import com.vuzix.m400cconnectivitysdk.core.M400cConstants
+import com.vuzix.m400cconnectivitysdk.M400cConstants
 import timber.log.Timber
 
 class ArtificialHorizonFragment :

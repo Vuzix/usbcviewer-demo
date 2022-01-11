@@ -11,15 +11,15 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-//import com.vuzix.m400cconnectivitysdk.core.VuzixSensor;
-//import com.vuzix.m400cconnectivitysdk.core.VuzixSensorEvent;
-//import com.vuzix.m400cconnectivitysdk.core.VuzixSensorEventListener;
-//import com.vuzix.m400cconnectivitysdk.core.VuzixSensorManager;
+//import com.vuzix.m400cconnectivitysdk.sensor.VuzixSensor;
+//import com.vuzix.m400cconnectivitysdk.sensor.VuzixSensorEvent;
+//import com.vuzix.m400cconnectivitysdk.sensor.VuzixSensorEventListener;
+//import com.vuzix.m400cconnectivitysdk.sensor.VuzixSensorManager;
 
-import com.vuzix.m400cconnectivitysdk.core.VuzixSensor;
-import com.vuzix.m400cconnectivitysdk.core.VuzixSensorEvent;
-import com.vuzix.m400cconnectivitysdk.core.VuzixSensorEventListener;
-import com.vuzix.m400cconnectivitysdk.core.VuzixSensorManager;
+import com.vuzix.m400cconnectivitysdk.sensor.VuzixSensor;
+import com.vuzix.m400cconnectivitysdk.sensor.VuzixSensorEvent;
+import com.vuzix.m400cconnectivitysdk.sensor.VuzixSensorEventListener;
+import com.vuzix.m400cconnectivitysdk.sensor.VuzixSensorManager;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -260,9 +260,9 @@ public class Orientation implements SensorEventListener, VuzixSensorEventListene
     m[0] /= magSize;
     m[1] /= magSize;
     m[2] /= magSize;
-    acc_avg[0] = -a[0];
-    acc_avg[1] = -a[1];
-    acc_avg[2] = -a[2];
+    acc_avg[0] = a[0];
+    acc_avg[1] = a[1];
+    acc_avg[2] = a[2];
     mag_avg[0] = m[0];
     mag_avg[1] = m[1];
     mag_avg[2] = m[2];

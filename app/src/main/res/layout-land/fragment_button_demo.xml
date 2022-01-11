@@ -10,12 +10,31 @@
         android:background="@drawable/bg_buttons_device">
 
         <ImageView
-            android:id="@+id/iv_buttons"
+            android:id="@+id/iv_button_back"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/button_back"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:src="@drawable/buttons_back"/>
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_button_middle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/button_middle"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_button_front"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/button_front"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

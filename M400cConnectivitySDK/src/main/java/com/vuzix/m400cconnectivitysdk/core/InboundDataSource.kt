@@ -1,10 +1,7 @@
 package com.vuzix.m400cconnectivitysdk.core
 
-import android.hardware.usb.UsbDevice
 import android.hardware.usb.UsbDeviceConnection
-import android.hardware.usb.UsbManager
 import com.vuzix.m400cconnectivitysdk.core.Either.Success
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -12,10 +9,7 @@ import timber.log.Timber
 import com.vuzix.m400cconnectivitysdk.core.Failure as Fail
 
 abstract class InboundDataSource(
-    externalScope: CoroutineScope,
-    usbManager: UsbManager,
-    usbDevice: UsbDevice,
-    val inboundInterface: VuzixInboundInterface
+    private val inboundInterface: VuzixInboundInterface
 ) {
     private val _dataFlow = MutableSharedFlow<Either<InboundDataSourceFailure, ByteArray>>(replay = 0)
     val dataFlow: SharedFlow<Either<InboundDataSourceFailure, ByteArray>> = _dataFlow

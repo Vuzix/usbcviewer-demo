@@ -21,9 +21,9 @@ import com.vuzix.android.camerasdk.usb.USBMonitor.OnDeviceConnectListener
 import com.vuzix.android.camerasdk.usb.USBMonitor.UsbControlBlock
 import com.vuzix.android.m400c.R
 import com.vuzix.android.m400c.databinding.FragmentCameraDemoBinding
-import com.vuzix.m400cconnectivitysdk.core.DeviceUtil
-import com.vuzix.m400cconnectivitysdk.core.M400cConstants
-import com.vuzix.m400cconnectivitysdk.core.VuzixVideoDevice
+import com.vuzix.m400cconnectivitysdk.util.DeviceUtil
+import com.vuzix.m400cconnectivitysdk.M400cConstants
+import com.vuzix.m400cconnectivitysdk.video.VuzixVideoDevice
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

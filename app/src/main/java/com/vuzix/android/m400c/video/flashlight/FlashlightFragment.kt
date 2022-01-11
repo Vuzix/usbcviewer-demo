@@ -15,9 +15,9 @@ import com.vuzix.android.m400c.R
 import com.vuzix.android.m400c.databinding.FragmentFlashlightDemoBinding
 import com.vuzix.android.m400c.video.flashlight.FlashlightState.Off
 import com.vuzix.android.m400c.video.flashlight.FlashlightState.On
-import com.vuzix.m400cconnectivitysdk.core.DeviceUtil
-import com.vuzix.m400cconnectivitysdk.core.M400cConstants
-import com.vuzix.m400cconnectivitysdk.core.VuzixVideoDevice
+import com.vuzix.m400cconnectivitysdk.util.DeviceUtil
+import com.vuzix.m400cconnectivitysdk.M400cConstants
+import com.vuzix.m400cconnectivitysdk.video.VuzixVideoDevice
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 

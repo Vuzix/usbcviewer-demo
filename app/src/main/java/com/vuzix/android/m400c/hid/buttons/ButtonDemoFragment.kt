@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnKeyListener
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.google.android.material.button.MaterialButton
 import com.vuzix.android.m400c.R
-import com.vuzix.m400cconnectivitysdk.core.M400cConstants
+import com.vuzix.m400cconnectivitysdk.M400cConstants
 import com.vuzix.android.m400c.databinding.FragmentButtonDemoBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -42,19 +44,11 @@ class ButtonDemoFragment : Fragment(), OnKeyListener {
             event?.keyCode == KeyEvent.KEYCODE_BACK -> {
                 requireActivity().onBackPressed()
             }
-            event?.action == KeyEvent.ACTION_UP -> {
-                GlobalScope.launch {
-                    delay(2500)
-                    launch(Dispatchers.Main) {
-                        binding.ivButtons?.visibility = View.INVISIBLE
-                    }
-                }
-            }
             else -> {
                 when (event?.scanCode) {
-                    M400cConstants.KEY_FRONT -> setButtonPressedImage(R.drawable.button_front)
-                    M400cConstants.KEY_MIDDLE -> setButtonPressedImage(R.drawable.button_middle)
-                    M400cConstants.KEY_BACK -> setButtonPressedImage(R.drawable.button_back)
+                    M400cConstants.KEY_FRONT -> setButtonPressedImage(binding.ivButtonFront, R.drawable.button_front)
+                    M400cConstants.KEY_MIDDLE -> setButtonPressedImage(binding.ivButtonMiddle, R.drawable.button_middle)
+                    M400cConstants.KEY_BACK -> setButtonPressedImage(binding.ivButtonBack, R.drawable.button_back)
                     M400cConstants.KEY_BACK_LONG, M400cConstants.KEY_FRONT_LONG, M400cConstants.KEY_MIDDLE_LONG -> requireActivity().onBackPressed()
                 }
                 return true
@@ -63,9 +57,15 @@ class ButtonDemoFragment : Fragment(), OnKeyListener {
         return false
     }
 
-    private fun setButtonPressedImage(@DrawableRes id: Int) {
-        binding.ivButtons?.visibility = View.VISIBLE
-        binding.ivButtons?.setImageDrawable(ContextCompat.getDrawable(requireContext(), id))
+    private fun setButtonPressedImage(imageView: ImageView?, @DrawableRes id: Int) {
+        imageView?.visibility = View.VISIBLE
+        imageView?.setImageDrawable(ContextCompat.getDrawable(requireContext(), id))
+        GlobalScope.launch {
+            delay(2500)
+            launch(Dispatchers.Main) {
+                imageView?.visibility = View.INVISIBLE
+            }
+        }
     }
 
 

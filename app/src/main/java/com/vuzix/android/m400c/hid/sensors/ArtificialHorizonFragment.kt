@@ -74,7 +74,7 @@ class ArtificialHorizonFragment :
     }
 
     override fun onOrientationChanged(azimuth: Float, pitch: Float, roll: Float) {
-        Timber.i("Orientation changed: az = $azimuth, pitch = $pitch, roll = $roll")
+//        Timber.i("Orientation changed: az = $azimuth, pitch = $pitch, roll = $roll")
         currAngle[0] = azimuth
         currAngle[1] = if (pitch.isNaN()) 0f else pitch
         currAngle[2] = if (roll.isNaN()) 0f else roll

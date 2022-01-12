@@ -10,3 +10,4 @@ rootProject.name = "M400C Controller App"
 include ':app'
 include ':camerasdk'
 include ':M400cConnectivitySDK'
+include ':usbcviewer'

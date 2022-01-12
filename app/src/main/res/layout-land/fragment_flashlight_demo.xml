@@ -5,6 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/cl_flashlight_view"
+        android:focusable="false"
         android:background="@drawable/bg_flashlight_off">
 
     </androidx.constraintlayout.widget.ConstraintLayout>

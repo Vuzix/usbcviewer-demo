@@ -1,4 +1,4 @@
-package com.vuzix.m400cconnectivitysdk
+package com.vuzix.sdk.usbcviewer
 
 object M400cConstants {
     const val ACTION_USB_PERMISSION = "com.android.vuzix.USB_PERMISSION"

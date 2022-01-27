@@ -21,9 +21,7 @@ import com.vuzix.android.camerasdk.usb.USBMonitor.OnDeviceConnectListener
 import com.vuzix.android.camerasdk.usb.USBMonitor.UsbControlBlock
 import com.vuzix.android.m400c.R
 import com.vuzix.android.m400c.databinding.FragmentCameraDemoBinding
-import com.vuzix.m400cconnectivitysdk.util.DeviceUtil
-import com.vuzix.m400cconnectivitysdk.M400cConstants
-import com.vuzix.m400cconnectivitysdk.video.VuzixVideoDevice
+import com.vuzix.sdk.usbcviewer.M400cConstants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -35,13 +33,13 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, O
     private val PREVIEW_MODE = 1
 
     lateinit var onDeviceConnectListener: OnDeviceConnectListener
-    lateinit var vuzixVideoDevice: VuzixVideoDevice
     lateinit var binding: FragmentCameraDemoBinding
     lateinit var usbManager: UsbManager
 
     var uvcCameraView: CameraViewInterface? = null
     var usbMonitor: USBMonitor? = null
     var cameraHandler: UVCCameraHandler? = null
+    var vuzixVideoDevice: UsbDevice? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,7 +92,7 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, O
             PREVIEW_MODE
         )
         val usbManager = requireContext().getSystemService(Context.USB_SERVICE) as UsbManager
-        vuzixVideoDevice = DeviceUtil.getVideoDevice(usbManager)
+        vuzixVideoDevice = getVideoDevice(usbManager)
         return binding.root
     }
 
@@ -102,7 +100,7 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, O
         super.onStart()
         Timber.d("onStart")
         usbMonitor?.register()
-        usbMonitor?.requestPermission(vuzixVideoDevice.usbDevice)
+        usbMonitor?.requestPermission(vuzixVideoDevice)
         uvcCameraView?.onResume()
     }
 
@@ -127,12 +125,12 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, O
 
     private fun turnOffLed() {
         val bytes = byteArrayOf(4, 0x84.toByte(), 0x04, 0x02, 0)
-        val connection = usbManager.openDevice(vuzixVideoDevice.usbDevice)
+        val connection = usbManager.openDevice(vuzixVideoDevice)
         connection.controlTransfer(
             0x21,
             0x09,
             0x0200,
-            vuzixVideoDevice.usbDevice?.getInterface(M400cConstants.VIDEO_HID)?.id!!,
+            vuzixVideoDevice?.getInterface(M400cConstants.VIDEO_HID)?.id!!,
             bytes,
             bytes.size,
             1000
@@ -177,5 +175,10 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, O
             return true
         }
         return false
+    }
+
+    private fun getVideoDevice(usbManager: UsbManager): UsbDevice? {
+        val devices = usbManager.deviceList
+        return devices.values.firstOrNull { device -> device.productId == M400cConstants.VIDEO_PID && device.vendorId == M400cConstants.VIDEO_VID }
     }
 }

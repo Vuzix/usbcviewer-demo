@@ -22,35 +22,85 @@
 
         <TextView
             android:id="@+id/tv_hid_gyro_x"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/gl_sensor_vert_33"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_gyro_title"
             tools:text="X: 0.002 rad/s" />
 
         <TextView
             android:id="@+id/tv_hid_gyro_y"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/gl_sensor_vert_33"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_hid_gyro_x"
             tools:text="Y: 0.002 rad/s" />
 
         <TextView
             android:id="@+id/tv_hid_gyro_z"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/gl_sensor_vert_33"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_hid_gyro_y"
+            tools:text="z: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_gyro_ptitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/phone_gyrometer_values"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_gyro_z" />
+
+        <TextView
+            android:id="@+id/tv_hid_pgyro_x"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/gl_sensor_vert_33"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_gyro_ptitle"
+            tools:text="X: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_hid_pgyro_y"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/gl_sensor_vert_33"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_pgyro_x"
+            tools:text="Y: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_hid_pgyro_z"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/gl_sensor_vert_33"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_pgyro_y"
             tools:text="z: 0.002 rad/s" />
 
         <TextView
@@ -66,34 +116,37 @@
 
         <TextView
             android:id="@+id/tv_hid_accel_x"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_33"
+            app:layout_constraintEnd_toStartOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_33"
             app:layout_constraintTop_toBottomOf="@+id/tv_accel_title"
             tools:text="X: 0.002 rad/s" />
 
         <TextView
             android:id="@+id/tv_hid_accel_y"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_33"
+            app:layout_constraintEnd_toStartOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_33"
             app:layout_constraintTop_toBottomOf="@+id/tv_hid_accel_x"
             tools:text="Y: 0.002 rad/s" />
 
         <TextView
             android:id="@+id/tv_hid_accel_z"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_33"
+            app:layout_constraintEnd_toStartOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_33"
             app:layout_constraintTop_toBottomOf="@+id/tv_hid_accel_y"
             tools:text="z: 0.002 rad/s" />
 
@@ -110,35 +163,144 @@
 
         <TextView
             android:id="@+id/tv_hid_mag_x"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_66"
             app:layout_constraintTop_toBottomOf="@+id/tv_mag_title"
             tools:text="X: 0.002 rad/s" />
 
         <TextView
             android:id="@+id/tv_hid_mag_y"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_66"
             app:layout_constraintTop_toBottomOf="@+id/tv_hid_mag_x"
             tools:text="Y: 0.002 rad/s" />
 
         <TextView
             android:id="@+id/tv_hid_mag_z"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_66"
             app:layout_constraintTop_toBottomOf="@+id/tv_hid_mag_y"
+            tools:text="z: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_mag_ptitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/phone_compass_values"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_mag_z" />
+
+        <TextView
+            android:id="@+id/tv_hid_pmag_x"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mag_ptitle"
+            tools:text="X: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_hid_pmag_y"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_pmag_x"
+            tools:text="Y: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_hid_pmag_z"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_pmag_y"
+            tools:text="z: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_quad_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/phone_accel_values"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_33"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_accel_z" />
+
+        <TextView
+            android:id="@+id/tv_hid_quad_x"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_33"
+            app:layout_constraintTop_toBottomOf="@+id/tv_quad_title"
+            tools:text="X: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_hid_quad_y"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_33"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_quad_x"
+            tools:text="Y: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_hid_quad_z"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_33"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_quad_y"
+            tools:text="z: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_hid_quad_w"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_33"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_quad_z"
             tools:text="z: 0.002 rad/s" />
 
         <androidx.constraintlayout.widget.Guideline

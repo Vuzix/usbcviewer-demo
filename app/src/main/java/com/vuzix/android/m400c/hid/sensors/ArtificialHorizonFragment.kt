@@ -1,47 +1,67 @@
 package com.vuzix.android.m400c.hid.sensors
 
-import android.content.Context
-import android.hardware.usb.UsbManager
+import android.app.PendingIntent
+import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.usb.UsbDevice
+import android.os.Build
+import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import android.view.View.OnKeyListener
+import android.widget.ImageView
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.vuzix.android.m400c.R
-import com.vuzix.m400cconnectivitysdk.M400cConstants
+import com.vuzix.sdk.usbcviewer.M400cConstants
+import com.vuzix.sdk.usbcviewer.sensors.Sensors
+import com.vuzix.sdk.usbcviewer.sensors.VuzixSensorEvent
+import com.vuzix.sdk.usbcviewer.sensors.VuzixSensorListener
 import timber.log.Timber
 
 class ArtificialHorizonFragment :
     Fragment(R.layout.fragment_horizon_sensor_demo),
-    OnKeyListener, Orientation.Listener {
+    OnKeyListener, VuzixSensorListener {
 
-    lateinit var usbManager: UsbManager
     private lateinit var mAltitudeIndicator: AltitudeIndicator
-    lateinit var mOrientation: Orientation
+    private lateinit var ivCompassNumbers: ImageView
+    lateinit var sensors: Sensors
 
     private var azZero = 0.0f
     private var pitchZero = 0.0f
     private var rollZero = 180.0f
     private val currAngle = FloatArray(3)
+    private var accelValues = FloatArray(3)
+    private var magValues = FloatArray(3)
+    private var gyroValues = FloatArray(3)
 
+    @RequiresApi(VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        usbManager = requireContext().getSystemService(Context.USB_SERVICE) as UsbManager
-        mOrientation = Orientation(usbManager)
-        mOrientation.startListening(this)
+        sensors = Sensors(requireContext(), this)
+        try {
+            sensors.connect()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        val metrics = requireActivity().windowManager.currentWindowMetrics
+        Timber.d("${metrics.bounds.height()} x ${metrics.bounds.width()} ")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        viewModel.startSensorStream()
         mAltitudeIndicator = view.findViewById(R.id.attitude_indicator)
-        mOrientation.startListening(this)
+        ivCompassNumbers = view.findViewById(R.id.iv_compass_numbers)
+        if (sensors.connected) {
+            sensors.initializeSensors()
+        }
     }
 
     override fun onStop() {
-//        viewModel.stopSensorStream()
-        mOrientation.stopListening()
         super.onStop()
+        sensors.disconnect()
     }
 
     override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
@@ -67,17 +87,51 @@ class ArtificialHorizonFragment :
         return false
     }
 
+    private fun updateOrientation(orientationData: OrientationData) {
+        currAngle[0] = orientationData.azimuth
+        currAngle[1] = if (orientationData.pitch.isNaN()) 0f else orientationData.pitch
+        currAngle[2] = if (orientationData.roll.isNaN()) 0f else orientationData.roll
+        mAltitudeIndicator.setAttitude(
+            orientationData.pitch - pitchZero,
+            orientationData.roll - rollZero
+        )
+        ivCompassNumbers.rotation = orientationData.azimuth - azZero
+    }
+
     private fun setZero() {
         azZero = currAngle[0]
         pitchZero = currAngle[1]
         rollZero = currAngle[2]
     }
 
-    override fun onOrientationChanged(azimuth: Float, pitch: Float, roll: Float) {
-//        Timber.i("Orientation changed: az = $azimuth, pitch = $pitch, roll = $roll")
-        currAngle[0] = azimuth
-        currAngle[1] = if (pitch.isNaN()) 0f else pitch
-        currAngle[2] = if (roll.isNaN()) 0f else roll
-        mAltitudeIndicator.setAttitude(pitch - pitchZero, roll - rollZero)
+    override fun onSensorChanged(event: VuzixSensorEvent) {
+        when (event.sensorType) {
+            Sensor.TYPE_ACCELEROMETER -> {
+                accelValues = event.values
+            }
+            Sensor.TYPE_MAGNETIC_FIELD -> {
+                magValues = event.values
+            }
+            Sensor.TYPE_GYROSCOPE -> {
+                gyroValues = event.values
+            }
+        }
+        val rotation = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+            requireActivity().windowManager.defaultDisplay.rotation
+        } else {
+            requireContext().display?.rotation ?: 0
+        }
+        updateOrientation(Orientation.updateOrientation(accelValues, magValues, rotation))
     }
+
+    override fun onError(error: Exception) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Error")
+            .setMessage(error.message)
+            .setNeutralButton("OK") { _, _ -> /* Do Nothing */ }
+    }
+
+    override fun onSensorInitialized() {
+    }
+
 }

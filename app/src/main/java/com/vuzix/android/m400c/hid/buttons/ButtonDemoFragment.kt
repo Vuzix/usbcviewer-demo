@@ -11,10 +11,9 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.google.android.material.button.MaterialButton
 import com.vuzix.android.m400c.R
-import com.vuzix.m400cconnectivitysdk.M400cConstants
 import com.vuzix.android.m400c.databinding.FragmentButtonDemoBinding
+import com.vuzix.sdk.usbcviewer.M400cConstants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay

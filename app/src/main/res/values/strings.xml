@@ -78,8 +78,11 @@
     <string name="video_device_not_connected">Video Device %1$s: Not Connected</string>
     <string name="m400_c">M400-C</string>
     <string name="gyrometer_values">Gyrometer Values</string>
+    <string name="phone_gyrometer_values">Phone Gyro Values</string>
     <string name="accelerometer_values">Accelerometer Values</string>
+    <string name="phone_accel_values">Phone Accel Values</string>
     <string name="compass_values">Compass Values</string>
+    <string name="phone_compass_values">Phone Compass Values</string>
     <string name="button_audio_clear_cache">Clear Cache</string>
 
     <string name="play">Play</string>

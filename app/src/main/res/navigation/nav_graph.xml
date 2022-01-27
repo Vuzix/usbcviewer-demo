@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_m400cFragment_to_flashlightFragment"
             app:destination="@id/flashlightFragment" />
+        <action
+            android:id="@+id/action_m400cFragment_to_sensorDemoFragment"
+            app:destination="@id/sensorDemoFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonDemoFragment"
@@ -51,5 +54,9 @@
         android:id="@+id/flashlightFragment"
         android:name="com.vuzix.android.m400c.video.flashlight.FlashlightFragment"
         android:label="FlashlightFragment" />
+    <fragment
+        android:id="@+id/sensorDemoFragment"
+        android:name="com.vuzix.android.m400c.hid.sensors.SensorDemoFragment"
+        android:label="SensorDemoFragment" />
 
 </navigation>

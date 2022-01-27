@@ -12,7 +12,7 @@ import com.vuzix.android.m400c.R
 import com.vuzix.android.m400c.databinding.FragmentFlashlightDemoBinding
 import com.vuzix.android.m400c.video.flashlight.FlashlightState.Off
 import com.vuzix.android.m400c.video.flashlight.FlashlightState.On
-import com.vuzix.m400cconnectivitysdk.M400cConstants
+import com.vuzix.sdk.usbcviewer.M400cConstants
 import com.vuzix.sdk.usbcviewer.flashlight.Flashlight
 import timber.log.Timber
 

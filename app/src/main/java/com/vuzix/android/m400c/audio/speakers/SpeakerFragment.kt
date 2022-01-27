@@ -10,8 +10,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.vuzix.android.m400c.R
-import com.vuzix.m400cconnectivitysdk.M400cConstants
 import com.vuzix.android.m400c.databinding.FragmentSpeakerDemoBinding
+import com.vuzix.sdk.usbcviewer.M400cConstants
 
 class SpeakerFragment : Fragment(), OnKeyListener {
 

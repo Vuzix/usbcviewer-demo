@@ -11,14 +11,18 @@ import android.view.KeyEvent
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.fragment.NavHostFragment
 import com.vuzix.android.m400c.audio.mic.MicrophoneFragment
 import com.vuzix.android.m400c.audio.speakers.SpeakerFragment
-import com.vuzix.m400cconnectivitysdk.M400cConstants
 import com.vuzix.android.m400c.hid.buttons.ButtonDemoFragment
 import com.vuzix.android.m400c.hid.sensors.ArtificialHorizonFragment
 import com.vuzix.android.m400c.video.flashlight.FlashlightFragment
 import com.vuzix.android.m400c.video.camera.VuzixCameraFragment
+import com.vuzix.sdk.usbcviewer.M400cConstants
 import timber.log.Timber
 
 class M400cActivity : AppCompatActivity() {
@@ -116,9 +120,20 @@ class M400cActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        hideSystemBars()
         setContentView(R.layout.activity_main)
-
         val filter = IntentFilter(M400cConstants.ACTION_USB_PERMISSION)
         registerReceiver(usbReceiver, filter)
+    }
+
+    private fun hideSystemBars() {
+        val windowInsetsController =
+            ViewCompat.getWindowInsetsController(window.decorView) ?: return
+        // Configure the behavior of the hidden system bars
+        windowInsetsController.systemBarsBehavior =
+            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        // Hide both the status bar and the navigation bar
+        windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
     }
 }

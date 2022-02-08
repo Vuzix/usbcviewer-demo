@@ -23,6 +23,12 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
+/**
+ * This Fragment is for use when you want to see the raw numbers coming back from the device
+ * as it pertains to the Accelerometer, the Magnetometer, and the Gyrometer.
+ *
+ * For comparison purposes, it will also show values from the phone the app is running on.
+ */
 class SensorDemoFragment : Fragment(), VuzixSensorListener, SensorEventListener {
 
     lateinit var binding: FragmentSensorDemoBinding
@@ -89,26 +95,26 @@ class SensorDemoFragment : Fragment(), VuzixSensorListener, SensorEventListener 
         when (event.sensorType) {
             Sensor.TYPE_ACCELEROMETER -> {
                 GlobalScope.launch(Dispatchers.Main) {
-                    binding.tvHidAccelX.text = event.values[0].toString()
-                    binding.tvHidAccelY.text = event.values[1].toString()
-                    binding.tvHidAccelZ.text = event.values[2].toString()
+                    binding.tvHidAccelX?.text = event.values[0].toString()
+                    binding.tvHidAccelY?.text = event.values[1].toString()
+                    binding.tvHidAccelZ?.text = event.values[2].toString()
                 }
             }
             Sensor.TYPE_MAGNETIC_FIELD -> {
                 GlobalScope.launch(Dispatchers.Main) {
                     val checkMagValues = event.values.toList()
                     if (checkMagValues.isNotEmpty()) {
-                        binding.tvHidMagX.text = event.values[0].toString()
-                        binding.tvHidMagY.text = event.values[1].toString()
-                        binding.tvHidMagZ.text = event.values[2].toString()
+                        binding.tvHidMagX?.text = event.values[0].toString()
+                        binding.tvHidMagY?.text = event.values[1].toString()
+                        binding.tvHidMagZ?.text = event.values[2].toString()
                     }
                 }
             }
             Sensor.TYPE_GYROSCOPE -> {
                 GlobalScope.launch(Dispatchers.Main) {
-                    binding.tvHidGyroX.text = event.values[0].toString()
-                    binding.tvHidGyroY.text = event.values[1].toString()
-                    binding.tvHidGyroZ.text = event.values[2].toString()
+                    binding.tvHidGyroX?.text = event.values[0].toString()
+                    binding.tvHidGyroY?.text = event.values[1].toString()
+                    binding.tvHidGyroZ?.text = event.values[2].toString()
                 }
             }
             Sensor.TYPE_GAME_ROTATION_VECTOR -> {

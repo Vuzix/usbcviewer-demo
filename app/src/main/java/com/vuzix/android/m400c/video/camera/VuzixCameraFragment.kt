@@ -108,8 +108,8 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, O
         Timber.d("onStop")
         cameraHandler?.close()
         uvcCameraView?.onPause()
-        GlobalScope.launch(Dispatchers.Main) { binding.pbCamera?.isVisible = false }
         turnOffLed()
+        GlobalScope.launch(Dispatchers.Main) { binding.pbCamera?.isVisible = false }
         super.onStop()
     }
 
@@ -126,10 +126,11 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, O
     private fun turnOffLed() {
         val bytes = byteArrayOf(4, 0x84.toByte(), 0x04, 0x02, 0)
         val connection = usbManager.openDevice(vuzixVideoDevice)
+        connection.claimInterface(vuzixVideoDevice?.getInterface(M400cConstants.VIDEO_HID), true)
         connection.controlTransfer(
-            0x21,
-            0x09,
-            0x0200,
+            0x21, // USB Direction Out
+            0x09, // USB HID Request Set Report
+            0x03, // USB Standard Set Feature
             vuzixVideoDevice?.getInterface(M400cConstants.VIDEO_HID)?.id!!,
             bytes,
             bytes.size,

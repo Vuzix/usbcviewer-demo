@@ -66,7 +66,11 @@ class SensorDemoFragment : Fragment(), VuzixSensorListener, SensorEventListener 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (sensors.connected) {
-            sensors.initializeSensors()
+            sensors.initializeSensors(
+                accelerometer = true,
+                gyroscope = true,
+                magnetometer = true,
+                orientation = false)
         }
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL)
         sensorManager.registerListener(this, gyrometer, SensorManager.SENSOR_DELAY_NORMAL)

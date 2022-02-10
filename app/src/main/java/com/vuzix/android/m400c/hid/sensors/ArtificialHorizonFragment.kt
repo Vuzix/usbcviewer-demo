@@ -1,9 +1,6 @@
 package com.vuzix.android.m400c.hid.sensors
 
-import android.app.PendingIntent
-import android.content.Intent
 import android.hardware.Sensor
-import android.hardware.usb.UsbDevice
 import android.os.Build
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
@@ -55,7 +52,12 @@ class ArtificialHorizonFragment :
         mAltitudeIndicator = view.findViewById(R.id.attitude_indicator)
         ivCompassNumbers = view.findViewById(R.id.iv_compass_numbers)
         if (sensors.connected) {
-            sensors.initializeSensors()
+            sensors.initializeSensors(
+                accelerometer = true,
+                gyroscope = false,
+                magnetometer = true,
+                orientation = false
+            )
         }
     }
 
@@ -116,7 +118,7 @@ class ArtificialHorizonFragment :
                 gyroValues = event.values
             }
         }
-        val rotation = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+        val rotation = if (Build.VERSION.SDK_INT < VERSION_CODES.R) {
             requireActivity().windowManager.defaultDisplay.rotation
         } else {
             requireContext().display?.rotation ?: 0

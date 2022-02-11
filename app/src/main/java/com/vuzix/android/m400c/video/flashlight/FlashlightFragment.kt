@@ -6,17 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnKeyListener
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.vuzix.android.m400c.R
 import com.vuzix.android.m400c.databinding.FragmentFlashlightDemoBinding
 import com.vuzix.android.m400c.video.flashlight.FlashlightState.Off
 import com.vuzix.android.m400c.video.flashlight.FlashlightState.On
+import com.vuzix.sdk.usbcviewer.ConnectionListener
 import com.vuzix.sdk.usbcviewer.M400cConstants
 import com.vuzix.sdk.usbcviewer.flashlight.Flashlight
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class FlashlightFragment : Fragment(), OnKeyListener {
+class FlashlightFragment : Fragment(), OnKeyListener, ConnectionListener {
 
     lateinit var binding: FragmentFlashlightDemoBinding
     lateinit var flashlight: Flashlight
@@ -26,10 +31,9 @@ class FlashlightFragment : Fragment(), OnKeyListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         flashlight = Flashlight(requireContext())
-        try {
-            flashlight.connect()
-        } catch (e: Exception) {
-            e.printStackTrace()
+        flashlight.registerDeviceMonitor(this)
+        if (flashlight.isDeviceAvailableAndAllowed()) {
+            initConnect()
         }
     }
 
@@ -75,6 +79,14 @@ class FlashlightFragment : Fragment(), OnKeyListener {
         return false
     }
 
+    private fun initConnect() {
+        try {
+            flashlight.connect()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     private fun changeState() {
         when (state) {
             Off -> {
@@ -87,6 +99,24 @@ class FlashlightFragment : Fragment(), OnKeyListener {
                 state = Off
                 flashlight.turnFlashlightOff()
             }
+        }
+    }
+
+    override fun onConnectionChanged(connected: Boolean) {
+        if (!connected) {
+            GlobalScope.launch(Dispatchers.Main) {
+                AlertDialog.Builder(requireContext())
+                    .setTitle("No device found")
+                    .setMessage("An M400-C device was not found. You will need to exit the app and connect the device before you can continue.")
+                    .setNeutralButton("Okay") { _, _ -> requireActivity().finish() }
+                    .show()
+            }
+        }
+    }
+
+    override fun onPermissionsChanged(granted: Boolean) {
+        if (granted) {
+            initConnect()
         }
     }
 }

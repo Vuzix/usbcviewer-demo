@@ -12,15 +12,18 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.vuzix.android.m400c.R
+import com.vuzix.sdk.usbcviewer.ConnectionListener
 import com.vuzix.sdk.usbcviewer.M400cConstants
 import com.vuzix.sdk.usbcviewer.sensors.Sensors
 import com.vuzix.sdk.usbcviewer.sensors.VuzixSensorEvent
 import com.vuzix.sdk.usbcviewer.sensors.VuzixSensorListener
-import timber.log.Timber
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class ArtificialHorizonFragment :
     Fragment(R.layout.fragment_horizon_sensor_demo),
-    OnKeyListener, VuzixSensorListener {
+    OnKeyListener, VuzixSensorListener, ConnectionListener {
 
     private lateinit var mAltitudeIndicator: AltitudeIndicator
     private lateinit var ivCompassNumbers: ImageView
@@ -38,13 +41,10 @@ class ArtificialHorizonFragment :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sensors = Sensors(requireContext(), this)
-        try {
-            sensors.connect()
-        } catch (e: Exception) {
-            e.printStackTrace()
+        sensors.registerDeviceMonitor(this)
+        if (sensors.isDeviceAvailableAndAllowed()) {
+            initConnect()
         }
-        val metrics = requireActivity().windowManager.currentWindowMetrics
-        Timber.d("${metrics.bounds.height()} x ${metrics.bounds.width()} ")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -89,6 +89,14 @@ class ArtificialHorizonFragment :
         return false
     }
 
+    private fun initConnect() {
+        try {
+            sensors.connect()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     private fun updateOrientation(orientationData: OrientationData) {
         currAngle[0] = orientationData.azimuth
         currAngle[1] = if (orientationData.pitch.isNaN()) 0f else orientationData.pitch
@@ -127,13 +135,34 @@ class ArtificialHorizonFragment :
     }
 
     override fun onError(error: Exception) {
-        AlertDialog.Builder(requireContext())
-            .setTitle("Error")
-            .setMessage(error.message)
-            .setNeutralButton("OK") { _, _ -> /* Do Nothing */ }
+        GlobalScope.launch(Dispatchers.Main) {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Error")
+                .setMessage(error.message)
+                .setNeutralButton("OK") { _, _ -> requireActivity().onBackPressed() }
+                .show()
+        }
     }
 
     override fun onSensorInitialized() {
+        view?.invalidate()
     }
 
+    override fun onConnectionChanged(connected: Boolean) {
+        if (!connected) {
+            GlobalScope.launch(Dispatchers.Main) {
+                AlertDialog.Builder(requireContext())
+                    .setTitle("No device found")
+                    .setMessage("An M400-C device was not found. You will need to exit the app and connect the device before you can continue.")
+                    .setNeutralButton("Okay") { _, _ -> requireActivity().finish() }
+                    .show()
+            }
+        }
+    }
+
+    override fun onPermissionsChanged(granted: Boolean) {
+        if (granted) {
+            initConnect()
+        }
+    }
 }

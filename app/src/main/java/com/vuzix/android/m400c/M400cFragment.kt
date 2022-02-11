@@ -66,74 +66,45 @@ class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallb
                 .setNeutralButton("Okay") { _, _ -> requireActivity().finish() }
                 .show()
         } else {
-            val hidDevice = try {
-                getHidDevice(usbManager)
-            } catch (e: Exception) {
-                Thread.sleep(4000)
-                getHidDevice(usbManager)
-            }
-            hidDevice?.let {
-                binding.btnDemoSensors.apply {
-                    setOnClickListener {
-                        view.findNavController().navigate(R.id.action_m400cFragment_to_sensorFragment)
+            binding.btnDemoSensors.apply {
+                setOnClickListener {
+                    view.findNavController().navigate(R.id.action_m400cFragment_to_sensorFragment)
 //                        view.findNavController().navigate(R.id.action_m400cFragment_to_sensorDemoFragment)
-                    }
-                    setButtonFocusTheme(this)
                 }
-                binding.btnDemoButtons.apply {
-                    setOnClickListener {
-                        view.findNavController()
-                            .navigate(R.id.action_m400cFragment_to_buttonDemoFragment)
-                    }
-                    setButtonFocusTheme(this)
-                }
-                checkPermission(it)
-            } ?: run {
-                binding.btnDemoSensors.isEnabled = false
-                binding.btnDemoButtons.isEnabled = false
+                setButtonFocusTheme(this)
             }
-
-            val audioDevice = getAudioDevice(usbManager)
-            audioDevice?.let {
-                binding.btnDemoMic.apply {
-                    setOnClickListener {
-                        view.findNavController()
-                            .navigate(R.id.action_m400cFragment_to_microphoneFragment)
-                    }
-                    setButtonFocusTheme(this)
+            binding.btnDemoButtons.apply {
+                setOnClickListener {
+                    view.findNavController()
+                        .navigate(R.id.action_m400cFragment_to_buttonDemoFragment)
                 }
-                binding.btnDemoSpeakers.apply {
-                    setOnClickListener {
-                        view.findNavController().navigate(R.id.action_m400cFragment_to_speakerFragment)
-                    }
-                    setButtonFocusTheme(this)
-                }
-                checkPermission(it)
-            } ?: run {
-                binding.btnDemoMic.isEnabled = false
-                binding.btnDemoSpeakers.isEnabled = false
+                setButtonFocusTheme(this)
             }
-
-            val videoDevice = getVideoDevice(usbManager)
-            videoDevice?.let {
-                binding.btnDemoCamera.apply {
-                    setOnClickListener {
-                        view.findNavController().navigate(R.id.action_m400cFragment_to_cameraFragment)
-                    }
-                    setButtonFocusTheme(this)
+            binding.btnDemoCamera.apply {
+                setOnClickListener {
+                    view.findNavController().navigate(R.id.action_m400cFragment_to_cameraFragment)
                 }
-                binding.btnDemoFlashlight.apply {
-                    setOnClickListener {
-                        view.findNavController()
-                            .navigate(R.id.action_m400cFragment_to_flashlightFragment)
-                    }
-                    setButtonFocusTheme(this)
+                setButtonFocusTheme(this)
+            }
+            binding.btnDemoFlashlight.apply {
+                setOnClickListener {
+                    view.findNavController()
+                        .navigate(R.id.action_m400cFragment_to_flashlightFragment)
                 }
-                checkPermission(it)
-
-            } ?: run {
-                binding.btnDemoCamera.isEnabled = false
-                binding.btnDemoFlashlight.isEnabled = false
+                setButtonFocusTheme(this)
+            }
+            binding.btnDemoMic.apply {
+                setOnClickListener {
+                    view.findNavController()
+                        .navigate(R.id.action_m400cFragment_to_microphoneFragment)
+                }
+                setButtonFocusTheme(this)
+            }
+            binding.btnDemoSpeakers.apply {
+                setOnClickListener {
+                    view.findNavController().navigate(R.id.action_m400cFragment_to_speakerFragment)
+                }
+                setButtonFocusTheme(this)
             }
         }
 
@@ -147,20 +118,6 @@ class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallb
         if (requestCode == 0) {
             if (grantResults.size == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 binding.btnDemoCamera.isEnabled = true
-            }
-        }
-    }
-
-    private fun checkPermission(usbDevice: UsbDevice) {
-        usbManager.hasPermission(usbDevice).let {
-            if (!it) {
-                val usbPermissionIntent = PendingIntent.getBroadcast(
-                    requireContext(),
-                    0,
-                    Intent(M400cConstants.ACTION_USB_PERMISSION),
-                    PendingIntent.FLAG_IMMUTABLE
-                )
-                usbManager.requestPermission(usbDevice, usbPermissionIntent)
             }
         }
     }
@@ -180,21 +137,4 @@ class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallb
             }
         }
     }
-
-    private fun getHidDevice(usbManager: UsbManager): UsbDevice? {
-        val devices = usbManager.deviceList
-        return devices.values.firstOrNull { device -> device.productId == M400cConstants.HID_PID && device.vendorId == M400cConstants.HID_VID }
-    }
-
-    private fun getVideoDevice(usbManager: UsbManager): UsbDevice? {
-        val devices = usbManager.deviceList
-        return devices.values.firstOrNull { device -> device.productId == M400cConstants.VIDEO_PID && device.vendorId == M400cConstants.VIDEO_VID }
-    }
-
-    private fun getAudioDevice(usbManager: UsbManager): UsbDevice? {
-        val devices = usbManager.deviceList
-        return devices.values.firstOrNull { device -> device.productId == M400cConstants.AUDIO_PID && device.vendorId == M400cConstants.AUDIO_VID }
-    }
-
-
 }

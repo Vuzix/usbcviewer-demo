@@ -91,7 +91,6 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, O
             PREVIEW_HEIGHT,
             PREVIEW_MODE
         )
-        val usbManager = requireContext().getSystemService(Context.USB_SERVICE) as UsbManager
         vuzixVideoDevice = getVideoDevice(usbManager)
         return binding.root
     }

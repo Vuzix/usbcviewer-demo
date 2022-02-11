@@ -107,7 +107,14 @@ class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallb
                 setButtonFocusTheme(this)
             }
         }
-
+        // Need to front-load permissions because the camera code doesn't like it when all
+        // permissions aren't available.
+        val videoDevice = getVideoDevice(usbManager)
+        val audioDevice = getAudioDevice(usbManager)
+        val hidDevice = getHidDevice(usbManager)
+        checkPermission(videoDevice)
+        checkPermission(audioDevice)
+        checkPermission(hidDevice)
     }
 
     override fun onRequestPermissionsResult(
@@ -118,6 +125,20 @@ class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallb
         if (requestCode == 0) {
             if (grantResults.size == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 binding.btnDemoCamera.isEnabled = true
+            }
+        }
+    }
+
+    private fun checkPermission(usbDevice: UsbDevice?) {
+        usbManager.hasPermission(usbDevice).let {
+            if (!it) {
+                val usbPermissionIntent = PendingIntent.getBroadcast(
+                    requireContext(),
+                    0,
+                    Intent(M400cConstants.ACTION_USB_PERMISSION),
+                    PendingIntent.FLAG_IMMUTABLE
+                )
+                usbManager.requestPermission(usbDevice, usbPermissionIntent)
             }
         }
     }
@@ -136,5 +157,20 @@ class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallb
                 }
             }
         }
+    }
+
+    private fun getVideoDevice(usbManager: UsbManager): UsbDevice? {
+        val devices = usbManager.deviceList
+        return devices.values.firstOrNull { device -> device.productId == M400cConstants.VIDEO_PID && device.vendorId == M400cConstants.VIDEO_VID }
+    }
+
+    private fun getHidDevice(usbManager: UsbManager): UsbDevice? {
+        val devices = usbManager.deviceList
+        return devices.values.firstOrNull { device -> device.productId == M400cConstants.HID_PID && device.vendorId == M400cConstants.HID_VID }
+    }
+
+    private fun getAudioDevice(usbManager: UsbManager): UsbDevice? {
+        val devices = usbManager.deviceList
+        return devices.values.firstOrNull { device -> device.productId == M400cConstants.AUDIO_PID && device.vendorId == M400cConstants.AUDIO_VID }
     }
 }

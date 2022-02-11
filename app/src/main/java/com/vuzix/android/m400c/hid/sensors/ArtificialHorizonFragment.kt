@@ -29,9 +29,6 @@ class ArtificialHorizonFragment :
     private lateinit var ivCompassNumbers: ImageView
     lateinit var sensors: Sensors
 
-    private var azZero = 0.0f
-    private var pitchZero = 0.0f
-    private var rollZero = 180.0f
     private val currAngle = FloatArray(3)
     private var accelValues = FloatArray(3)
     private var magValues = FloatArray(3)
@@ -71,9 +68,6 @@ class ArtificialHorizonFragment :
             KeyEvent.KEYCODE_BACK -> {
                 requireActivity().onBackPressed()
             }
-            KeyEvent.KEYCODE_ENTER -> {
-                setZero()
-            }
             else -> {
                 when (event?.scanCode) {
                     M400cConstants.KEY_BACK_LONG,
@@ -101,17 +95,15 @@ class ArtificialHorizonFragment :
         currAngle[0] = orientationData.azimuth
         currAngle[1] = if (orientationData.pitch.isNaN()) 0f else orientationData.pitch
         currAngle[2] = if (orientationData.roll.isNaN()) 0f else orientationData.roll
+        // We want the globe to do the opposite of what we're doing, if we're pitching
+        // down to earth, roll the globe up so it looks like we're crashing.
         mAltitudeIndicator.setAttitude(
-            orientationData.pitch - pitchZero,
-            orientationData.roll - rollZero
+            -orientationData.pitch,
+            -orientationData.roll
         )
-        ivCompassNumbers.rotation = orientationData.azimuth - azZero
-    }
-
-    private fun setZero() {
-        azZero = currAngle[0]
-        pitchZero = currAngle[1]
-        rollZero = currAngle[2]
+        // On setRotation(), increasing values result in clockwise rotation. So if
+        // our bearing is 90 degrees, we rotate the dial -90 to put East at the top.
+        ivCompassNumbers.rotation = -orientationData.azimuth
     }
 
     override fun onSensorChanged(event: VuzixSensorEvent) {
@@ -126,11 +118,8 @@ class ArtificialHorizonFragment :
                 gyroValues = event.values
             }
         }
-        val rotation = if (Build.VERSION.SDK_INT < VERSION_CODES.R) {
-            requireActivity().windowManager.defaultDisplay.rotation
-        } else {
-            requireContext().display?.rotation ?: 0
-        }
+        // todo: read left/right eye orientation from M400C
+        val rotation = 0 // force to right-eye landscape orientation.
         updateOrientation(Orientation.updateOrientation(accelValues, magValues, rotation))
     }
 

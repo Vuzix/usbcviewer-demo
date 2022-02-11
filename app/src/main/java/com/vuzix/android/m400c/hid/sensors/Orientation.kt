@@ -26,24 +26,23 @@ object Orientation {
         val worldAxisForDeviceAxisX: Int
         val worldAxisForDeviceAxisY: Int
         val adjustedRotationMatrix = FloatArray(9)
+
         when (rotation) {
             Surface.ROTATION_90 -> {
-                worldAxisForDeviceAxisX = SensorManager.AXIS_X
-                worldAxisForDeviceAxisY = SensorManager.AXIS_Z
-            }
-            Surface.ROTATION_180 -> {
                 worldAxisForDeviceAxisX = SensorManager.AXIS_Z
                 worldAxisForDeviceAxisY = SensorManager.AXIS_MINUS_X
-
             }
-            Surface.ROTATION_270 -> {
+            Surface.ROTATION_180 -> {
                 worldAxisForDeviceAxisX = SensorManager.AXIS_MINUS_X
                 worldAxisForDeviceAxisY = SensorManager.AXIS_MINUS_Z
-
             }
-            else -> {
+            Surface.ROTATION_270 -> {
                 worldAxisForDeviceAxisX = SensorManager.AXIS_MINUS_Z
                 worldAxisForDeviceAxisY = SensorManager.AXIS_X
+            }
+            else -> {
+                worldAxisForDeviceAxisX = SensorManager.AXIS_X
+                worldAxisForDeviceAxisY = SensorManager.AXIS_Z
             }
         }
 
@@ -54,9 +53,13 @@ object Orientation {
         val orientation = FloatArray(3)
         SensorManager.getOrientation(adjustedRotationMatrix, orientation)
         // Convert radians to degrees
-        val azimuth = orientation[0] * -57
-        val pitch = orientation[1] * -57
-        val roll = orientation[2] * -57
+        val azimuth = orientation[0] * 57
+        val pitch = orientation[1] * 57
+        val roll = orientation[2] * 57
+        // Verbose debugging:
+        //val pitchDir = if (pitch > 0) "down" else "up"
+        //val bankDir = if (roll > 0) "right" else "left"
+        //Log.d("Sensors", "Azimuth: $azimuth° Pitch: $pitch° (nose $pitchDir) Roll: $roll° (bank $bankDir) Device rotation: $rotation")
         return OrientationData(azimuth, pitch, roll)
     }
 

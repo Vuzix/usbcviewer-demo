@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.hardware.usb.UsbDevice
@@ -66,6 +67,8 @@ class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallb
                 .setNeutralButton("Okay") { _, _ -> requireActivity().finish() }
                 .show()
         } else {
+            val filter = IntentFilter(M400cConstants.ACTION_USB_PERMISSION)
+            requireActivity().registerReceiver(DeviceHelper.setupReceiver(usbManager), filter)
             binding.btnDemoSensors.apply {
                 setOnClickListener {
                     view.findNavController().navigate(R.id.action_m400cFragment_to_sensorFragment)
@@ -106,15 +109,10 @@ class M400cFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallb
                 }
                 setButtonFocusTheme(this)
             }
+            // Need to front-load permissions because the camera code doesn't like it when all
+            // permissions aren't available.
+            DeviceHelper.checkPermissions(usbManager, requireContext())
         }
-        // Need to front-load permissions because the camera code doesn't like it when all
-        // permissions aren't available.
-        val videoDevice = getVideoDevice(usbManager)
-        val audioDevice = getAudioDevice(usbManager)
-        val hidDevice = getHidDevice(usbManager)
-        checkPermission(videoDevice)
-        checkPermission(audioDevice)
-        checkPermission(hidDevice)
     }
 
     override fun onRequestPermissionsResult(

@@ -232,7 +232,7 @@ public class UVCCamera {
      * close and release UVC camera
      */
     public synchronized void close() {
-    	stopPreview();
+    	//stopPreview();
     	if (mNativePtr != 0) {
     		nativeRelease(mNativePtr);
 //    		mNativePtr = 0;	// nativeDestroyを呼ぶのでここでクリアしちゃダメ
@@ -377,7 +377,12 @@ public class UVCCamera {
      * @param holder
      */
     public synchronized void setPreviewDisplay(final SurfaceHolder holder) {
-   		nativeSetPreviewDisplay(mNativePtr, holder.getSurface());
+    	if (holder == null) {
+			nativeSetPreviewDisplay(mNativePtr, null);
+		}
+    	else {
+			nativeSetPreviewDisplay(mNativePtr, holder.getSurface());
+		}
     }
 
     /**
@@ -386,8 +391,11 @@ public class UVCCamera {
      * @param texture
      */
     public synchronized void setPreviewTexture(final SurfaceTexture texture) {	// API >= 11
-    	final Surface surface = new Surface(texture);	// XXX API >= 14
-    	nativeSetPreviewDisplay(mNativePtr, surface);
+		if (texture == null) {
+			nativeSetPreviewDisplay(mNativePtr, null);
+		} else {
+			nativeSetPreviewDisplay(mNativePtr, new Surface(texture));
+		}
     }
 
     /**
@@ -422,10 +430,10 @@ public class UVCCamera {
      * stop preview
      */
     public synchronized void stopPreview() {
-    	setFrameCallback(null, 0);
     	if (mCtrlBlock != null) {
     		nativeStopPreview(mNativePtr);
     	}
+		setFrameCallback(null, 0);
     }
 
     /**
@@ -435,7 +443,7 @@ public class UVCCamera {
     	close();
     	if (mNativePtr != 0) {
     		nativeDestroy(mNativePtr);
-    		nativeSetPrivacy(mNativePtr, false);
+    		//nativeSetPrivacy(mNativePtr, false);
     		mNativePtr = 0;
     	}
     }

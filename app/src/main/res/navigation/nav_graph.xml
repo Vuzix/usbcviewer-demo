@@ -29,6 +29,12 @@
         <action
             android:id="@+id/action_m400cFragment_to_sensorDemoFragment"
             app:destination="@id/sensorDemoFragment" />
+        <action
+            android:id="@+id/action_m400cFragment_to_settingsParentFragment"
+            app:destination="@id/settingsParentFragment" />
+        <action
+            android:id="@+id/action_m400cFragment_to_connectDeviceFragment"
+            app:destination="@id/connectDeviceFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonDemoFragment"
@@ -49,7 +55,11 @@
     <fragment
         android:id="@+id/cameraFragment"
         android:name="com.vuzix.android.m400c.video.camera.VuzixCameraFragment"
-        android:label="CameraFragment" />
+        android:label="CameraFragment" >
+        <action
+            android:id="@+id/action_cameraFragment_to_settingsParentFragment"
+            app:destination="@id/settingsParentFragment" />
+    </fragment>
     <fragment
         android:id="@+id/flashlightFragment"
         android:name="com.vuzix.android.m400c.video.flashlight.FlashlightFragment"
@@ -58,5 +68,14 @@
         android:id="@+id/sensorDemoFragment"
         android:name="com.vuzix.android.m400c.hid.sensors.SensorDemoFragment"
         android:label="SensorDemoFragment" />
+    <fragment
+        android:id="@+id/settingsParentFragment"
+        android:name="com.vuzix.android.m400c.SettingsParentFragment"
+        android:label="SettingsParentFragment" >
+    </fragment>
+    <fragment
+        android:id="@+id/connectDeviceFragment"
+        android:name="com.vuzix.android.m400c.ConnectDeviceFragment"
+        android:label="ConnectDeviceFragment" />
 
 </navigation>

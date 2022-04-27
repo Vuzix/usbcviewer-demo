@@ -4,14 +4,12 @@ import android.content.Context
 import android.hardware.usb.UsbDevice
 import android.hardware.usb.UsbManager
 import android.os.Bundle
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.Surface
-import android.view.View
+import android.view.*
 import android.view.View.OnKeyListener
-import android.view.ViewGroup
+import android.widget.Button
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import com.vuzix.android.camerasdk.camera.UVCCameraHandler
 import com.vuzix.android.camerasdk.ui.CameraDialog
 import com.vuzix.android.camerasdk.ui.CameraFragment
@@ -19,9 +17,12 @@ import com.vuzix.android.camerasdk.ui.CameraViewInterface
 import com.vuzix.android.camerasdk.usb.USBMonitor
 import com.vuzix.android.camerasdk.usb.USBMonitor.OnDeviceConnectListener
 import com.vuzix.android.camerasdk.usb.USBMonitor.UsbControlBlock
+import com.vuzix.android.m400c.BuildConfig
 import com.vuzix.android.m400c.R
 import com.vuzix.android.m400c.databinding.FragmentCameraDemoBinding
+import com.vuzix.sdk.usbcviewer.ColorMode
 import com.vuzix.sdk.usbcviewer.M400cConstants
+import com.vuzix.sdk.usbcviewer.USBCDeviceManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -51,7 +52,8 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, O
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_camera_demo, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_camera_demo, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         uvcCameraView = binding.uvcCameraView as CameraViewInterface
         uvcCameraView?.setAspectRatio(PREVIEW_WIDTH, PREVIEW_HEIGHT)
@@ -92,7 +94,18 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, O
             PREVIEW_MODE
         )
         vuzixVideoDevice = getVideoDevice(usbManager)
-        return binding.root
+
+
+        val view = binding.root
+        val button = view.findViewById<Button>(R.id.camera_settings)
+        button.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt("type", 1)
+            view.findNavController().navigate(R.id.action_cameraFragment_to_settingsParentFragment, bundle)
+        }
+        button.visibility = if (BuildConfig.DEBUG) View.VISIBLE else View.INVISIBLE
+
+        return view
     }
 
     override fun onStart() {
@@ -107,7 +120,7 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, O
         Timber.d("onStop")
         cameraHandler?.close()
         uvcCameraView?.onPause()
-        turnOffLed()
+        //turnOffLed()
         GlobalScope.launch(Dispatchers.Main) { binding.pbCamera?.isVisible = false }
         super.onStop()
     }
@@ -122,19 +135,12 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, O
         super.onDestroy()
     }
 
+
+    // TODO: this is not documented in the API
+    // This turns off the red LED light.  Seems like this isn't something we should allow developers to interact with.
     private fun turnOffLed() {
         val bytes = byteArrayOf(4, 0x84.toByte(), 0x04, 0x02, 0)
-        val connection = usbManager.openDevice(vuzixVideoDevice)
-        connection.claimInterface(vuzixVideoDevice?.getInterface(M400cConstants.VIDEO_HID), true)
-        connection.controlTransfer(
-            0x21, // USB Direction Out
-            0x09, // USB HID Request Set Report
-            0x03, // USB Standard Set Feature
-            vuzixVideoDevice?.getInterface(M400cConstants.VIDEO_HID)?.id!!,
-            bytes,
-            bytes.size,
-            1000
-        )
+        context?.let { USBCDeviceManager.shared(it).cameraInterface?.setHidReport(0x03, bytes) }
     }
 
     fun startPreview() {
@@ -161,24 +167,38 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, O
     }
 
     override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
-        if (event?.keyCode == KeyEvent.KEYCODE_BACK) {
-            requireActivity().onBackPressed()
-        } else {
-            when (event?.scanCode) {
-                M400cConstants.KEY_BACK_LONG,
-                M400cConstants.KEY_FRONT_LONG,
-                M400cConstants.KEY_MIDDLE_LONG ->
-                    if (event.action != KeyEvent.ACTION_UP) {
-                        requireActivity().onBackPressed()
-                    }
+        val m400c = context?.let { USBCDeviceManager.shared(it) } ?: return false
+
+        when (event?.keyCode) {
+            KeyEvent.KEYCODE_BACK -> {
+                requireActivity().onBackPressed()
             }
-            return true
+            KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                m400c.cameraInterface?.setColorModeToBlackAndWhiteWithThreshold(70)
+            }
+            KeyEvent.KEYCODE_DPAD_LEFT -> {
+                m400c.cameraInterface?.setColorMode(ColorMode.COLOR)
+            }
+            KeyEvent.KEYCODE_ENTER -> {
+                m400c.cameraInterface?.setColorMode(ColorMode.NEGATIVE)
+            }
+            else -> {
+                when (event?.scanCode) {
+                    M400cConstants.KEY_BACK_LONG,
+                    M400cConstants.KEY_FRONT_LONG,
+                    M400cConstants.KEY_MIDDLE_LONG ->
+                        if (event.action != KeyEvent.ACTION_UP) {
+                            requireActivity().onBackPressed()
+                        }
+                }
+                return true
+            }
         }
         return false
     }
 
     private fun getVideoDevice(usbManager: UsbManager): UsbDevice? {
         val devices = usbManager.deviceList
-        return devices.values.firstOrNull { device -> device.productId == M400cConstants.VIDEO_PID && device.vendorId == M400cConstants.VIDEO_VID }
+        return devices.values.firstOrNull { device -> device.productId == M400cConstants.CAMERA_PID && device.vendorId == M400cConstants.CAMERA_VID }
     }
 }

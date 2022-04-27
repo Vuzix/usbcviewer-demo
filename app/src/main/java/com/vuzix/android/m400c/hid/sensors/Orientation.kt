@@ -2,7 +2,7 @@ package com.vuzix.android.m400c.hid.sensors
 
 import android.hardware.SensorManager
 import android.view.Surface
-import java.util.LinkedList
+import java.util.*
 import kotlin.math.abs
 
 object Orientation {
@@ -48,10 +48,12 @@ object Orientation {
 
         smoothOrientation(accelData, magData, accelAvg, magAvg)
         SensorManager.getRotationMatrix(rotationMatrix, null, accelAvg, magAvg)
+
         rotationMatrix = normalize(rotationMatrix)
         SensorManager.remapCoordinateSystem(rotationMatrix, worldAxisForDeviceAxisX, worldAxisForDeviceAxisY, adjustedRotationMatrix)
         val orientation = FloatArray(3)
         SensorManager.getOrientation(adjustedRotationMatrix, orientation)
+
         // Convert radians to degrees
         val azimuth = orientation[0] * 57
         val pitch = orientation[1] * 57

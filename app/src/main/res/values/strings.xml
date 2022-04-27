@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">M400-C</string>
+    <string name="app_name">M400C</string>
     <string name="button_hid_device">HID Device</string>
     <string name="button_audio_device">Audio Device</string>
     <string name="button_video_device">Video Device</string>
@@ -36,8 +36,8 @@
     <!-- HID Text Strings   -->
     <string name="demo_sensor_header">Sensor Demo</string>
     <string name="demo_buttons">M400-C Button Demo</string>
-    <string name="demo_buttons_message">The M400-C has four buttons which allows for four short press commands and three long-press commands (the fourth long-press is system reserved).\n\nPress a button to see which one it is and what it does.</string>
-    <string name="demo_sensor_message">The M400-C has onboard sensors available for use.\nPress Start to see this in action.</string>
+    <string name="demo_buttons_message">The M400C has four buttons which allows for four short press commands and three long-press commands (the fourth long-press is system reserved).\n\nPress a button to see which one it is and what it does.</string>
+    <string name="demo_sensor_message">The M400C has onboard sensors available for use.\nPress Start to see this in action.</string>
 
     <!--  Audio Button Strings   -->
     <string name="button_audio_sound_on">Audio Sound - ON</string>
@@ -46,8 +46,8 @@
     <string name="button_audio_record_off">Record Audio - OFF</string>
 
     <!-- Audio Text Strings   -->
-    <string name="audio_demo_message">The M400-C is capable of acting as an external speaker.\n\nPress the Play button for a demonstration.</string>
-    <string name="audio_mic_demo_message">The M400-C is capable of acting as an external microphone.\n\nPress Record and begin speaking to try this out. Press Stop when you are finished and a new audio file will appear in the list.\n\nSelect your audio from the list and press the Play button to play back your recorded message.</string>
+    <string name="audio_demo_message">The M400C is capable of acting as an external speaker.\n\nPress the Play button for a demonstration.</string>
+    <string name="audio_mic_demo_message">The M400C is capable of acting as an external microphone.\n\nPress Record and begin speaking to try this out. Press Stop when you are finished and a new audio file will appear in the list.\n\nSelect your audio from the list and press the Play button to play back your recorded message.</string>
     <string name="audio_speaker_demo">Speaker Demo</string>
     <string name="audio_microphone_demo">Microphone Demo</string>
 
@@ -90,4 +90,6 @@
     <string name="record">Record</string>
     <string name="available_files">Available Files</string>
     <string name="start">Start</string>
+
+    <string name="connect_device">No device found. \nAn M400C device was not found. You will need to connect the device before you can continue.</string>
 </resources>

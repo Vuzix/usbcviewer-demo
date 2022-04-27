@@ -5,7 +5,6 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.hardware.SensorManager.DynamicSensorCallback
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +14,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.vuzix.android.m400c.R
 import com.vuzix.android.m400c.databinding.FragmentSensorDemoBinding
-import com.vuzix.sdk.usbcviewer.sensors.Sensors
+import com.vuzix.sdk.usbcviewer.SensorType
+import com.vuzix.sdk.usbcviewer.USBCDeviceManager
 import com.vuzix.sdk.usbcviewer.sensors.VuzixSensorEvent
 import com.vuzix.sdk.usbcviewer.sensors.VuzixSensorListener
 import kotlinx.coroutines.Dispatchers
@@ -32,7 +32,6 @@ import timber.log.Timber
 class SensorDemoFragment : Fragment(), VuzixSensorListener, SensorEventListener {
 
     lateinit var binding: FragmentSensorDemoBinding
-    lateinit var sensors: Sensors
 
     lateinit var sensorManager: SensorManager
     lateinit var accelerometer: Sensor
@@ -41,12 +40,7 @@ class SensorDemoFragment : Fragment(), VuzixSensorListener, SensorEventListener 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sensors = Sensors(requireContext(), this)
-        try {
-            sensors.connect()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+
         sensorManager = requireActivity().getSystemService(Context.SENSOR_SERVICE) as SensorManager
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
         gyrometer = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
@@ -65,13 +59,15 @@ class SensorDemoFragment : Fragment(), VuzixSensorListener, SensorEventListener 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (sensors.connected) {
-            sensors.initializeSensors(
-                accelerometer = true,
-                gyroscope = true,
-                magnetometer = true,
-                orientation = false)
+
+        context?.let {
+            USBCDeviceManager.shared(it).sensorInterface?.registerListener(this)
+            USBCDeviceManager.shared(it).sensorInterface?.startUpdatingSensor(SensorType.ACCELEROMETER)
+            USBCDeviceManager.shared(it).sensorInterface?.startUpdatingSensor(SensorType.GYRO)
+            USBCDeviceManager.shared(it).sensorInterface?.startUpdatingSensor(SensorType.MAGNETOMETER)
         }
+
+
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL)
         sensorManager.registerListener(this, gyrometer, SensorManager.SENSOR_DELAY_NORMAL)
         sensorManager.registerListener(this, compass, SensorManager.SENSOR_DELAY_NORMAL)
@@ -79,7 +75,12 @@ class SensorDemoFragment : Fragment(), VuzixSensorListener, SensorEventListener 
 
     override fun onStop() {
         super.onStop()
-        sensors.disconnect()
+        context?.let {
+            USBCDeviceManager.shared(it).sensorInterface?.stopUpdatingSensor(SensorType.ACCELEROMETER)
+            USBCDeviceManager.shared(it).sensorInterface?.stopUpdatingSensor(SensorType.GYRO)
+            USBCDeviceManager.shared(it).sensorInterface?.stopUpdatingSensor(SensorType.MAGNETOMETER)
+        }
+
         sensorManager.unregisterListener(this, accelerometer)
         sensorManager.unregisterListener(this, gyrometer)
         sensorManager.unregisterListener(this, compass)

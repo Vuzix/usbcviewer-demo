@@ -6,36 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnKeyListener
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.vuzix.android.m400c.R
 import com.vuzix.android.m400c.databinding.FragmentFlashlightDemoBinding
 import com.vuzix.android.m400c.video.flashlight.FlashlightState.Off
 import com.vuzix.android.m400c.video.flashlight.FlashlightState.On
-import com.vuzix.sdk.usbcviewer.ConnectionListener
 import com.vuzix.sdk.usbcviewer.M400cConstants
-import com.vuzix.sdk.usbcviewer.flashlight.Flashlight
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.vuzix.sdk.usbcviewer.USBCDeviceManager
 import timber.log.Timber
 
-class FlashlightFragment : Fragment(), OnKeyListener, ConnectionListener {
+class FlashlightFragment : Fragment(), OnKeyListener {
 
     lateinit var binding: FragmentFlashlightDemoBinding
-    lateinit var flashlight: Flashlight
-
     var state: FlashlightState = Off
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        flashlight = Flashlight(requireContext())
-        flashlight.registerDeviceMonitor(this)
-        if (flashlight.isDeviceAvailableAndAllowed()) {
-            initConnect()
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,8 +37,11 @@ class FlashlightFragment : Fragment(), OnKeyListener, ConnectionListener {
 
     override fun onStop() {
         super.onStop()
-        flashlight.disconnect()
+
+        val m400c = context?.let { USBCDeviceManager.shared(it) } ?: return
+        m400c.cameraInterface?.setFlashLight(false)
     }
+
 
     override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
         Timber.d("onKey")
@@ -67,9 +54,7 @@ class FlashlightFragment : Fragment(), OnKeyListener, ConnectionListener {
                 M400cConstants.KEY_MIDDLE,
                 M400cConstants.KEY_SIDE -> {
                     if (event.action != KeyEvent.ACTION_UP) {
-                        if (flashlight.connected) {
-                            changeState()
-                        }
+                        changeState()
                     }
                 }
                 else -> requireActivity().onBackPressed()
@@ -79,44 +64,19 @@ class FlashlightFragment : Fragment(), OnKeyListener, ConnectionListener {
         return false
     }
 
-    private fun initConnect() {
-        try {
-            flashlight.connect()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
     private fun changeState() {
+        val m400c = context?.let { USBCDeviceManager.shared(it) } ?: return
         when (state) {
             Off -> {
                 binding.clFlashlightView.setBackgroundResource(R.drawable.bg_flashlight_on)
                 state = On
-                flashlight.turnFlashlightOn()
+                m400c.cameraInterface?.setFlashLight(true)
             }
             On -> {
                 binding.clFlashlightView.setBackgroundResource(R.drawable.bg_flashlight_off)
                 state = Off
-                flashlight.turnFlashlightOff()
+                m400c.cameraInterface?.setFlashLight(false)
             }
-        }
-    }
-
-    override fun onConnectionChanged(connected: Boolean) {
-        if (!connected) {
-            GlobalScope.launch(Dispatchers.Main) {
-                AlertDialog.Builder(requireContext())
-                    .setTitle("No device found")
-                    .setMessage("An M400-C device was not found. You will need to exit the app and connect the device before you can continue.")
-                    .setNeutralButton("Okay") { _, _ -> requireActivity().finish() }
-                    .show()
-            }
-        }
-    }
-
-    override fun onPermissionsChanged(granted: Boolean) {
-        if (granted) {
-            initConnect()
         }
     }
 }

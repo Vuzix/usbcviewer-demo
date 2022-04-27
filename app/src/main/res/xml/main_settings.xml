@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="General">
+
+        <SeekBarPreference
+            android:key="brightnessPref"
+            android:defaultValue="100"
+            android:title="Brightness" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="autoRotatePref"
+            android:title="Auto Rotate" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="forceLeftEyePref"
+            android:title="Force Left Eye" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Touchpad">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="enableTouchPadPref"
+            android:title="Enable TouchPad" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="hTogglePref"
+            android:title="Horizontal Toggle" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="vTogglePref"
+            android:title="Vertical Toggle" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Restore Defaults">
+        <com.vuzix.android.m400c.util.ButtonPreference
+            android:key="defaults_pref"
+            android:selectable="false"
+            android:layout="@layout/restore_defaults"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

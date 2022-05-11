@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.Window
 import android.view.WindowManager
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -22,7 +21,6 @@ import com.vuzix.android.m400c.hid.buttons.ButtonDemoFragment
 import com.vuzix.android.m400c.hid.sensors.ArtificialHorizonFragment
 import com.vuzix.android.m400c.video.camera.VuzixCameraFragment
 import com.vuzix.android.m400c.video.flashlight.FlashlightFragment
-import com.vuzix.sdk.usbcviewer.ColorMode
 import com.vuzix.sdk.usbcviewer.ConnectionListener
 import com.vuzix.sdk.usbcviewer.USBCDeviceManager
 import com.vuzix.sdk.usbcviewer.utils.LogUtil

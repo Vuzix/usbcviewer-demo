@@ -4,6 +4,7 @@ import android.hardware.Sensor
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.Surface
 import android.view.View
 import android.view.View.OnKeyListener
 import android.widget.ImageView
@@ -12,7 +13,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.vuzix.android.m400c.R
 import com.vuzix.sdk.usbcviewer.M400cConstants
-import com.vuzix.sdk.usbcviewer.SensorType
 import com.vuzix.sdk.usbcviewer.USBCDeviceManager
 import com.vuzix.sdk.usbcviewer.sensors.VuzixSensorEvent
 import com.vuzix.sdk.usbcviewer.sensors.VuzixSensorListener
@@ -32,7 +32,6 @@ class ArtificialHorizonFragment :
     private var accelValues = FloatArray(3)
     private var magValues = FloatArray(3)
     private var gyroValues = FloatArray(3)
-    private var rotationVectorValues = FloatArray(3)
 
     @RequiresApi(VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,10 +46,9 @@ class ArtificialHorizonFragment :
 
         try {
             context?.let {
-                //M400cUsbManager.shared(it).sensorInterface?.startUpdatingSensor(SensorType.ORIENTATION)
-                USBCDeviceManager.shared(it).sensorInterface?.startUpdatingSensor(SensorType.MAGNETOMETER)
-                USBCDeviceManager.shared(it).sensorInterface?.startUpdatingSensor(SensorType.ACCELEROMETER)
-
+                //M400cUsbManager.shared(it).sensorInterface?.startUpdatingSensor(Sensor.TYPE_ROTATION_VECTOR)
+                USBCDeviceManager.shared(it).sensorInterface?.startUpdatingSensor(Sensor.TYPE_MAGNETIC_FIELD)
+                USBCDeviceManager.shared(it).sensorInterface?.startUpdatingSensor(Sensor.TYPE_ACCELEROMETER)
             }
         } catch (e: Exception) {
             //nothing.
@@ -60,6 +58,7 @@ class ArtificialHorizonFragment :
     override fun onStop() {
         super.onStop()
         context?.let { USBCDeviceManager.shared(it).sensorInterface?.unregisterListener(this) };
+        rotationSet = false
     }
 
     override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
@@ -97,14 +96,23 @@ class ArtificialHorizonFragment :
         ivCompassNumbers.rotation = -orientationData.azimuth
     }
 
-    var rotation = 0 // force to right-eye landscape orientation.
+    var rotation = Surface.ROTATION_0 // default to right-eye landscape orientation.
+    var rotationSet = false
     var outputEveryNth = 0
     override fun onSensorChanged(event: VuzixSensorEvent) {
 
         when (event.sensorType) {
             Sensor.TYPE_ACCELEROMETER -> {
                 accelValues = event.values
-                rotation = if (accelValues[1] > 0) { 0 } else { 2 }
+                if(!rotationSet) {
+                    rotationSet = true;
+                    rotation = if (accelValues[1] > 0) {
+                        Surface.ROTATION_0
+                    } else {
+                        Surface.ROTATION_180
+                    }
+                    LogUtil.rel("Setting rotation to $rotation")
+                }
             }
             Sensor.TYPE_MAGNETIC_FIELD -> {
                 magValues = event.values

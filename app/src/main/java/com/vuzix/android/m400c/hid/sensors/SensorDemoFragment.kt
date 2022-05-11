@@ -14,7 +14,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.vuzix.android.m400c.R
 import com.vuzix.android.m400c.databinding.FragmentSensorDemoBinding
-import com.vuzix.sdk.usbcviewer.SensorType
 import com.vuzix.sdk.usbcviewer.USBCDeviceManager
 import com.vuzix.sdk.usbcviewer.sensors.VuzixSensorEvent
 import com.vuzix.sdk.usbcviewer.sensors.VuzixSensorListener
@@ -62,9 +61,9 @@ class SensorDemoFragment : Fragment(), VuzixSensorListener, SensorEventListener 
 
         context?.let {
             USBCDeviceManager.shared(it).sensorInterface?.registerListener(this)
-            USBCDeviceManager.shared(it).sensorInterface?.startUpdatingSensor(SensorType.ACCELEROMETER)
-            USBCDeviceManager.shared(it).sensorInterface?.startUpdatingSensor(SensorType.GYRO)
-            USBCDeviceManager.shared(it).sensorInterface?.startUpdatingSensor(SensorType.MAGNETOMETER)
+            USBCDeviceManager.shared(it).sensorInterface?.startUpdatingSensor(Sensor.TYPE_ACCELEROMETER)
+            USBCDeviceManager.shared(it).sensorInterface?.startUpdatingSensor(Sensor.TYPE_GYROSCOPE)
+            USBCDeviceManager.shared(it).sensorInterface?.startUpdatingSensor(Sensor.TYPE_MAGNETIC_FIELD)
         }
 
 
@@ -76,9 +75,9 @@ class SensorDemoFragment : Fragment(), VuzixSensorListener, SensorEventListener 
     override fun onStop() {
         super.onStop()
         context?.let {
-            USBCDeviceManager.shared(it).sensorInterface?.stopUpdatingSensor(SensorType.ACCELEROMETER)
-            USBCDeviceManager.shared(it).sensorInterface?.stopUpdatingSensor(SensorType.GYRO)
-            USBCDeviceManager.shared(it).sensorInterface?.stopUpdatingSensor(SensorType.MAGNETOMETER)
+            USBCDeviceManager.shared(it).sensorInterface?.stopUpdatingSensor(Sensor.TYPE_ACCELEROMETER)
+            USBCDeviceManager.shared(it).sensorInterface?.stopUpdatingSensor(Sensor.TYPE_GYROSCOPE)
+            USBCDeviceManager.shared(it).sensorInterface?.stopUpdatingSensor(Sensor.TYPE_MAGNETIC_FIELD)
         }
 
         sensorManager.unregisterListener(this, accelerometer)

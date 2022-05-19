@@ -92,4 +92,22 @@
     <string name="start">Start</string>
 
     <string name="connect_device">No device found. \nAn M400C device was not found. You will need to connect the device before you can continue.</string>
+
+    <string name="priority_array_0_auto_exposure">auto exposure</string>
+    <string name="priority_array_1_flicker_cancelation">flicker cancellation</string>
+
+    <string name="AF_Array_0_one_shot">One shot contrast Auto Focus</string>
+    <string name="AF_Array_1_continuous">Continuous contrast Auto Focus</string>
+    <string name="AF_Array_2_one_shot_PDAF">One shot contrast and PDAF hybrid AF</string>
+    <string name="AF_Array_3_cont_PDAF">Continuous contrast and PDAF hybrid AF</string>
+
+    <string name="Color_Array_0_Color">Color</string>
+    <string name="Color_Array_1_Mono">Mono</string>
+    <string name="Color_Array_2_neg">Negative</string>
+    <string name="Color_Array_3_bw">Black and white</string>
+
+    <string name="Flash_Array_0_auto">Flash Auto</string>
+    <string name="Flash_Array_1_on">Flash On</string>
+    <string name="Flash_Array_2_off">Flash Off</string>
+
 </resources>

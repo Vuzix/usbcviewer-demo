@@ -135,14 +135,6 @@ class VuzixCameraFragment : CameraFragment(), CameraDialog.CameraDialogParent, O
         super.onDestroy()
     }
 
-
-    // TODO: this is not documented in the API
-    // This turns off the red LED light.  Seems like this isn't something we should allow developers to interact with.
-    private fun turnOffLed() {
-        val bytes = byteArrayOf(4, 0x84.toByte(), 0x04, 0x02, 0)
-        context?.let { USBCDeviceManager.shared(it).cameraInterface?.setHidReport(0x03, bytes) }
-    }
-
     fun startPreview() {
         GlobalScope.launch(Dispatchers.Main) { binding.pbCamera?.isVisible = true }
         uvcCameraView?.let {

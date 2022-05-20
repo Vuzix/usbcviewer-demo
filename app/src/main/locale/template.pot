@@ -1,0 +1,391 @@
+# Translations template for PROJECT.
+# Copyright (C) 2022 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2022-05-19 16:36-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+msgctxt "app_name"
+msgid "M400C"
+msgstr ""
+
+msgctxt "button_hid_device"
+msgid "HID Device"
+msgstr ""
+
+msgctxt "button_audio_device"
+msgid "Audio Device"
+msgstr ""
+
+msgctxt "button_video_device"
+msgid "Video Device"
+msgstr ""
+
+msgctxt "button_find_device"
+msgid "Find Device"
+msgstr ""
+
+msgctxt "button_find_audio_device"
+msgid "Find Audio Device"
+msgstr ""
+
+#. Main Screen Strings
+msgctxt "main_pick_a_demo"
+msgid "Pick a demo"
+msgstr ""
+
+msgctxt "button_main_sensors"
+msgid "Sensors"
+msgstr ""
+
+msgctxt "button_main_mic"
+msgid "Microphone"
+msgstr ""
+
+msgctxt "button_main_speakers"
+msgid "Speakers"
+msgstr ""
+
+msgctxt "button_main_camera"
+msgid "Camera"
+msgstr ""
+
+msgctxt "button_main_buttons"
+msgid "Buttons"
+msgstr ""
+
+msgctxt "button_main_flashlight"
+msgid "Flashlight"
+msgstr ""
+
+#. HID Button Strings
+msgctxt "button_hid_keyboard_off"
+msgid "Keyboard - OFF"
+msgstr ""
+
+msgctxt "button_hid_keyboard_on"
+msgid "Keyboard - ON"
+msgstr ""
+
+msgctxt "button_hid_sensor_off"
+msgid "Sensor - OFF"
+msgstr ""
+
+msgctxt "button_hid_sensor_on"
+msgid "Sensor - ON"
+msgstr ""
+
+msgctxt "button_hid_control_off"
+msgid "Control - OFF"
+msgstr ""
+
+msgctxt "button_hid_control_on"
+msgid "Control - ON"
+msgstr ""
+
+#. HID Gyro Strings
+#, c-format
+msgctxt "hid_sensor_x"
+msgid "X: %1$d"
+msgstr ""
+
+#, c-format
+msgctxt "hid_sensor_y"
+msgid "Y: %1$d"
+msgstr ""
+
+#, c-format
+msgctxt "hid_sensor_z"
+msgid "Z: %1$d"
+msgstr ""
+
+#. HID Accel Strings
+#, c-format
+msgctxt "hid_accel_x"
+msgid "X: %1$d"
+msgstr ""
+
+#, c-format
+msgctxt "hid_accel_y"
+msgid "Y: %1$d"
+msgstr ""
+
+#, c-format
+msgctxt "hid_accel_z"
+msgid "Z: %1$d"
+msgstr ""
+
+#. HID Text Strings
+msgctxt "demo_sensor_header"
+msgid "Sensor Demo"
+msgstr ""
+
+msgctxt "demo_buttons"
+msgid "M400-C Button Demo"
+msgstr ""
+
+msgctxt "demo_buttons_message"
+msgid ""
+"The M400C has four buttons which allows for four short press commands and"
+" three long-press commands (the fourth long-press is system reserved).\n"
+"\n"
+"Press a button to see which one it is and what it does."
+msgstr ""
+
+msgctxt "demo_sensor_message"
+msgid ""
+"The M400C has onboard sensors available for use.\n"
+"Press Start to see this in action."
+msgstr ""
+
+#. Audio Button Strings
+msgctxt "button_audio_sound_on"
+msgid "Audio Sound - ON"
+msgstr ""
+
+msgctxt "button_audio_sound_off"
+msgid "Audio Sound - OFF"
+msgstr ""
+
+msgctxt "button_audio_record_on"
+msgid "Record Audio - ON"
+msgstr ""
+
+msgctxt "button_audio_record_off"
+msgid "Record Audio - OFF"
+msgstr ""
+
+#. Audio Text Strings
+msgctxt "audio_demo_message"
+msgid ""
+"The M400C is capable of acting as an external speaker.\n"
+"\n"
+"Press the Play button for a demonstration."
+msgstr ""
+
+msgctxt "audio_mic_demo_message"
+msgid ""
+"The M400C is capable of acting as an external microphone.\n"
+"\n"
+"Press Record and begin speaking to try this out. Press Stop when you are "
+"finished and a new audio file will appear in the list.\n"
+"\n"
+"Select your audio from the list and press the Play button to play back "
+"your recorded message."
+msgstr ""
+
+msgctxt "audio_speaker_demo"
+msgid "Speaker Demo"
+msgstr ""
+
+msgctxt "audio_microphone_demo"
+msgid "Microphone Demo"
+msgstr ""
+
+#. Video Button Strings
+msgctxt "button_video_one_on"
+msgid "Video One - ON"
+msgstr ""
+
+msgctxt "button_video_one_off"
+msgid "Video One - OFF"
+msgstr ""
+
+msgctxt "button_video_two_on"
+msgid "Video Two - ON"
+msgstr ""
+
+msgctxt "button_video_two_off"
+msgid "Video Two - OFF"
+msgstr ""
+
+msgctxt "button_check_camera"
+msgid "Check Camera"
+msgstr ""
+
+#. Video Text Strings
+msgctxt "video_camera_demo"
+msgid "Camera Demo"
+msgstr ""
+
+msgctxt "camera_message"
+msgid "This section is a work in progress"
+msgstr ""
+
+#. Debug user messages
+msgctxt "hid_device_available"
+msgid "HID Device Available"
+msgstr ""
+
+msgctxt "audio_device_available"
+msgid "Audio Device Available"
+msgstr ""
+
+msgctxt "video_device_available"
+msgid "Video Device Available"
+msgstr ""
+
+#. General Strings
+#, c-format
+msgctxt "device_permission_granted"
+msgid "%1$s - Permissions Granted"
+msgstr ""
+
+#, c-format
+msgctxt "device_no_permission_granted"
+msgid "%1$s - No Permissions Granted"
+msgstr ""
+
+#, c-format
+msgctxt "hid_device_connected"
+msgid "HID Device %1$s: Connected"
+msgstr ""
+
+#, c-format
+msgctxt "audio_device_connected"
+msgid "Audio Device %1$s: Connected"
+msgstr ""
+
+#, c-format
+msgctxt "video_device_connected"
+msgid "Video Device %1$s: Connected"
+msgstr ""
+
+#, c-format
+msgctxt "hid_device_not_connected"
+msgid "HID Device %1$s: Not Connected"
+msgstr ""
+
+#, c-format
+msgctxt "audio_device_not_connected"
+msgid "Audio Device %1$s: Not Connected"
+msgstr ""
+
+#, c-format
+msgctxt "video_device_not_connected"
+msgid "Video Device %1$s: Not Connected"
+msgstr ""
+
+msgctxt "m400_c"
+msgid "M400-C"
+msgstr ""
+
+msgctxt "gyrometer_values"
+msgid "Gyrometer Values"
+msgstr ""
+
+msgctxt "phone_gyrometer_values"
+msgid "Phone Gyro Values"
+msgstr ""
+
+msgctxt "accelerometer_values"
+msgid "Accelerometer Values"
+msgstr ""
+
+msgctxt "phone_accel_values"
+msgid "Phone Accel Values"
+msgstr ""
+
+msgctxt "compass_values"
+msgid "Compass Values"
+msgstr ""
+
+msgctxt "phone_compass_values"
+msgid "Phone Compass Values"
+msgstr ""
+
+msgctxt "button_audio_clear_cache"
+msgid "Clear Cache"
+msgstr ""
+
+msgctxt "play"
+msgid "Play"
+msgstr ""
+
+msgctxt "stop"
+msgid "Stop"
+msgstr ""
+
+msgctxt "record"
+msgid "Record"
+msgstr ""
+
+msgctxt "available_files"
+msgid "Available Files"
+msgstr ""
+
+msgctxt "start"
+msgid "Start"
+msgstr ""
+
+msgctxt "connect_device"
+msgid ""
+"No device found. \n"
+"An M400C device was not found. You will need to connect the device before"
+" you can continue."
+msgstr ""
+
+msgctxt "priority_array_0_auto_exposure"
+msgid "auto exposure"
+msgstr ""
+
+msgctxt "priority_array_1_flicker_cancelation"
+msgid "flicker cancellation"
+msgstr ""
+
+msgctxt "AF_Array_0_one_shot"
+msgid "One shot contrast Auto Focus"
+msgstr ""
+
+msgctxt "AF_Array_1_continuous"
+msgid "Continuous contrast Auto Focus"
+msgstr ""
+
+msgctxt "AF_Array_2_one_shot_PDAF"
+msgid "One shot contrast and PDAF hybrid AF"
+msgstr ""
+
+msgctxt "AF_Array_3_cont_PDAF"
+msgid "Continuous contrast and PDAF hybrid AF"
+msgstr ""
+
+msgctxt "Color_Array_0_Color"
+msgid "Color"
+msgstr ""
+
+msgctxt "Color_Array_1_Mono"
+msgid "Mono"
+msgstr ""
+
+msgctxt "Color_Array_2_neg"
+msgid "Negative"
+msgstr ""
+
+msgctxt "Color_Array_3_bw"
+msgid "Black and white"
+msgstr ""
+
+msgctxt "Flash_Array_0_auto"
+msgid "Flash Auto"
+msgstr ""
+
+msgctxt "Flash_Array_1_on"
+msgid "Flash On"
+msgstr ""
+
+msgctxt "Flash_Array_2_off"
+msgid "Flash Off"
+msgstr ""
+

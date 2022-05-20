@@ -1,0 +1,412 @@
+# Japanese translations for PROJECT.
+# Copyright (C) 2022 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2022-05-19 16:36-0400\n"
+"PO-Revision-Date: 2022-05-20 08:24+0900\n"
+"Last-Translator: \n"
+"Language-Team: ja <LL@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=(0);\n"
+"Generated-By: Babel 2.9.1\n"
+"X-Generator: Poedit 3.0.1\n"
+
+msgctxt "app_name"
+msgid "M400C"
+msgstr "M400C"
+
+msgctxt "button_hid_device"
+msgid "HID Device"
+msgstr "HIDデバイス"
+
+msgctxt "button_audio_device"
+msgid "Audio Device"
+msgstr "オーディオデバイス"
+
+msgctxt "button_video_device"
+msgid "Video Device"
+msgstr "ビデオデバイス"
+
+msgctxt "button_find_device"
+msgid "Find Device"
+msgstr "デバイスの検索"
+
+msgctxt "button_find_audio_device"
+msgid "Find Audio Device"
+msgstr "オーディオデバイスの検索"
+
+#. Main Screen Strings
+msgctxt "main_pick_a_demo"
+msgid "Pick a demo"
+msgstr "デモを選択"
+
+msgctxt "button_main_sensors"
+msgid "Sensors"
+msgstr "センサー"
+
+msgctxt "button_main_mic"
+msgid "Microphone"
+msgstr "マイクロフォン"
+
+msgctxt "button_main_speakers"
+msgid "Speakers"
+msgstr "スピーカー"
+
+msgctxt "button_main_camera"
+msgid "Camera"
+msgstr "カメラ"
+
+msgctxt "button_main_buttons"
+msgid "Buttons"
+msgstr "ボタン"
+
+msgctxt "button_main_flashlight"
+msgid "Flashlight"
+msgstr "懐中電灯"
+
+#. HID Button Strings
+msgctxt "button_hid_keyboard_off"
+msgid "Keyboard - OFF"
+msgstr "キーボード - OFF"
+
+msgctxt "button_hid_keyboard_on"
+msgid "Keyboard - ON"
+msgstr "キーボード - ON"
+
+msgctxt "button_hid_sensor_off"
+msgid "Sensor - OFF"
+msgstr "センサー - OFF"
+
+msgctxt "button_hid_sensor_on"
+msgid "Sensor - ON"
+msgstr "センサー - ON"
+
+msgctxt "button_hid_control_off"
+msgid "Control - OFF"
+msgstr "コントロール - OFF"
+
+msgctxt "button_hid_control_on"
+msgid "Control - ON"
+msgstr "コントロール - ON"
+
+#. HID Gyro Strings
+#, c-format
+msgctxt "hid_sensor_x"
+msgid "X: %1$d"
+msgstr "X: %1$d"
+
+#, c-format
+msgctxt "hid_sensor_y"
+msgid "Y: %1$d"
+msgstr "Y: %1$d"
+
+#, c-format
+msgctxt "hid_sensor_z"
+msgid "Z: %1$d"
+msgstr "Z: %1$d"
+
+#. HID Accel Strings
+#, c-format
+msgctxt "hid_accel_x"
+msgid "X: %1$d"
+msgstr "X: %1$d"
+
+#, c-format
+msgctxt "hid_accel_y"
+msgid "Y: %1$d"
+msgstr "Y: %1$d"
+
+#, c-format
+msgctxt "hid_accel_z"
+msgid "Z: %1$d"
+msgstr "Z: %1$d"
+
+#. HID Text Strings
+msgctxt "demo_sensor_header"
+msgid "Sensor Demo"
+msgstr "センサーデモ"
+
+msgctxt "demo_buttons"
+msgid "M400-C Button Demo"
+msgstr "M400-C ボタンデモ"
+
+msgctxt "demo_buttons_message"
+msgid ""
+"The M400C has four buttons which allows for four short press commands "
+"and three long-press commands (the fourth long-press is system "
+"reserved).\n"
+"\n"
+"Press a button to see which one it is and what it does."
+msgstr ""
+"M400Cには4つのボタンがあり、4つの短押しコマンドと3つの長押しコマンドが可"
+"能です（4つ目の長押しはシステム予約です）。\n"
+"\n"
+"ボタンを押すと、そのボタンがどれで、何をするのかがわかります。"
+
+msgctxt "demo_sensor_message"
+msgid ""
+"The M400C has onboard sensors available for use.\n"
+"Press Start to see this in action."
+msgstr ""
+"M400Cでは、オンボードセンサーを利用することができます。\n"
+"Press Startでその様子をご覧いただけます。"
+
+#. Audio Button Strings
+msgctxt "button_audio_sound_on"
+msgid "Audio Sound - ON"
+msgstr "オーディオサウンド - ON"
+
+msgctxt "button_audio_sound_off"
+msgid "Audio Sound - OFF"
+msgstr "オーディオサウンド - OFF"
+
+msgctxt "button_audio_record_on"
+msgid "Record Audio - ON"
+msgstr "オーディオを録音する - ON"
+
+msgctxt "button_audio_record_off"
+msgid "Record Audio - OFF"
+msgstr "音声を録音する - OFF"
+
+#. Audio Text Strings
+msgctxt "audio_demo_message"
+msgid ""
+"The M400C is capable of acting as an external speaker.\n"
+"\n"
+"Press the Play button for a demonstration."
+msgstr ""
+"M400Cは、外部スピーカーとして機能することができます。\n"
+"\n"
+"再生ボタンを押すと、デモが行われます。"
+
+msgctxt "audio_mic_demo_message"
+msgid ""
+"The M400C is capable of acting as an external microphone.\n"
+"\n"
+"Press Record and begin speaking to try this out. Press Stop when you are "
+"finished and a new audio file will appear in the list.\n"
+"\n"
+"Select your audio from the list and press the Play button to play back "
+"your recorded message."
+msgstr ""
+"M400Cは、外部マイクとして機能することができます。\n"
+"\n"
+"試しに録音を押して、話し始めてみてください。終了したら停止を押すと、新し"
+"いオーディオファイルがリストに表示されます。\n"
+"\n"
+"リストから音声を選択し、再生ボタンを押すと、録音したメッセージが再生され"
+"ます。"
+
+msgctxt "audio_speaker_demo"
+msgid "Speaker Demo"
+msgstr "スピーカーデモ"
+
+msgctxt "audio_microphone_demo"
+msgid "Microphone Demo"
+msgstr "マイクロホンデモ"
+
+#. Video Button Strings
+msgctxt "button_video_one_on"
+msgid "Video One - ON"
+msgstr "ビデオワン - ON"
+
+msgctxt "button_video_one_off"
+msgid "Video One - OFF"
+msgstr "ビデオワン - OFF"
+
+msgctxt "button_video_two_on"
+msgid "Video Two - ON"
+msgstr "ビデオ2 - ON"
+
+msgctxt "button_video_two_off"
+msgid "Video Two - OFF"
+msgstr "ビデオ2 - OFF"
+
+msgctxt "button_check_camera"
+msgid "Check Camera"
+msgstr "チェックカメラ"
+
+#. Video Text Strings
+msgctxt "video_camera_demo"
+msgid "Camera Demo"
+msgstr "カメラデモ"
+
+msgctxt "camera_message"
+msgid "This section is a work in progress"
+msgstr "このセクションは現在進行中です"
+
+#. Debug user messages
+msgctxt "hid_device_available"
+msgid "HID Device Available"
+msgstr "HIDデバイス対応"
+
+msgctxt "audio_device_available"
+msgid "Audio Device Available"
+msgstr "オーディオデバイスあり"
+
+msgctxt "video_device_available"
+msgid "Video Device Available"
+msgstr "ビデオデバイスあり"
+
+#. General Strings
+#, c-format
+msgctxt "device_permission_granted"
+msgid "%1$s - Permissions Granted"
+msgstr "%1$s - アクセス権が許可されました。"
+
+#, c-format
+msgctxt "device_no_permission_granted"
+msgid "%1$s - No Permissions Granted"
+msgstr "%1$s - アクセス権がありません"
+
+#, c-format
+msgctxt "hid_device_connected"
+msgid "HID Device %1$s: Connected"
+msgstr "HID デバイス %1$s:接続中"
+
+#, c-format
+msgctxt "audio_device_connected"
+msgid "Audio Device %1$s: Connected"
+msgstr "オーディオデバイス%1$sです。接続済み"
+
+#, c-format
+msgctxt "video_device_connected"
+msgid "Video Device %1$s: Connected"
+msgstr "ビデオデバイス%1$sです。接続中"
+
+#, c-format
+msgctxt "hid_device_not_connected"
+msgid "HID Device %1$s: Not Connected"
+msgstr "HID デバイス %1$s:接続されていません"
+
+#, c-format
+msgctxt "audio_device_not_connected"
+msgid "Audio Device %1$s: Not Connected"
+msgstr "オーディオデバイス%1$sです。接続されていない"
+
+#, c-format
+msgctxt "video_device_not_connected"
+msgid "Video Device %1$s: Not Connected"
+msgstr "ビデオデバイス%1$sです。接続されていません"
+
+msgctxt "m400_c"
+msgid "M400-C"
+msgstr "M400-C"
+
+msgctxt "gyrometer_values"
+msgid "Gyrometer Values"
+msgstr "ジャイロメーター値"
+
+msgctxt "phone_gyrometer_values"
+msgid "Phone Gyro Values"
+msgstr "フォンジャイロ値"
+
+msgctxt "accelerometer_values"
+msgid "Accelerometer Values"
+msgstr "加速度センサーの値"
+
+msgctxt "phone_accel_values"
+msgid "Phone Accel Values"
+msgstr "フォーンアクセル値"
+
+msgctxt "compass_values"
+msgid "Compass Values"
+msgstr "コンパスバリュー"
+
+msgctxt "phone_compass_values"
+msgid "Phone Compass Values"
+msgstr "フォン・コンパス・バリュー"
+
+msgctxt "button_audio_clear_cache"
+msgid "Clear Cache"
+msgstr "キャッシュをクリア"
+
+msgctxt "play"
+msgid "Play"
+msgstr "再生"
+
+msgctxt "stop"
+msgid "Stop"
+msgstr "停止"
+
+msgctxt "record"
+msgid "Record"
+msgstr "録画"
+
+msgctxt "available_files"
+msgid "Available Files"
+msgstr "利用可能なファイル"
+
+msgctxt "start"
+msgid "Start"
+msgstr "スタート"
+
+msgctxt "connect_device"
+msgid ""
+"No device found. \n"
+"An M400C device was not found. You will need to connect the device "
+"before you can continue."
+msgstr ""
+"デバイスが見つかりません。\n"
+"M400Cのデバイスが見つかりませんでした。続行するには、デバイスを接続する必"
+"要があります。"
+
+msgctxt "priority_array_0_auto_exposure"
+msgid "auto exposure"
+msgstr "自動露出"
+
+msgctxt "priority_array_1_flicker_cancelation"
+msgid "flicker cancellation"
+msgstr "フリッカーキャンセル"
+
+msgctxt "AF_Array_0_one_shot"
+msgid "One shot contrast Auto Focus"
+msgstr "ワンショットコントラストオートフォーカス"
+
+msgctxt "AF_Array_1_continuous"
+msgid "Continuous contrast Auto Focus"
+msgstr "連続コントラストオートフォーカス"
+
+msgctxt "AF_Array_2_one_shot_PDAF"
+msgid "One shot contrast and PDAF hybrid AF"
+msgstr "ワンショット・コントラスト・PDAFハイブリッドAF"
+
+msgctxt "AF_Array_3_cont_PDAF"
+msgid "Continuous contrast and PDAF hybrid AF"
+msgstr "コンティニュアス・コントラストとPDAFのハイブリッドAF"
+
+msgctxt "Color_Array_0_Color"
+msgid "Color"
+msgstr "色"
+
+msgctxt "Color_Array_1_Mono"
+msgid "Mono"
+msgstr "モノ"
+
+msgctxt "Color_Array_2_neg"
+msgid "Negative"
+msgstr "ネガ反転"
+
+msgctxt "Color_Array_3_bw"
+msgid "Black and white"
+msgstr "ブラック＆ホワイト"
+
+msgctxt "Flash_Array_0_auto"
+msgid "Flash Auto"
+msgstr "フラッシュオート"
+
+msgctxt "Flash_Array_1_on"
+msgid "Flash On"
+msgstr "懐中電灯オン"
+
+msgctxt "Flash_Array_2_off"
+msgid "Flash Off"
+msgstr "懐中電灯オフ"

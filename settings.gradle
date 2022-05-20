@@ -1,0 +1,3 @@
+rootProject.name = "M400C Controller App"
+include ':app'
+include ':camerasdk'

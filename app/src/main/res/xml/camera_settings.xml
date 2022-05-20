@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:entries="@array/camera_exposure_keys"
+        android:entryValues="@array/camera_exposure_values"
+        android:key="camera_exposure_pref"
+        android:title="Exposure" />
+    <ListPreference
+        android:entries="@array/priority_keys"
+        android:entryValues="@array/priority_values"
+        android:key="priority_pref"
+        android:title="Priority" />
+    <SeekBarPreference
+        android:max="60"
+        android:key="frame_rate_pref"
+        android:title="Max Frame Rate (auto is 0)" />
+    <ListPreference
+        android:entries="@array/auto_focus_keys"
+        android:entryValues="@array/auto_focus_values"
+        android:key="auto_focus_pref"
+        android:title="Auto Focus" />
+    <SwitchPreference
+        android:key="noise_reduction_pref"
+        android:title="Noise Reduction Auto" />
+    <SeekBarPreference
+        android:key="noise_reduction_fixed_pref"
+        android:max="10"
+        android:title="Noise Reduction Strength" />
+    <SwitchPreference
+        android:key="scan_mode_pref"
+        android:title="Scan Mode" />
+    <ListPreference
+        android:entries="@array/color_mode_keys"
+        android:entryValues="@array/color_mode_values"
+        android:key="color_mode_pref"
+        android:title="Color Mode" />
+    <SeekBarPreference
+        android:key="jpeg_quality_pref"
+        android:max="100"
+        android:title="JPEG Quality" />
+    <ListPreference
+        android:entries="@array/flash_mode_keys"
+        android:entryValues="@array/flash_mode_values"
+        android:key="flash_mode_pref"
+        android:title="Camera Flash Mode" />
+    <SwitchPreference
+        android:key="auto_rotate_pref"
+        android:title="Auto Rotate" />
+    <SwitchPreference
+        android:key="left_eye_pref"
+        android:title="Left Eye Mode" />
+</PreferenceScreen>

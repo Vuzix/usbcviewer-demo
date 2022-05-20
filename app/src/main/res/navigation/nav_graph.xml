@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/m400cFragment">
+
+    <fragment
+        android:id="@+id/m400cFragment"
+        android:name="com.vuzix.android.m400c.M400cFragment"
+        android:label="M400cFragment">
+        <action
+            android:id="@+id/action_m400cFragment_to_buttonDemoFragment"
+            app:destination="@id/buttonDemoFragment" />
+        <action
+            android:id="@+id/action_m400cFragment_to_microphoneFragment"
+            app:destination="@id/microphoneFragment" />
+        <action
+            android:id="@+id/action_m400cFragment_to_speakerFragment"
+            app:destination="@id/speakerFragment" />
+        <action
+            android:id="@+id/action_m400cFragment_to_sensorFragment"
+            app:destination="@id/sensorFragment" />
+        <action
+            android:id="@+id/action_m400cFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+        <action
+            android:id="@+id/action_m400cFragment_to_flashlightFragment"
+            app:destination="@id/flashlightFragment" />
+        <action
+            android:id="@+id/action_m400cFragment_to_sensorDemoFragment"
+            app:destination="@id/sensorDemoFragment" />
+        <action
+            android:id="@+id/action_m400cFragment_to_settingsParentFragment"
+            app:destination="@id/settingsParentFragment" />
+        <action
+            android:id="@+id/action_m400cFragment_to_connectDeviceFragment"
+            app:destination="@id/connectDeviceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/buttonDemoFragment"
+        android:name="com.vuzix.android.m400c.hid.buttons.ButtonDemoFragment"
+        android:label="ButtonDemoFragment" />
+    <fragment
+        android:id="@+id/microphoneFragment"
+        android:name="com.vuzix.android.m400c.audio.mic.MicrophoneFragment"
+        android:label="MicrophoneFragment" />
+    <fragment
+        android:id="@+id/speakerFragment"
+        android:name="com.vuzix.android.m400c.audio.speakers.SpeakerFragment"
+        android:label="SpeakerFragment" />
+    <fragment
+        android:id="@+id/sensorFragment"
+        android:name="com.vuzix.android.m400c.hid.sensors.ArtificialHorizonFragment"
+        android:label="SensorFragment" />
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.vuzix.android.m400c.video.camera.VuzixCameraFragment"
+        android:label="CameraFragment" >
+        <action
+            android:id="@+id/action_cameraFragment_to_settingsParentFragment"
+            app:destination="@id/settingsParentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/flashlightFragment"
+        android:name="com.vuzix.android.m400c.video.flashlight.FlashlightFragment"
+        android:label="FlashlightFragment" />
+    <fragment
+        android:id="@+id/sensorDemoFragment"
+        android:name="com.vuzix.android.m400c.hid.sensors.SensorDemoFragment"
+        android:label="SensorDemoFragment" />
+    <fragment
+        android:id="@+id/settingsParentFragment"
+        android:name="com.vuzix.android.m400c.SettingsParentFragment"
+        android:label="SettingsParentFragment" >
+    </fragment>
+    <fragment
+        android:id="@+id/connectDeviceFragment"
+        android:name="com.vuzix.android.m400c.ConnectDeviceFragment"
+        android:label="ConnectDeviceFragment" />
+
+</navigation>

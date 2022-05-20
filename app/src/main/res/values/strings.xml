@@ -1,0 +1,113 @@
+<resources>
+    <string name="app_name">M400C</string>
+    <string name="button_hid_device">HID Device</string>
+    <string name="button_audio_device">Audio Device</string>
+    <string name="button_video_device">Video Device</string>
+    <string name="button_find_device">Find Device</string>
+    <string name="button_find_audio_device">Find Audio Device</string>
+
+    <!-- Main Screen Strings   -->
+    <string name="main_pick_a_demo">Pick a demo</string>
+    <string name="button_main_sensors">Sensors</string>
+    <string name="button_main_mic">Microphone</string>
+    <string name="button_main_speakers">Speakers</string>
+    <string name="button_main_camera">Camera</string>
+    <string name="button_main_buttons">Buttons</string>
+    <string name="button_main_flashlight">Flashlight</string>
+
+    <!-- HID Button Strings   -->
+    <string name="button_hid_keyboard_off">Keyboard - OFF</string>
+    <string name="button_hid_keyboard_on">Keyboard - ON</string>
+    <string name="button_hid_sensor_off">Sensor - OFF</string>
+    <string name="button_hid_sensor_on">Sensor - ON</string>
+    <string name="button_hid_control_off">Control - OFF</string>
+    <string name="button_hid_control_on">Control - ON</string>
+
+    <!-- HID Gyro Strings   -->
+    <string name="hid_sensor_x">X: %1$d</string>
+    <string name="hid_sensor_y">Y: %1$d</string>
+    <string name="hid_sensor_z">Z: %1$d</string>
+
+    <!-- HID Accel Strings   -->
+    <string name="hid_accel_x">X: %1$d</string>
+    <string name="hid_accel_y">Y: %1$d</string>
+    <string name="hid_accel_z">Z: %1$d</string>
+
+    <!-- HID Text Strings   -->
+    <string name="demo_sensor_header">Sensor Demo</string>
+    <string name="demo_buttons">M400-C Button Demo</string>
+    <string name="demo_buttons_message">The M400C has four buttons which allows for four short press commands and three long-press commands (the fourth long-press is system reserved).\n\nPress a button to see which one it is and what it does.</string>
+    <string name="demo_sensor_message">The M400C has onboard sensors available for use.\nPress Start to see this in action.</string>
+
+    <!--  Audio Button Strings   -->
+    <string name="button_audio_sound_on">Audio Sound - ON</string>
+    <string name="button_audio_sound_off">Audio Sound - OFF</string>
+    <string name="button_audio_record_on">Record Audio - ON</string>
+    <string name="button_audio_record_off">Record Audio - OFF</string>
+
+    <!-- Audio Text Strings   -->
+    <string name="audio_demo_message">The M400C is capable of acting as an external speaker.\n\nPress the Play button for a demonstration.</string>
+    <string name="audio_mic_demo_message">The M400C is capable of acting as an external microphone.\n\nPress Record and begin speaking to try this out. Press Stop when you are finished and a new audio file will appear in the list.\n\nSelect your audio from the list and press the Play button to play back your recorded message.</string>
+    <string name="audio_speaker_demo">Speaker Demo</string>
+    <string name="audio_microphone_demo">Microphone Demo</string>
+
+    <!-- Video Button Strings   -->
+    <string name="button_video_one_on">Video One - ON</string>
+    <string name="button_video_one_off">Video One - OFF</string>
+    <string name="button_video_two_on">Video Two - ON</string>
+    <string name="button_video_two_off">Video Two - OFF</string>
+    <string name="button_check_camera">Check Camera</string>
+
+    <!-- Video Text Strings   -->
+    <string name="video_camera_demo">Camera Demo</string>
+    <string name="camera_message">This section is a work in progress</string>
+
+    <!-- Debug user messages   -->
+    <string name="hid_device_available">HID Device Available</string>
+    <string name="audio_device_available">Audio Device Available</string>
+    <string name="video_device_available">Video Device Available</string>
+
+    <!-- General Strings   -->
+    <string name="device_permission_granted">%1$s - Permissions Granted</string>
+    <string name="device_no_permission_granted">%1$s - No Permissions Granted</string>
+    <string name="hid_device_connected">HID Device %1$s: Connected</string>
+    <string name="audio_device_connected">Audio Device %1$s: Connected</string>
+    <string name="video_device_connected">Video Device %1$s: Connected</string>
+    <string name="hid_device_not_connected">HID Device %1$s: Not Connected</string>
+    <string name="audio_device_not_connected">Audio Device %1$s: Not Connected</string>
+    <string name="video_device_not_connected">Video Device %1$s: Not Connected</string>
+    <string name="m400_c">M400-C</string>
+    <string name="gyrometer_values">Gyrometer Values</string>
+    <string name="phone_gyrometer_values">Phone Gyro Values</string>
+    <string name="accelerometer_values">Accelerometer Values</string>
+    <string name="phone_accel_values">Phone Accel Values</string>
+    <string name="compass_values">Compass Values</string>
+    <string name="phone_compass_values">Phone Compass Values</string>
+    <string name="button_audio_clear_cache">Clear Cache</string>
+
+    <string name="play">Play</string>
+    <string name="stop">Stop</string>
+    <string name="record">Record</string>
+    <string name="available_files">Available Files</string>
+    <string name="start">Start</string>
+
+    <string name="connect_device">No device found. \nAn M400C device was not found. You will need to connect the device before you can continue.</string>
+
+    <string name="priority_array_0_auto_exposure">auto exposure</string>
+    <string name="priority_array_1_flicker_cancelation">flicker cancellation</string>
+
+    <string name="AF_Array_0_one_shot">One shot contrast Auto Focus</string>
+    <string name="AF_Array_1_continuous">Continuous contrast Auto Focus</string>
+    <string name="AF_Array_2_one_shot_PDAF">One shot contrast and PDAF hybrid AF</string>
+    <string name="AF_Array_3_cont_PDAF">Continuous contrast and PDAF hybrid AF</string>
+
+    <string name="Color_Array_0_Color">Color</string>
+    <string name="Color_Array_1_Mono">Mono</string>
+    <string name="Color_Array_2_neg">Negative</string>
+    <string name="Color_Array_3_bw">Black and white</string>
+
+    <string name="Flash_Array_0_auto">Flash Auto</string>
+    <string name="Flash_Array_1_on">Flash On</string>
+    <string name="Flash_Array_2_off">Flash Off</string>
+
+</resources>

@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_sensors">
+
+        <TextView
+            android:id="@+id/tv_gyro_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/gyrometer_values"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gl_sensor_horz_20" />
+
+        <TextView
+            android:id="@+id/tv_hid_gyro_x"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/gl_sensor_vert_33"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_gyro_title"
+            tools:text="X: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_hid_gyro_y"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/gl_sensor_vert_33"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_gyro_x"
+            tools:text="Y: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_hid_gyro_z"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/gl_sensor_vert_33"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_gyro_y"
+            tools:text="z: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_gyro_ptitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/phone_gyrometer_values"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_gyro_z" />
+
+        <TextView
+            android:id="@+id/tv_hid_pgyro_x"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/gl_sensor_vert_33"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_gyro_ptitle"
+            tools:text="X: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_hid_pgyro_y"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/gl_sensor_vert_33"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_pgyro_x"
+            tools:text="Y: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_hid_pgyro_z"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/gl_sensor_vert_33"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_pgyro_y"
+            tools:text="z: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_accel_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/accelerometer_values"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_33"
+            app:layout_constraintTop_toBottomOf="@+id/gl_sensor_horz_20" />
+
+        <TextView
+            android:id="@+id/tv_hid_accel_x"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_33"
+            app:layout_constraintTop_toBottomOf="@+id/tv_accel_title"
+            tools:text="X: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_hid_accel_y"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_33"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_accel_x"
+            tools:text="Y: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_hid_accel_z"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_33"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_accel_y"
+            tools:text="z: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_mag_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/compass_values"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintTop_toBottomOf="@+id/gl_sensor_horz_20" />
+
+        <TextView
+            android:id="@+id/tv_hid_mag_x"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mag_title"
+            tools:text="X: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_hid_mag_y"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_mag_x"
+            tools:text="Y: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_hid_mag_z"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_mag_y"
+            tools:text="z: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_mag_ptitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/phone_compass_values"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_mag_z" />
+
+        <TextView
+            android:id="@+id/tv_hid_pmag_x"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mag_ptitle"
+            tools:text="X: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_hid_pmag_y"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_pmag_x"
+            tools:text="Y: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_hid_pmag_z"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_pmag_y"
+            tools:text="z: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_quad_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/phone_accel_values"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/gl_sensor_vert_33"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_accel_z" />
+
+        <TextView
+            android:id="@+id/tv_hid_quad_x"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_33"
+            app:layout_constraintTop_toBottomOf="@+id/tv_quad_title"
+            tools:text="X: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_hid_quad_y"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_33"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_quad_x"
+            tools:text="Y: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_hid_quad_z"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_33"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_quad_y"
+            tools:text="z: 0.002 rad/s" />
+
+        <TextView
+            android:id="@+id/tv_hid_quad_w"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/gl_sensor_vert_66"
+            app:layout_constraintStart_toEndOf="@+id/gl_sensor_vert_33"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hid_quad_z"
+            tools:text="z: 0.002 rad/s" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_sensor_vert_33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".33" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_sensor_vert_66"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".66" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_sensor_horz_80"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".80" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_sensor_horz_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.20" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

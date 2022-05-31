@@ -44,10 +44,4 @@
         android:entryValues="@array/flash_mode_values"
         android:key="flash_mode_pref"
         android:title="Camera Flash Mode" />
-    <SwitchPreference
-        android:key="auto_rotate_pref"
-        android:title="Auto Rotate" />
-    <SwitchPreference
-        android:key="left_eye_pref"
-        android:title="Left Eye Mode" />
 </PreferenceScreen>

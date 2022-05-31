@@ -7,6 +7,7 @@ import androidx.preference.SeekBarPreference
 import androidx.preference.SwitchPreference
 import com.vuzix.android.m400c.R
 import com.vuzix.sdk.usbcviewer.*
+import com.vuzix.sdk.usbcviewer.utils.LogUtil
 import com.vuzix.sdk.usbcviewer.utils.toBoolean
 import com.vuzix.sdk.usbcviewer.utils.toInt
 
@@ -16,6 +17,9 @@ class CameraSettingsFragment: PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.camera_settings, rootKey)
 
         val manager = USBCDeviceManager.shared(requireContext())
+
+        val firmwareVersion = manager.cameraInterface?.getFirmwareVersion()
+        LogUtil.debug("Camera " + firmwareVersion.toString())
 
         val cameraExposurePref = findPreference<ListPreference>("camera_exposure_pref")
         val exposure = manager.cameraInterface?.getExposureCompensation()
@@ -136,21 +140,6 @@ class CameraSettingsFragment: PreferenceFragmentCompat() {
                     2-> manager.cameraInterface?.setFlashOff()
                 }
             }
-            true
-        }
-
-
-        val autoRotatePref = findPreference<SwitchPreference>("auto_rotate_pref")
-        autoRotatePref?.isChecked = (manager.cameraInterface?.getAutoRotation() ?: false)
-        autoRotatePref?.setOnPreferenceChangeListener { _, newValue ->
-            manager.cameraInterface?.setAutoRotation(newValue as Boolean)
-            true
-        }
-
-        val leftEyePref = findPreference<SwitchPreference>("left_eye_pref")
-        leftEyePref?.isChecked = (manager.cameraInterface?.getForceLeftEye() ?: false)
-        leftEyePref?.setOnPreferenceChangeListener { _, newValue ->
-            manager.cameraInterface?.setForceLeftEye(newValue as Boolean)
             true
         }
     }

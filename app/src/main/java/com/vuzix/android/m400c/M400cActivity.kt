@@ -42,6 +42,9 @@ class M400cActivity : AppCompatActivity(),  ConnectionListener{
         when (currentFragment?.id) {
             R.id.sensorFragment -> {
                 supportFragmentManager.fragments[0].let { fragment ->
+                    if (fragment.childFragmentManager.fragments[0] is SettingsFragment) {
+                        return false;
+                    }
                     fragment.childFragmentManager.fragments[0].let { it as ArtificialHorizonFragment
                         event?.let { keyEvent ->
                             it.onKey(it.view, keyEvent.keyCode, keyEvent)

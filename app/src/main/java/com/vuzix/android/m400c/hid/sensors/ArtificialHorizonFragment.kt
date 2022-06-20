@@ -58,7 +58,6 @@ class ArtificialHorizonFragment :
     override fun onStop() {
         super.onStop()
         context?.let { USBCDeviceManager.shared(it).sensorInterface?.unregisterListener(this) };
-        rotationSet = false
     }
 
     override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
@@ -97,20 +96,19 @@ class ArtificialHorizonFragment :
     }
 
     var rotation = Surface.ROTATION_0 // default to right-eye landscape orientation.
-    var rotationSet = false
     var outputEveryNth = 0
     override fun onSensorChanged(event: VuzixSensorEvent) {
 
         when (event.sensorType) {
             Sensor.TYPE_ACCELEROMETER -> {
                 accelValues = event.values
-                if(!rotationSet) {
-                    rotationSet = true;
-                    rotation = if (accelValues[1] > 0) {
-                        Surface.ROTATION_0
-                    } else {
-                        Surface.ROTATION_180
-                    }
+                val new_rotation = if (accelValues[1] > 0) {
+                    Surface.ROTATION_0
+                } else {
+                    Surface.ROTATION_180
+                }
+                if (rotation != new_rotation) {
+                    rotation = new_rotation
                     LogUtil.rel("Setting rotation to $rotation")
                 }
             }
@@ -134,7 +132,7 @@ class ArtificialHorizonFragment :
 //
 //            }
         }
-        if (outputEveryNth > 10) {
+        if (outputEveryNth > 100) {
             LogUtil.debug("onSensorChanged EVENT **************************")
             LogUtil.debug("time stamp: ${event.timestamp}")
             LogUtil.debug("accelValues[0] = ${accelValues[0]}, accelValues[1] = ${accelValues[1]}, accelValues[2] = ${accelValues[2]}")

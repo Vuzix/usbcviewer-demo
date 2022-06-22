@@ -33,10 +33,13 @@ class ArtificialHorizonFragment :
     private var magValues = FloatArray(3)
     private var gyroValues = FloatArray(3)
 
+    private var autoRotate = false;
+
     @RequiresApi(VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         context?.let { USBCDeviceManager.shared(it).sensorInterface?.registerListener(this) };
+        autoRotate = USBCDeviceManager.shared()?.deviceControlInterface?.getAutoRotation() == true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -97,20 +100,36 @@ class ArtificialHorizonFragment :
 
     var rotation = Surface.ROTATION_0 // default to right-eye landscape orientation.
     var outputEveryNth = 0
+    var hasInitialize = false
     override fun onSensorChanged(event: VuzixSensorEvent) {
 
         when (event.sensorType) {
             Sensor.TYPE_ACCELEROMETER -> {
                 accelValues = event.values
-                val new_rotation = if (accelValues[1] > 0) {
-                    Surface.ROTATION_0
-                } else {
-                    Surface.ROTATION_180
+                var shouldCheckRotate = false
+                if ( autoRotate ) {
+                    shouldCheckRotate = true
                 }
-                if (rotation != new_rotation) {
-                    rotation = new_rotation
-                    LogUtil.rel("Setting rotation to $rotation")
+                else if (!hasInitialize) {
+                    hasInitialize = true
+                    shouldCheckRotate = true
                 }
+                if (shouldCheckRotate) {
+                    val new_rotation = if (accelValues[1] < -0.5) {
+                        Surface.ROTATION_180
+                    }
+                    else if (accelValues[1] > 0.5) {
+                        Surface.ROTATION_0
+                    } else {
+                        // nothing, buffer zone, takes out the flicker of images, as the sensor bounces around a bit
+                        rotation
+                    }
+                    if (rotation != new_rotation) {
+                        rotation = new_rotation
+                        LogUtil.rel("Setting rotation to $rotation")
+                    }
+                }
+
             }
             Sensor.TYPE_MAGNETIC_FIELD -> {
                 magValues = event.values

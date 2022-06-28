@@ -39,7 +39,7 @@ dependencies {
     implementation project(":camerasdk")
 
     // The Version of the Vuzix SDK from jitpack.io
-    implementation "com.vuzix:sdk-usbcviewer:1.0.0"
+    implementation "com.vuzix:sdk-usbcviewer:1.0.1"
 
     implementation "androidx.core:core-ktx:${versions.core_ktx}"
     implementation "androidx.appcompat:appcompat:${versions.appcompat}"
